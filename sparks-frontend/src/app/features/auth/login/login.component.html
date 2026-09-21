@@ -1,0 +1,56 @@
+<div class="login">
+  <aside class="login__panel login__panel--logo-only">
+    <a class="login__brand" routerLink="/">
+      <img src="/logo-sparks-full.png" alt="SPARKS" class="login__brand-logo login__brand-logo--lg" />
+    </a>
+  </aside>
+
+  <main class="login__form-wrap">
+    <div class="login__form-card">
+      <div class="login__form-logo"><img src="/logo-sparks-mark.png" alt="SPARKS" class="login__form-logo-img" /></div>
+      <h2>Welcome back</h2>
+      <p class="login__form-sub">Sign in to your SPARKS account</p>
+
+      <form (ngSubmit)="submit()">
+        <label class="sp-label" for="email">Email address</label>
+        <input
+          id="email"
+          class="sp-input"
+          type="email"
+          name="email"
+          placeholder="first.last@alten.com"
+          [(ngModel)]="email"
+          autocomplete="username"
+        />
+
+        <label class="sp-label login__password-label" for="password">Password</label>
+        <div class="login__password-field">
+          <input
+            id="password"
+            class="sp-input"
+            [type]="showPassword ? 'text' : 'password'"
+            name="password"
+            placeholder="••••••••"
+            [(ngModel)]="password"
+            autocomplete="current-password"
+          />
+          <button type="button" class="login__eye" (click)="showPassword = !showPassword">
+            <sp-icon [name]="showPassword ? 'eye-off' : 'eye'" [size]="17"></sp-icon>
+          </button>
+        </div>
+
+        <div class="login__row">
+          <span></span>
+          <a class="login__forgot" routerLink="/forgot-password">Forgot password?</a>
+        </div>
+
+        <p class="login__error" *ngIf="error()">{{ error() }}</p>
+
+        <button class="sp-btn sp-btn--primary login__submit" type="submit" [disabled]="loading()">
+          <sp-icon name="arrow-right" [size]="16"></sp-icon>
+          {{ loading() ? 'Signing in…' : 'Sign in to SPARKS' }}
+        </button>
+      </form>
+    </div>
+  </main>
+</div>

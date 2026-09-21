@@ -1,0 +1,79 @@
+.cs__header {
+  margin-bottom: 22px;
+}
+
+.cs__header h1 {
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.cs__header p {
+  color: var(--text-secondary);
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.cs__table-wrap {
+  overflow-x: auto;
+}
+
+.cs__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+
+.cs__table th {
+  text-align: left;
+  padding: 14px 18px;
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+
+.cs__table td {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border);
+}
+
+.cs__table tr:last-child td {
+  border-bottom: none;
+}
+
+.cs__domain {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+}
+
+.cs__edit-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--border);
+  background: #fff;
+  border-radius: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.cs__edit-btn:hover {
+  background: var(--surface);
+}
+
+.cs__modal-domain {
+  font-weight: 700;
+  color: var(--alten-blue);
+  margin-bottom: 8px;
+}
+
+.cs__save-btn {
+  margin-top: 20px;
+  width: 100%;
+}

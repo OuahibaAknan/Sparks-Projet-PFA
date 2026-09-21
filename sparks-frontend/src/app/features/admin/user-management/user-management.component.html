@@ -1,0 +1,95 @@
+<div class="um">
+  <div class="um__header">
+    <div>
+      <h1>User Management</h1>
+      <p>{{ users().length }} engineers registered</p>
+    </div>
+    <button class="sp-btn sp-btn--primary" (click)="openAddModal()">
+      <sp-icon name="plus" [size]="16"></sp-icon>
+      Add User
+    </button>
+  </div>
+
+  <p class="um__delete-error" *ngIf="deleteError()">{{ deleteError() }}</p>
+
+  <div class="sp-card um__table-wrap">
+    <table class="um__table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Status</th>
+          <th>Availability</th>
+          <th>Active Tickets</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let u of users()">
+          <td>
+            <div class="um__name">
+              <span class="um__avatar" [style.background]="u.avatarColor">{{ u.initials }}</span>
+              {{ u.firstName }} {{ u.lastName }}
+            </div>
+          </td>
+          <td class="um__muted">{{ u.email }}</td>
+          <td><sp-badge [text]="u.role" [fg]="roleColor(u.role).fg" [bg]="roleColor(u.role).bg"></sp-badge></td>
+          <td>
+            <span class="um__dot-label" [class.um__dot-label--off]="u.status === 'Inactive'">
+              <span class="um__dot"></span>{{ u.status }}
+            </span>
+          </td>
+          <td>
+            <span class="um__dot-label" [class.um__dot-label--off]="u.availability !== 'Available'">
+              <span class="um__dot"></span>{{ u.availability }}
+            </span>
+          </td>
+          <td>{{ u.activeTickets }}</td>
+          <td>
+            <div class="um__actions">
+              <button title="Toggle status" (click)="toggleStatus(u)"><sp-icon name="edit" [size]="15"></sp-icon></button>
+              <button title="Remove" (click)="remove(u)"><sp-icon name="trash" [size]="15"></sp-icon></button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<sp-modal [open]="showAddModal()" title="Add User" (closed)="showAddModal.set(false)">
+  <div class="um__form">
+    <label class="sp-label">First name</label>
+    <input class="sp-input" type="text" [(ngModel)]="form.firstName" />
+
+    <label class="sp-label">Last name</label>
+    <input class="sp-input" type="text" [(ngModel)]="form.lastName" />
+
+    <label class="sp-label">Email</label>
+    <input class="sp-input" type="email" [(ngModel)]="form.email" />
+
+    <label class="sp-label">Role</label>
+    <select class="sp-input" [(ngModel)]="form.role">
+      <option *ngFor="let r of roles" [value]="r">{{ r }}</option>
+    </select>
+
+    <p class="um__delete-error" *ngIf="addError()">{{ addError() }}</p>
+
+    <button class="sp-btn sp-btn--primary um__form-submit" (click)="submitAdd()" [disabled]="saving()">
+      {{ saving() ? 'Adding…' : 'Add user' }}
+    </button>
+  </div>
+</sp-modal>
+
+<sp-confirm-modal
+  [open]="!!userToDelete()"
+  title="Delete user"
+  [message]="'Delete ' + userToDelete()?.firstName + ' ' + userToDelete()?.lastName + '? This cannot be undone.'"
+  confirmLabel="Delete"
+  loadingLabel="Deleting…"
+  [danger]="true"
+  [loading]="deleting()"
+  (confirmed)="confirmDelete()"
+  (cancelled)="userToDelete.set(null)"
+></sp-confirm-modal>

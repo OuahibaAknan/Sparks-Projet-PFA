@@ -1,0 +1,34 @@
+<section class="roles section section--bg-white" id="support-roles">
+  <div class="container">
+    <div class="section__header" spReveal>
+      <span class="section__kicker">
+        <sp-icon name="users" [size]="13"></sp-icon>
+        Generalists &amp; Specialists
+      </span>
+      <h2 class="section__title">Two profiles, one intelligently balanced team</h2>
+      <p class="section__subtitle">SPARKS routes every ticket to the profile best equipped to resolve it.</p>
+    </div>
+
+    <div class="roles__grid">
+      @for (r of roles; track r.title; let i = $index) {
+        <div class="roles__card" [class.roles__card--specialist]="r.role === 'specialist'" [spReveal]="i * 120">
+          <span class="roles__icon">
+            <sp-icon [name]="r.role === 'generalist' ? 'users' : 'user'" [size]="24"></sp-icon>
+          </span>
+          <h3>{{ r.title }}</h3>
+          <p>{{ r.text }}</p>
+          <ul class="roles__examples">
+            @for (ex of r.examples; track ex) {
+              <li><sp-icon name="check" [size]="13"></sp-icon>{{ ex }}</li>
+            }
+          </ul>
+        </div>
+      }
+
+      <div class="roles__link" aria-hidden="true">
+        <span class="roles__link-icon"><sp-icon name="shuffle" [size]="16"></sp-icon></span>
+        <span>SmartTicket AI routes between them automatically</span>
+      </div>
+    </div>
+  </div>
+</section>

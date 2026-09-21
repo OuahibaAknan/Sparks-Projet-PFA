@@ -1,0 +1,67 @@
+<div class="tm">
+  <div class="tm__header">
+    <h1>Ticket Management</h1>
+    <p>Track your tickets by status</p>
+  </div>
+
+  <div class="dash__tabs">
+    <button
+      *ngFor="let t of tabs()"
+      class="dash__tab"
+      [class.dash__tab--active]="tab() === t.key"
+      (click)="selectTab(t.key)"
+    >
+      {{ t.label }}
+      <span class="dash__tab-count">{{ (t.key === 'active' ? active() : t.key === 'specialist' ? specialistPool() : generalistPool()).length }}</span>
+    </button>
+  </div>
+
+  <div class="tm__pills" *ngIf="tab() === 'active'">
+    <button
+      *ngFor="let pill of pills"
+      class="tm__pill"
+      [class.tm__pill--active]="selectedPill() === pill.key"
+      [style.color]="selectedPill() === pill.key ? '#fff' : pill.fg"
+      [style.background]="selectedPill() === pill.key ? pill.fg : pill.bg"
+      [style.border-color]="pill.fg"
+      (click)="selectPill(pill.key)"
+    >
+      {{ pill.label }} ({{ countsLoading() ? '…' : countFor(pill.key) }})
+    </button>
+  </div>
+
+  <div class="dash__filters">
+    <span class="dash__filter-label">Priority:</span>
+    <button
+      *ngFor="let p of priorities"
+      class="dash__filter-chip"
+      [class.dash__filter-chip--active]="priorityFilter() === p"
+      (click)="setPriorityFilter(p)"
+    >
+      {{ p }}
+    </button>
+  </div>
+
+  <div class="dash__grid" *ngIf="tab() !== 'active'">
+    <sp-blind-ticket-card
+      *ngFor="let t of filteredPool()"
+      [ticket]="t"
+      mode="pool"
+      (accept)="openAccept($event)"
+      (decline)="decline($event)"
+    ></sp-blind-ticket-card>
+    <p class="dash__empty" *ngIf="!loading() && filteredPool().length === 0">No tickets match this filter right now.</p>
+  </div>
+
+  <div class="dash__grid" *ngIf="tab() === 'active'">
+    <sp-blind-ticket-card *ngFor="let t of filteredActive()" [ticket]="t" mode="active"></sp-blind-ticket-card>
+    <p class="dash__empty" *ngIf="filteredActive().length === 0">No tickets match this filter.</p>
+  </div>
+</div>
+
+<sp-accept-modal
+  [ticket]="ticketToConfirm()"
+  [loading]="acceptLoading()"
+  (confirm)="confirmAccept($event)"
+  (cancel)="ticketToConfirm.set(null)"
+></sp-accept-modal>

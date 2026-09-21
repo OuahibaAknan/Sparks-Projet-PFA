@@ -1,0 +1,113 @@
+.dash__header h1 {
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.dash__header p {
+  color: var(--text-secondary);
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.dash__kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.dash__tabs {
+  display: flex;
+  gap: 6px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 20px;
+}
+
+.dash__tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 6px;
+  margin-right: 22px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  font-weight: 600;
+  font-size: 14.5px;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.dash__filters {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.dash__filter-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-right: 4px;
+}
+
+.dash__filter-chip {
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: #fff;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.dash__filter-chip--active {
+  background: var(--alten-navy);
+  border-color: var(--alten-navy);
+  color: #fff;
+}
+
+.dash__tab--active {
+  color: var(--alten-navy);
+  border-bottom-color: var(--alten-blue);
+}
+
+.dash__tab-count {
+  background: var(--surface);
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 1px 8px;
+  border-radius: 999px;
+}
+
+.dash__tab--active .dash__tab-count {
+  background: var(--status-accepted-bg);
+  color: var(--alten-blue);
+}
+
+.dash__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.dash__empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: var(--text-muted);
+  padding: 40px 0;
+  font-size: 14px;
+}
+
+@media (max-width: 1100px) {
+  .dash__kpis {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .dash__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

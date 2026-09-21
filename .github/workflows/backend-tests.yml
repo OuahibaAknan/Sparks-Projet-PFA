@@ -1,0 +1,40 @@
+name: Backend Tests
+
+on:
+  push:
+    branches: [tests-base, Sparks, Sparks_tests, main]
+  pull_request:
+    branches: [tests-base, Sparks, Sparks_tests, main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: sparks-backend
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore Sparks.slnx
+
+      - name: Build
+        run: dotnet build Sparks.slnx --no-restore --configuration Release
+
+      - name: Run tests
+        run: dotnet test --no-build --configuration Release --logger "trx;LogFileName=test-results.trx"
+
+      - name: Publish test results
+        uses: dorny/test-reporter@v1
+        if: success() || failure()
+        with:
+          name: Test Results
+          path: 'sparks-backend/**/test-results.trx'
+          reporter: dotnet-trx

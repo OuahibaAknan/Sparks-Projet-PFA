@@ -1,0 +1,128 @@
+.tl__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.tl__header h1 {
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.tl__header p {
+  color: var(--text-secondary);
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.tl__toolbar {
+  margin-bottom: 14px;
+}
+
+.tl__search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px 14px;
+  max-width: 420px;
+  color: var(--text-muted);
+}
+
+.tl__search input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  width: 100%;
+  color: var(--text-primary);
+}
+
+.tl__filters {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.tl__filter-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-right: 4px;
+}
+
+.tl__filter-chip {
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: #fff;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.tl__filter-chip--active {
+  background: var(--alten-navy);
+  border-color: var(--alten-navy);
+  color: #fff;
+}
+
+.tl__table-wrap {
+  margin-top: 16px;
+  padding: 6px 18px 14px;
+  overflow-x: auto;
+}
+
+.tl__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+
+.tl__table th {
+  text-align: left;
+  padding: 14px 12px;
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+
+.tl__table td {
+  padding: 14px 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.tl__row {
+  cursor: pointer;
+}
+
+.tl__row:hover {
+  background: var(--surface);
+}
+
+.tl__id {
+  font-weight: 700;
+}
+
+.tl__muted {
+  color: var(--text-secondary);
+}
+
+.tl__sla-urgent {
+  color: var(--priority-critical);
+  font-weight: 600;
+}
+
+.tl__empty {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 40px 0;
+}

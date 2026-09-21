@@ -1,0 +1,86 @@
+<aside class="aip">
+  <div class="aip__header">
+    <sp-icon name="sparkles" [size]="16"></sp-icon>
+    <h3>SmartTicket AI</h3>
+  </div>
+
+  <ng-container *ngIf="!loading() && metadata() as m; else loadingTpl">
+    <div class="aip__block aip__summary">
+      <div class="aip__block-title">
+        <sp-icon name="sparkles" [size]="14"></sp-icon>
+        AI Summary
+      </div>
+      <p [class.aip__summary-text--clamped]="!showFullSummary()">{{ m.summary }}</p>
+      <button class="aip__link" (click)="showFullSummary.set(!showFullSummary())">
+        {{ showFullSummary() ? 'Show less' : 'Show full description' }}
+        <sp-icon [name]="showFullSummary() ? 'chevron-down' : 'chevron-right'" [size]="13"></sp-icon>
+      </button>
+    </div>
+
+    <div class="aip__block" *ngIf="m.similarTickets.length">
+      <div class="aip__block-title aip__block-title--plain">Similar / Possible Duplicates</div>
+      <div class="aip__similar" *ngFor="let s of m.similarTickets">
+        <a [routerLink]="['/app/tickets', s.ticketId]">{{ s.ticketId }}</a>
+        <span class="aip__similar-domain">{{ s.domain }}</span>
+        <div class="aip__similar-bar-track">
+          <div class="aip__similar-bar-fill" [style.width.%]="s.similarityPct"></div>
+        </div>
+        <span class="aip__similar-pct">{{ s.similarityPct }}%</span>
+      </div>
+    </div>
+
+    <div class="aip__block" *ngIf="m.suggestedSolutions.length">
+      <div class="aip__block-title aip__block-title--plain">Suggested Solutions</div>
+      <div class="aip__solution" *ngFor="let s of m.suggestedSolutions">
+        <div class="aip__solution-head">
+          <span class="aip__solution-tag">
+            <sp-icon name="sparkles" [size]="12"></sp-icon>
+            AI suggestion, verify before applying
+          </span>
+          <span class="aip__solution-rank">#{{ s.rank }}</span>
+        </div>
+        <p>{{ s.text }}</p>
+        <div class="aip__solution-footer">
+          <span>Source: <a [routerLink]="['/app/tickets', s.sourceTicketId]">{{ s.sourceTicketId }}</a></span>
+          <div class="aip__solution-votes">
+            <button [class.aip__vote--active]="s.vote === 'up'" (click)="vote(s, 'up')">
+              <sp-icon name="thumbs-up" [size]="14"></sp-icon>
+            </button>
+            <button [class.aip__vote--active]="s.vote === 'down'" (click)="vote(s, 'down')">
+              <sp-icon name="thumbs-down" [size]="14"></sp-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="aip__block aip__chat">
+      <div class="aip__block-title aip__block-title--plain">Chat with SmartTicket AI</div>
+      <div class="aip__chat-messages">
+        <div *ngFor="let msg of m.chat" class="aip__chat-msg" [class.aip__chat-msg--user]="msg.sender === 'user'">
+          <span class="aip__chat-avatar" *ngIf="msg.sender === 'ai'"><sp-icon name="sparkles" [size]="13"></sp-icon></span>
+          <p>{{ msg.text }}</p>
+        </div>
+        <div class="aip__chat-msg" *ngIf="chatSending()">
+          <span class="aip__chat-avatar"><sp-icon name="sparkles" [size]="13"></sp-icon></span>
+          <p class="aip__typing">Thinking…</p>
+        </div>
+      </div>
+      <div class="aip__chat-input">
+        <input
+          type="text"
+          placeholder="Ask SmartTicket AI…"
+          [(ngModel)]="chatDraft"
+          (keyup.enter)="sendChat()"
+        />
+        <button (click)="sendChat()" [disabled]="!chatDraft.trim()">
+          <sp-icon name="send" [size]="15"></sp-icon>
+        </button>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-template #loadingTpl>
+    <div class="aip__loading">Analyzing ticket…</div>
+  </ng-template>
+</aside>

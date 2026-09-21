@@ -1,0 +1,44 @@
+<section class="ps section section--bg-navy">
+  <div class="container">
+    <div class="section__header" spReveal>
+      <span class="section__kicker">
+        <sp-icon name="activity" [size]="13"></sp-icon>
+        Why SPARKS
+      </span>
+      <h2 class="section__title">From uneven ticket-picking to fair, intelligent routing</h2>
+      <p class="section__subtitle">
+        PLM support used to depend on who happened to grab a ticket first. SPARKS changes the model.
+      </p>
+    </div>
+
+    <div class="ps__grid">
+      @for (col of columns; track col.heading; let i = $index) {
+        <div class="ps__col" [class.ps__col--after]="col.tone === 'after'" [spReveal]="i * 120">
+          <div class="ps__col-head">
+            <span class="ps__icon">
+              <sp-icon [name]="col.tone === 'before' ? 'x' : 'check-circle'" [size]="16"></sp-icon>
+            </span>
+            <div>
+              <h3>{{ col.heading }}</h3>
+              <span class="ps__caption">{{ col.caption }}</span>
+            </div>
+          </div>
+          <ul>
+            @for (p of col.points; track p) {
+              <li>
+                <sp-icon [name]="col.tone === 'before' ? 'x' : 'check'" [size]="14"></sp-icon>
+                <span>{{ p }}</span>
+              </li>
+            }
+          </ul>
+        </div>
+
+        @if (col.tone === 'before') {
+          <div class="ps__arrow" aria-hidden="true">
+            <sp-icon name="arrow-right" [size]="22"></sp-icon>
+          </div>
+        }
+      }
+    </div>
+  </div>
+</section>

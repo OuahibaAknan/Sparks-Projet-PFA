@@ -1,0 +1,220 @@
+<div class="td" *ngIf="!loading(); else loadingTpl">
+  <ng-container *ngIf="ticket() as t; else errorTpl">
+    <a class="td__back" [routerLink]="backRoute()">
+      <sp-icon name="chevron-left" [size]="16"></sp-icon>
+      Back to Dashboard
+    </a>
+
+    <div class="td__layout">
+      <div class="td__main">
+        <div class="sp-card td__card">
+          <div class="td__badges">
+            <span class="td__id">{{ t.id }}</span>
+            <sp-badge [text]="statusLabel(t.status)" [fg]="statusColor(t.status).fg" [bg]="statusColor(t.status).bg"></sp-badge>
+            <sp-badge [text]="t.priority" [fg]="priorityColor(t.priority).fg" [bg]="priorityColor(t.priority).bg" [dot]="true"></sp-badge>
+            <sp-badge [text]="t.domain" fg="var(--alten-navy)" bg="#eaf3fa"></sp-badge>
+            <sp-ai-badge [text]="'AI-classified: ' + t.domain"></sp-ai-badge>
+          </div>
+
+          <h1 class="td__title">{{ t.title }}</h1>
+
+          <dl class="td__meta">
+            <div>
+              <dt>Requester</dt>
+              <dd>{{ t.requesterName }}</dd>
+            </div>
+            <div>
+              <dt>Site</dt>
+              <dd>{{ t.site }}</dd>
+            </div>
+            <div>
+              <dt>Source</dt>
+              <dd>{{ t.sourceSystem === 'TOOLSUP' ? 'ToolSup' : t.sourceSystem }}</dd>
+            </div>
+            <div>
+              <dt>SLA Deadline</dt>
+              <dd [class.td__meta-urgent]="t.slaMinutesRemaining < 180">{{ slaLabel(t.slaMinutesRemaining) }}</dd>
+            </div>
+            <div>
+              <dt>Assigned To</dt>
+              <dd>{{ t.assigneeName || 'Unassigned' }}</dd>
+            </div>
+          </dl>
+
+          <div class="td__description">
+            <strong>Description:</strong> {{ t.description }}
+          </div>
+
+          <div class="td__refs" *ngIf="t.partNumber || t.ecrNumber">
+            <span *ngIf="t.partNumber"><sp-icon name="tag" [size]="14"></sp-icon> Part: <a href="javascript:void(0)">{{ t.partNumber }}</a></span>
+            <span *ngIf="t.ecrNumber"><sp-icon name="layers" [size]="14"></sp-icon> ECR: <a href="javascript:void(0)">{{ t.ecrNumber }}</a></span>
+          </div>
+
+          <div class="td__attachments" *ngIf="t.attachments.length">
+            <a *ngFor="let a of t.attachments" href="javascript:void(0)">
+              <sp-icon name="paperclip" [size]="14"></sp-icon>
+              {{ a.name }}
+            </a>
+          </div>
+
+          <div class="td__actions" *ngIf="t.status !== 'Closed'">
+            <button
+              class="sp-btn sp-btn--danger"
+              *ngIf="t.status !== 'Escalated' && t.status !== 'Resolved' && auth.currentUser()?.role === 'Generalist'"
+              [disabled]="actionLoading()"
+              (click)="escalate()"
+            >
+              <sp-icon name="arrow-up-right" [size]="15"></sp-icon>
+              Escalate to Specialist
+            </button>
+            <button
+              class="sp-btn sp-btn--success"
+              *ngIf="t.status !== 'Resolved'"
+              [disabled]="actionLoading()"
+              (click)="resolve()"
+            >
+              <sp-icon name="check-circle" [size]="15"></sp-icon>
+              Mark as Resolved
+            </button>
+            <button class="sp-btn sp-btn--outline" [disabled]="actionLoading()" (click)="close()">
+              <sp-icon name="x" [size]="15"></sp-icon>
+              Close
+            </button>
+          </div>
+        </div>
+
+        <div class="sp-card td__card">
+          <h2 class="td__section-title">Additional Information</h2>
+          <dl class="td__meta td__meta--details">
+            <div>
+              <dt>Applicant ID</dt>
+              <dd>{{ t.applicantId || '—' }}</dd>
+            </div>
+            <div>
+              <dt>First Name</dt>
+              <dd>{{ t.applicantFirstName || '—' }}</dd>
+            </div>
+            <div>
+              <dt>Last Name</dt>
+              <dd>{{ t.applicantLastName || '—' }}</dd>
+            </div>
+            <div>
+              <dt>Reference STLA</dt>
+              <dd>{{ t.referenceSTLA || '—' }}</dd>
+            </div>
+            <div>
+              <dt>Reference KZ</dt>
+              <dd>{{ t.id }}</dd>
+            </div>
+            <div>
+              <dt>Application</dt>
+              <dd>{{ t.application || '—' }}</dd>
+            </div>
+            <div>
+              <dt>Module</dt>
+              <dd>{{ t.module || '—' }}</dd>
+            </div>
+            <div>
+              <dt>Ss Module</dt>
+              <dd>{{ t.subModule || '—' }}</dd>
+            </div>
+            <div>
+              <dt>Status</dt>
+              <dd>{{ statusLabel(t.status) }}</dd>
+            </div>
+            <div>
+              <dt>Closing Date</dt>
+              <dd>{{ t.closingDate ? (t.closingDate | date: 'mediumDate') : '—' }}</dd>
+            </div>
+            <div>
+              <dt>Reactivity</dt>
+              <dd>{{ t.reactivityHours != null ? t.reactivityHours + 'h' : '—' }}</dd>
+            </div>
+            <div>
+              <dt>Level</dt>
+              <dd>{{ t.level || '—' }}</dd>
+            </div>
+            <div>
+              <dt>Gravity</dt>
+              <dd>{{ t.priority }}</dd>
+            </div>
+            <div>
+              <dt>Ticket Summary</dt>
+              <dd>{{ t.summary || '—' }}</dd>
+            </div>
+            <div>
+              <dt>Jira Link</dt>
+              <dd>
+                <a *ngIf="t.jiraLink; else noJira" [href]="t.jiraLink" target="_blank" rel="noopener">{{ t.jiraLink }}</a>
+                <ng-template #noJira>—</ng-template>
+              </dd>
+            </div>
+            <div>
+              <dt>English Accepted</dt>
+              <dd>{{ t.englishAccepted ? 'Yes' : 'No' }}</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="sp-card td__card">
+          <h2 class="td__section-title">Activity Timeline</h2>
+          <ul class="td__timeline">
+            <li *ngFor="let h of t.history">
+              <span class="td__timeline-icon" [class.td__timeline-icon--ai]="h.isAiGenerated">
+                <sp-icon [name]="historyIcon(h.icon)" [size]="14"></sp-icon>
+              </span>
+              <div class="td__timeline-body">
+                <p [class.td__timeline-label--ai]="h.isAiGenerated">
+                  {{ h.label }}
+                  <sp-ai-badge *ngIf="h.isAiGenerated" text="AI-suggested"></sp-ai-badge>
+                </p>
+                <span class="td__timeline-meta">{{ h.timestamp | date: 'MMM d, HH:mm' }} · {{ h.actor }}</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sp-card td__card">
+          <h2 class="td__section-title">Comments</h2>
+          <ul class="td__comments">
+            <li *ngFor="let c of t.comments">
+              <span class="td__comment-avatar">{{ c.authorInitials }}</span>
+              <div>
+                <p class="td__comment-head"><strong>{{ c.author }}</strong> <span>{{ c.timestamp | date: 'MMM d, HH:mm' }}</span></p>
+                <p class="td__comment-text">{{ c.message }}</p>
+              </div>
+            </li>
+            <li *ngIf="t.comments.length === 0" class="td__comments-empty">No comments yet.</li>
+          </ul>
+          <div class="td__comment-form">
+            <input
+              type="text"
+              class="sp-input"
+              placeholder="Add a comment…"
+              [(ngModel)]="commentDraft"
+              [disabled]="commentSubmitting()"
+              (keyup.enter)="addComment()"
+            />
+            <button class="sp-btn sp-btn--primary sp-btn--sm" (click)="addComment()" [disabled]="!commentDraft.trim() || commentSubmitting()">
+              Post
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <sp-ai-panel [ticketId]="t.id" [domain]="t.domain"></sp-ai-panel>
+    </div>
+  </ng-container>
+
+  <ng-template #errorTpl>
+    <div class="td__error">
+      <sp-icon name="lock" [size]="22"></sp-icon>
+      <p>{{ error() }}</p>
+      <a class="sp-btn sp-btn--outline" [routerLink]="backRoute()">Back to dashboard</a>
+    </div>
+  </ng-template>
+</div>
+
+<ng-template #loadingTpl>
+  <div class="td__loading">Loading ticket…</div>
+</ng-template>

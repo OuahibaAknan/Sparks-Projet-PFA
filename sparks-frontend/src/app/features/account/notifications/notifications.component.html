@@ -1,0 +1,29 @@
+<div class="nt">
+  <div class="nt__header">
+    <div>
+      <h1>Notifications</h1>
+      <p>{{ unreadCount }} unread</p>
+    </div>
+    <button class="sp-btn sp-btn--outline sp-btn--sm" (click)="markAllRead()">Mark all as read</button>
+  </div>
+
+  <div class="sp-card nt__list">
+    <a
+      *ngFor="let n of notifications()"
+      class="nt__item"
+      [class.nt__item--unread]="!n.read"
+      [routerLink]="n.ticketId ? ['/app/tickets', n.ticketId] : null"
+      (click)="open(n)"
+    >
+      <span class="nt__icon" [class.nt__icon--ai]="meta(n).isAi">
+        <sp-icon [name]="meta(n).icon" [size]="15"></sp-icon>
+      </span>
+      <div class="nt__body">
+        <p class="nt__title">{{ meta(n).title }}</p>
+        <p class="nt__detail">{{ n.message }}</p>
+      </div>
+      <span class="nt__time">{{ timeAgo(n.createdAt) }}</span>
+    </a>
+    <p class="nt__empty" *ngIf="!loading() && notifications().length === 0">No notifications yet.</p>
+  </div>
+</div>

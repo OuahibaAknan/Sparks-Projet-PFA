@@ -1,0 +1,68 @@
+<div class="st">
+  <div class="st__header">
+    <h1>Settings</h1>
+    <p>Platform configuration and integration status</p>
+  </div>
+
+  <div class="sp-card st__card">
+    <h2>Fairness &amp; Routing</h2>
+
+    <div class="st__row">
+      <div>
+        <p class="st__row-title"><sp-icon name="lock" [size]="14"></sp-icon> Blind ticket acceptance</p>
+        <p class="st__row-sub">Engineers never see title/description before accepting. Core platform rule, cannot be disabled.</p>
+      </div>
+      <span class="st__locked">Enforced</span>
+    </div>
+
+    <div class="st__row">
+      <div>
+        <p class="st__row-title">Auto-escalate on SLA breach</p>
+        <p class="st__row-sub">Automatically escalate unassigned tickets to Specialist pool when SLA expires.</p>
+      </div>
+      <button class="st__switch" [class.st__switch--on]="settings().autoEscalateOnSlaBreach" (click)="toggle('autoEscalateOnSlaBreach')">
+        <span class="st__switch-knob"></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="sp-card st__card">
+    <h2>Notifications</h2>
+
+    <div class="st__row">
+      <div>
+        <p class="st__row-title">Email notifications</p>
+        <p class="st__row-sub">Notify engineers by email for new pool tickets and SLA warnings.</p>
+      </div>
+      <button class="st__switch" [class.st__switch--on]="settings().emailNotifications" (click)="toggle('emailNotifications')">
+        <span class="st__switch-knob"></span>
+      </button>
+    </div>
+
+    <div class="st__row">
+      <div>
+        <p class="st__row-title">Slack notifications</p>
+        <p class="st__row-sub">Send pool and escalation alerts to the team Slack channel.</p>
+      </div>
+      <button class="st__switch" [class.st__switch--on]="settings().slackNotifications" (click)="toggle('slackNotifications')">
+        <span class="st__switch-knob"></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="sp-card st__card">
+    <h2>Integration status</h2>
+    <div class="st__row">
+      <div>
+        <p class="st__row-title">Data source</p>
+        <p class="st__row-sub">{{ useMockData ? 'Using mock data, no live API connected.' : apiBaseUrl }}</p>
+      </div>
+      <span class="st__badge" [class.st__badge--mock]="useMockData">{{ useMockData ? 'Mock mode' : 'Live API' }}</span>
+    </div>
+  </div>
+
+  <div class="st__save">
+    <button class="sp-btn sp-btn--primary" (click)="save()">Save settings</button>
+    <span class="st__saved" *ngIf="saved()"><sp-icon name="check" [size]="14"></sp-icon> Saved</span>
+  </div>
+</div>

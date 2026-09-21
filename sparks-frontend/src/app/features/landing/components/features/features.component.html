@@ -1,0 +1,24 @@
+<section class="features section section--bg-tint" id="features">
+  <div class="container">
+    <div class="section__header" spReveal>
+      <span class="section__kicker">
+        <sp-icon name="grid" [size]="13"></sp-icon>
+        Key Features
+      </span>
+      <h2 class="section__title">Everything PLM support needs, built in</h2>
+      <p class="section__subtitle">One platform covering qualification, routing, fairness and visibility end to end.</p>
+    </div>
+
+    <div class="features__grid">
+      @for (f of features; track f.title; let i = $index) {
+        <div class="features__card" [spReveal]="(i % 3) * 100">
+          <span class="features__icon">
+            <sp-icon [name]="f.icon" [size]="21"></sp-icon>
+          </span>
+          <h3>{{ f.title }}</h3>
+          <p>{{ f.text }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>

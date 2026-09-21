@@ -1,0 +1,58 @@
+.cta {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.cta__glow {
+  position: absolute;
+  left: 50%;
+  top: -220px;
+  transform: translateX(-50%);
+  width: 640px;
+  height: 420px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 139, 210, 0.22) 0%, rgba(0, 139, 210, 0) 70%);
+  pointer-events: none;
+}
+
+.cta__inner {
+  position: relative;
+  max-width: 620px;
+}
+
+.cta__kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #7ecbf2;
+}
+
+.cta h2 {
+  margin-top: 16px;
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  color: #fff;
+}
+
+.cta p {
+  margin-top: 16px;
+  font-size: 15.5px;
+  line-height: 1.7;
+  color: #a9c1d4;
+}
+
+.cta .sp-btn {
+  margin-top: 34px;
+}
+
+@media (max-width: 560px) {
+  .cta h2 {
+    font-size: 27px;
+  }
+}

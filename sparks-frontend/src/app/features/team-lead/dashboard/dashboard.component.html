@@ -1,0 +1,82 @@
+<div class="adash" *ngIf="stats() as s">
+  <div class="adash__header">
+    <div>
+      <h1>Team Lead Dashboard</h1>
+      <p>Welcome back, {{ firstName }} · Team overview, {{ today | date: 'longDate' }}</p>
+    </div>
+    <div class="adash__header-actions">
+      <button class="sp-btn sp-btn--outline sp-btn--sm">
+        <sp-icon name="download" [size]="15"></sp-icon>
+        Export
+      </button>
+      <button class="sp-btn sp-btn--outline sp-btn--sm" (click)="refresh()">
+        <sp-icon name="refresh-cw" [size]="15"></sp-icon>
+        Refresh
+      </button>
+    </div>
+  </div>
+
+  <div class="adash__kpis">
+    <sp-kpi-stat label="Available" [value]="pool().length" tint="#eaf3fa" accent="var(--alten-blue)"></sp-kpi-stat>
+    <sp-kpi-stat label="My Active" [value]="active().length" tint="var(--ai-accent-soft)" accent="var(--ai-accent)"></sp-kpi-stat>
+    <sp-kpi-stat label="Resolved Today" [value]="roleStats().resolvedToday" tint="var(--status-resolved-bg)" accent="var(--status-resolved)"></sp-kpi-stat>
+    <sp-kpi-stat label="Avg. Resolution" [value]="roleStats().avgResolutionHours + 'h'" tint="var(--priority-high-bg)" accent="var(--priority-high)"></sp-kpi-stat>
+  </div>
+
+  <div class="adash__kpis">
+    <sp-kpi-stat label="Total Tickets" [value]="s.totalTickets" [delta]="s.totalTicketsDeltaPct" tint="#eaf3fa" accent="var(--alten-blue)"></sp-kpi-stat>
+    <sp-kpi-stat label="Open Tickets" [value]="s.openTickets" [delta]="s.openTicketsDeltaPct" tint="var(--priority-high-bg)" accent="var(--priority-high)"></sp-kpi-stat>
+    <sp-kpi-stat label="Avg. Resolution" [value]="s.avgResolutionHours + 'h'" [delta]="s.avgResolutionDeltaPct" tint="var(--status-resolved-bg)" accent="var(--status-resolved)"></sp-kpi-stat>
+    <sp-kpi-stat label="Refusal Rate" [value]="s.refusalRatePct + '%'" [delta]="s.refusalRateDeltaPct" tint="var(--priority-critical-bg)" accent="var(--priority-critical)"></sp-kpi-stat>
+    <sp-kpi-stat label="AI Accuracy" [value]="s.aiAccuracyPct + '%'" [delta]="s.aiAccuracyDeltaPct" tint="var(--ai-accent-soft)" accent="var(--ai-accent)"></sp-kpi-stat>
+  </div>
+
+  <div class="adash__charts">
+    <div class="sp-card adash__chart-card">
+      <h3>Tickets by Status</h3>
+      <sp-donut-chart [data]="statusDonutData"></sp-donut-chart>
+    </div>
+    <div class="sp-card adash__chart-card">
+      <h3>Tickets by PLM Domain</h3>
+      <sp-bar-chart [data]="domainBarData" color="var(--alten-navy)"></sp-bar-chart>
+    </div>
+    <div class="sp-card adash__chart-card">
+      <h3>Resolution Time Trend (hours)</h3>
+      <sp-line-chart [data]="resolutionLineData" color="var(--alten-blue)"></sp-line-chart>
+    </div>
+  </div>
+
+  <div class="sp-card adash__recent">
+    <div class="adash__recent-header">
+      <h3>Recent Tickets</h3>
+      <a class="adash__recent-link" routerLink="/app/admin/tickets">
+        View all
+        <sp-icon name="chevron-right" [size]="14"></sp-icon>
+      </a>
+    </div>
+    <table class="adash__recent-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Priority</th>
+          <th>Domain</th>
+          <th>Status</th>
+          <th>Assignee</th>
+          <th>SLA</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let t of recentTickets()" [routerLink]="['/app/tickets', t.id]" class="adash__recent-row">
+          <td class="adash__recent-id">{{ t.id }}</td>
+          <td><sp-badge [text]="t.priority" [fg]="priorityColor(t.priority).fg" [bg]="priorityColor(t.priority).bg" [dot]="true"></sp-badge></td>
+          <td><sp-badge [text]="t.domain" fg="var(--alten-navy)" bg="#eaf3fa"></sp-badge></td>
+          <td><sp-badge [text]="statusLabel(t.status)" [fg]="statusColor(t.status).fg" [bg]="statusColor(t.status).bg"></sp-badge></td>
+          <td class="adash__recent-muted">{{ t.assigneeName || 'Unassigned' }}</td>
+          <td [class.adash__recent-urgent]="t.slaMinutesRemaining < 180">{{ slaLabel(t.slaMinutesRemaining) }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <sp-all-tickets-table></sp-all-tickets-table>
+</div>

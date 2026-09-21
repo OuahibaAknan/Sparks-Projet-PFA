@@ -1,0 +1,78 @@
+<div class="tl" *ngIf="result() as r">
+  <div class="tl__header">
+    <div>
+      <h1>All Tickets</h1>
+      <p>{{ r.total }} tickets</p>
+    </div>
+  </div>
+
+  <div class="tl__toolbar">
+    <div class="tl__search">
+      <sp-icon name="search" [size]="15"></sp-icon>
+      <input type="text" placeholder="Search by ID, title or domain…" [(ngModel)]="search" (keyup.enter)="onSearch()" (blur)="onSearch()" />
+    </div>
+  </div>
+
+  <div class="tl__filters">
+    <span class="tl__filter-label">Status:</span>
+    <button
+      *ngFor="let s of statuses"
+      class="tl__filter-chip"
+      [class.tl__filter-chip--active]="statusFilter === s"
+      (click)="setStatus(s)"
+    >
+      {{ s === 'All' ? 'All' : statusLabel(s) }}
+    </button>
+  </div>
+  <div class="tl__filters">
+    <span class="tl__filter-label">Priority:</span>
+    <button
+      *ngFor="let p of priorities"
+      class="tl__filter-chip"
+      [class.tl__filter-chip--active]="priorityFilter === p"
+      (click)="setPriority(p)"
+    >
+      {{ p }}
+    </button>
+  </div>
+
+  <div class="sp-card tl__table-wrap">
+    <table class="tl__table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Date</th>
+          <th>Priority</th>
+          <th>Domain</th>
+          <th>Status</th>
+          <th>Level</th>
+          <th>Assignee</th>
+          <th>SLA</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let t of r.items" [routerLink]="['/app/tickets', t.id]" class="tl__row">
+          <td class="tl__id">{{ t.id }}</td>
+          <td class="tl__muted">{{ t.createdAt }}</td>
+          <td><sp-badge [text]="t.priority" [fg]="priorityColor(t.priority).fg" [bg]="priorityColor(t.priority).bg" [dot]="true"></sp-badge></td>
+          <td><sp-badge [text]="t.domain" fg="var(--alten-navy)" bg="#eaf3fa"></sp-badge></td>
+          <td><sp-badge [text]="statusLabel(t.status)" [fg]="statusColor(t.status).fg" [bg]="statusColor(t.status).bg"></sp-badge></td>
+          <td class="tl__muted">{{ t.level || '—' }}</td>
+          <td class="tl__muted">{{ t.assigneeName || 'Unassigned' }}</td>
+          <td [class.tl__sla-urgent]="t.slaMinutesRemaining < 180">{{ slaLabel(t.slaMinutesRemaining) }}</td>
+        </tr>
+        <tr *ngIf="r.items.length === 0">
+          <td colspan="8" class="tl__empty">No tickets match these filters.</td>
+        </tr>
+      </tbody>
+    </table>
+    <sp-pagination
+      [page]="r.page"
+      [pageSize]="r.pageSize"
+      [total]="r.total"
+      [pageSizeOptions]="pageSizeOptions"
+      (pageChange)="onPageChange($event)"
+      (pageSizeChange)="onPageSizeChange($event)"
+    ></sp-pagination>
+  </div>
+</div>

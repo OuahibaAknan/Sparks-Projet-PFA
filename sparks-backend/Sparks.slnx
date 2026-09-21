@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Sparks.Api.Tests/Sparks.Api.Tests.csproj" />
+  <Project Path="Sparks.Api/Sparks.Api.csproj" />
+</Solution>

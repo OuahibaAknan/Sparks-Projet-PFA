@@ -1,0 +1,351 @@
+.aii__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.aii__header h1 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--ai-accent);
+}
+
+.aii__header p {
+  color: var(--text-secondary);
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.aii__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--ai-accent-soft);
+  border: 1px solid var(--ai-accent-border);
+  color: var(--ai-accent);
+  font-weight: 700;
+  font-size: 12.5px;
+  padding: 7px 14px;
+  border-radius: 999px;
+}
+
+.aii__kpis {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.aii__kpi {
+  padding: 20px;
+}
+
+.aii__kpi-value {
+  font-size: 26px;
+  font-weight: 800;
+}
+
+.aii__kpi-label {
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+.aii__kpi-delta {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--status-resolved);
+  margin-top: 8px;
+}
+
+.aii__kpi-delta--muted {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.aii__kpi--violet {
+  background: var(--ai-accent-soft);
+}
+.aii__kpi--violet .aii__kpi-value {
+  color: var(--ai-accent);
+}
+
+.aii__kpi--blue {
+  background: var(--status-accepted-bg);
+}
+.aii__kpi--blue .aii__kpi-value {
+  color: var(--alten-blue);
+}
+
+.aii__kpi--orange {
+  background: var(--status-escalated-bg);
+}
+.aii__kpi--orange .aii__kpi-value {
+  color: var(--status-escalated);
+}
+
+.aii__kpi--green {
+  background: var(--status-resolved-bg);
+}
+.aii__kpi--green .aii__kpi-value {
+  color: var(--status-resolved);
+}
+
+.aii__charts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.aii__chart-card {
+  padding: 22px;
+}
+
+.aii__chart-card h3 {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--ai-accent);
+}
+
+.aii__chart-sub {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  margin: 4px 0 16px;
+}
+
+.aii__queue {
+  margin-top: 18px;
+  padding: 22px;
+}
+
+.aii__queue-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  color: var(--status-escalated);
+}
+
+.aii__queue-header h3 {
+  font-size: 15.5px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.aii__queue-pending {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--status-escalated);
+  background: var(--status-escalated-bg);
+  padding: 4px 11px;
+  border-radius: 999px;
+}
+
+.aii__queue-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+
+.aii__queue-table th {
+  text-align: left;
+  padding: 10px 12px;
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+
+.aii__queue-table td {
+  padding: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.aii__queue-table tr:last-child td {
+  border-bottom: none;
+}
+
+.aii__queue-id {
+  font-weight: 700;
+}
+
+.aii__domain-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--alten-navy);
+  background: #eaf3fa;
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+.aii__route-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ai-accent);
+}
+
+.aii__confidence {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 140px;
+}
+
+.aii__confidence-track {
+  flex: 1;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.aii__confidence-fill {
+  height: 100%;
+  background: var(--status-escalated);
+  border-radius: 999px;
+}
+
+.aii__confidence span {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--status-escalated);
+}
+
+.aii__queue-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.aii__approve-btn,
+.aii__correct-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text-secondary);
+}
+
+.aii__approve-btn {
+  color: var(--status-resolved);
+  border-color: #b9f0d4;
+  background: var(--status-resolved-bg);
+}
+
+.aii__approve-btn:hover {
+  filter: brightness(0.97);
+}
+
+.aii__correct-btn:hover {
+  background: var(--surface);
+}
+
+.aii__queue-empty {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 13.5px;
+  padding: 24px 0;
+}
+
+.aii__queue-error {
+  color: var(--priority-critical, #c0392b);
+  font-size: 13px;
+  margin: 10px 0 0;
+}
+
+.aii__monitoring {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.aii__monitor-card {
+  padding: 20px;
+}
+
+.aii__monitor-kicker {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--ai-accent);
+  margin-bottom: 12px;
+}
+
+.aii__monitor-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius);
+  background: var(--ai-accent-soft);
+  color: var(--ai-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.aii__monitor-value {
+  font-size: 19px;
+  font-weight: 800;
+}
+
+.aii__monitor-label {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-top: 3px;
+}
+
+.aii__monitor-sub {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 8px;
+}
+
+.aii__correct-ticket {
+  font-weight: 700;
+  color: var(--ai-accent);
+  margin-bottom: 8px;
+}
+
+.aii__correct-save {
+  width: 100%;
+  margin-top: 20px;
+}
+
+@media (max-width: 1100px) {
+  .aii__kpis {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .aii__charts {
+    grid-template-columns: 1fr;
+  }
+  .aii__monitoring {
+    grid-template-columns: 1fr;
+  }
+  .aii__queue-table {
+    display: block;
+    overflow-x: auto;
+  }
+}

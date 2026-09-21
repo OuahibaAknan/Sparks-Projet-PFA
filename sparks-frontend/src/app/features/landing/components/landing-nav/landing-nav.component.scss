@@ -1,0 +1,147 @@
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 30;
+  background: linear-gradient(90deg, #0a1128 0%, #1b2a4a 50%, #0a1128 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 1px 3px rgba(4, 57, 98, 0.1);
+}
+
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  height: 76px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.nav__brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-weight: 800;
+  font-size: 16px;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+
+.nav__logo {
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+
+.nav__logo-img {
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+}
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.88);
+  flex: 1;
+}
+
+.nav__links a {
+  position: relative;
+  padding: 6px 2px;
+  transition: color 0.15s ease;
+}
+
+.nav__links a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 100%;
+  bottom: 0;
+  height: 2px;
+  border-radius: 2px;
+  background: #fff;
+  transition: right 0.2s ease;
+}
+
+.nav__links a:hover {
+  color: #fff;
+}
+
+.nav__links a:hover::after {
+  right: 0;
+}
+
+.nav__actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav__login {
+  border-radius: 999px;
+}
+
+.nav__burger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  border-radius: var(--radius);
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.15);
+  }
+}
+
+.nav__mobile {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 20px 20px;
+  border-top: 1px solid var(--border);
+  background: #fff;
+
+  a {
+    padding: 10px 4px;
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--surface);
+  }
+}
+
+.nav__mobile-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+
+  .sp-btn {
+    flex: 1;
+  }
+}
+
+@media (max-width: 980px) {
+  .nav__links,
+  .nav__actions {
+    display: none;
+  }
+  .nav__burger {
+    display: flex;
+    margin-left: auto;
+  }
+}

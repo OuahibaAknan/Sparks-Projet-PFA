@@ -1,0 +1,20 @@
+<div class="dash">
+  <div class="dash__header">
+    <div>
+      <h1>Support Dashboard</h1>
+      <p>
+        Welcome back, {{ firstName }}
+        <ng-container *ngIf="criticalCount > 0">. {{ criticalCount }} critical ticket{{ criticalCount > 1 ? 's' : '' }} need attention</ng-container>
+      </p>
+    </div>
+  </div>
+
+  <div class="dash__kpis">
+    <sp-kpi-stat label="Available" [value]="pool().length" tint="#eaf3fa" accent="var(--alten-blue)"></sp-kpi-stat>
+    <sp-kpi-stat label="My Active" [value]="active().length" tint="var(--ai-accent-soft)" accent="var(--ai-accent)"></sp-kpi-stat>
+    <sp-kpi-stat label="Resolved Today" [value]="stats().resolvedToday" tint="var(--status-resolved-bg)" accent="var(--status-resolved)"></sp-kpi-stat>
+    <sp-kpi-stat label="Avg. Resolution" [value]="stats().avgResolutionHours + 'h'" tint="var(--priority-high-bg)" accent="var(--priority-high)"></sp-kpi-stat>
+  </div>
+
+  <sp-all-tickets-table></sp-all-tickets-table>
+</div>

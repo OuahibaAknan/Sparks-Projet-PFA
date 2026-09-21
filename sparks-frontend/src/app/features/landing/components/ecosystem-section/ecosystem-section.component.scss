@@ -1,0 +1,135 @@
+.eco-flow {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 60px;
+}
+
+.eco-flow__col {
+  flex: 1 1 200px;
+  min-width: 0;
+  max-width: 230px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.eco-flow__col--single {
+  justify-content: center;
+}
+
+.eco-flow__connector {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+}
+
+.eco-node {
+  min-width: 0;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 18px 16px;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.eco-node:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.eco-node__icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--generalist-accent-soft);
+  color: var(--alten-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+}
+
+.eco-node__label {
+  display: block;
+  font-weight: 800;
+  font-size: 14.5px;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.eco-node__caption {
+  display: block;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.eco-node--hub {
+  background: var(--alten-navy);
+  border-color: var(--alten-navy);
+}
+
+.eco-node--hub .eco-node__icon {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+.eco-node--hub .eco-node__label {
+  color: #fff;
+}
+
+.eco-node--hub .eco-node__caption {
+  color: #a9c1d4;
+}
+
+.eco-node--ai {
+  background: linear-gradient(160deg, var(--landing-navy-light), var(--landing-navy-deep));
+  border-color: rgba(124, 58, 237, 0.4);
+}
+
+.eco-node--ai .eco-node__icon {
+  background: rgba(124, 58, 237, 0.22);
+  color: #c9b3fb;
+}
+
+.eco-node--generalist .eco-node__icon {
+  background: var(--generalist-accent-soft);
+  color: var(--generalist-accent);
+}
+
+.eco-node--generalist {
+  border-color: rgba(0, 139, 210, 0.25);
+}
+
+.eco-node--specialist .eco-node__icon {
+  background: var(--specialist-accent-soft);
+  color: var(--specialist-accent);
+}
+
+.eco-node--specialist {
+  border-color: rgba(249, 115, 22, 0.25);
+}
+
+@media (max-width: 900px) {
+  .eco-flow {
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+  .eco-flow__col,
+  .eco-flow__col--single {
+    max-width: 320px;
+    width: 100%;
+  }
+  .eco-flow__connector {
+    padding-top: 0;
+    transform: rotate(90deg);
+    padding: 4px 0;
+  }
+}

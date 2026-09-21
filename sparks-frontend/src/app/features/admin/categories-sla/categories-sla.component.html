@@ -1,0 +1,50 @@
+<div class="cs">
+  <div class="cs__header">
+    <div>
+      <h1>Categories &amp; SLA</h1>
+      <p>SLA thresholds per PLM domain and priority level (hours)</p>
+    </div>
+  </div>
+
+  <div class="sp-card cs__table-wrap">
+    <table class="cs__table">
+      <thead>
+        <tr>
+          <th>PLM Domain</th>
+          <th>Low</th>
+          <th>Medium</th>
+          <th>High</th>
+          <th>Critical</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let r of rules()">
+          <td class="cs__domain"><sp-icon name="tag" [size]="14"></sp-icon> {{ r.domain }}</td>
+          <td>{{ r.low }}h</td>
+          <td>{{ r.medium }}h</td>
+          <td>{{ r.high }}h</td>
+          <td>{{ r.critical }}h</td>
+          <td>
+            <button class="cs__edit-btn" (click)="edit(r)"><sp-icon name="edit" [size]="14"></sp-icon> Edit</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<sp-modal [open]="!!editing()" title="Edit SLA thresholds" (closed)="editing.set(null)">
+  <ng-container *ngIf="editing() as e">
+    <p class="cs__modal-domain">{{ e.domain }}</p>
+    <label class="sp-label">Low priority (hours)</label>
+    <input class="sp-input" type="number" [(ngModel)]="e.low" />
+    <label class="sp-label">Medium priority (hours)</label>
+    <input class="sp-input" type="number" [(ngModel)]="e.medium" />
+    <label class="sp-label">High priority (hours)</label>
+    <input class="sp-input" type="number" [(ngModel)]="e.high" />
+    <label class="sp-label">Critical priority (hours)</label>
+    <input class="sp-input" type="number" [(ngModel)]="e.critical" />
+    <button class="sp-btn sp-btn--primary cs__save-btn" (click)="save()">Save changes</button>
+  </ng-container>
+</sp-modal>

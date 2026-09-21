@@ -1,0 +1,69 @@
+<section class="sai section section--bg-navy" id="smartticket-ai">
+  <div class="container sai__inner">
+    <div class="sai__visual" spReveal>
+      <div class="sai__scan">
+        <span class="sai__scan-badge">
+          <sp-icon name="sparkles" [size]="12"></sp-icon>
+          Analyzing…
+        </span>
+
+        <div class="sai__ticket">
+          <div class="sai__ticket-top">
+            <span class="sai__ticket-id">TKT-2851</span>
+            <span class="sai__ticket-dot" style="background: var(--priority-high)"></span>
+          </div>
+          <span class="sai__ticket-line sai__ticket-line--w1"></span>
+          <span class="sai__ticket-line sai__ticket-line--w2"></span>
+          <div class="sai__ticket-tags">
+            <span class="sai__tag">ECR Workflow</span>
+            <span class="sai__tag sai__tag--ai">AI: Generalist</span>
+          </div>
+        </div>
+
+        <div class="sai__core">
+          <sp-icon name="cpu" [size]="30"></sp-icon>
+          <span class="sai__core-ring"></span>
+          <span class="sai__core-ring sai__core-ring--2"></span>
+        </div>
+
+        <div class="sai__output">
+          <div class="sai__output-row"><sp-icon name="check" [size]="12"></sp-icon> Priority: High</div>
+          <div class="sai__output-row"><sp-icon name="check" [size]="12"></sp-icon> Domain: ECR Workflow</div>
+          <div class="sai__output-row"><sp-icon name="check" [size]="12"></sp-icon> Route: Generalist</div>
+          <div class="sai__output-row"><sp-icon name="check" [size]="12"></sp-icon> No duplicates found</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sai__content">
+      <div class="section__header sai__header" spReveal>
+        <span class="section__kicker">
+          <sp-icon name="cpu" [size]="13"></sp-icon>
+          SmartTicket AI
+        </span>
+        <h2 class="section__title">The intelligent core of SPARKS</h2>
+        <p class="section__subtitle">
+          Every ticket passes through SmartTicket AI before it reaches an engineer, analyzed,
+          classified and routed in seconds.
+        </p>
+      </div>
+
+      <div class="sai__grid">
+        @for (c of capabilities; track c.title; let i = $index) {
+          <div class="sai__cap" [spReveal]="i * 60">
+            <span class="sai__cap-icon"><sp-icon [name]="c.icon" [size]="16"></sp-icon></span>
+            <div>
+              <h3>{{ c.title }}</h3>
+              <p>{{ c.text }}</p>
+            </div>
+          </div>
+        }
+      </div>
+
+      <a class="sp-btn sp-btn--accent" routerLink="/login" spReveal>
+        Discover SmartTicket AI
+        <sp-icon name="arrow-right" [size]="16"></sp-icon>
+      </a>
+    </div>
+  </div>
+</section>

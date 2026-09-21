@@ -1,0 +1,65 @@
+<section class="eco section section--bg-white" id="ecosystem">
+  <div class="container">
+    <div class="section__header" spReveal>
+      <span class="section__kicker">
+        <sp-icon name="route" [size]="13"></sp-icon>
+        The SPARKS Ecosystem
+      </span>
+      <h2 class="section__title">One platform, connecting every ticket to the right expert</h2>
+      <p class="section__subtitle">
+        AIDE and TOOLSUP feed every incident into SPARKS. SmartTicket AI qualifies and routes it,
+        and the right Generalist or Specialist takes it from there.
+      </p>
+    </div>
+
+    <div class="eco-flow" spReveal>
+      <div class="eco-flow__col">
+        @for (s of sources; track s.label) {
+          <div class="eco-node eco-node--source">
+            <span class="eco-node__icon"><sp-icon [name]="s.icon" [size]="18"></sp-icon></span>
+            <span class="eco-node__label">{{ s.label }}</span>
+            <span class="eco-node__caption">{{ s.caption }}</span>
+          </div>
+        }
+      </div>
+
+      <div class="eco-flow__connector">
+        <sp-icon name="arrow-right" [size]="18"></sp-icon>
+      </div>
+
+      <div class="eco-flow__col eco-flow__col--single">
+        <div class="eco-node eco-node--hub">
+          <span class="eco-node__icon"><sp-icon [name]="hubs[0].icon" [size]="20"></sp-icon></span>
+          <span class="eco-node__label">{{ hubs[0].label }}</span>
+          <span class="eco-node__caption">{{ hubs[0].caption }}</span>
+        </div>
+      </div>
+
+      <div class="eco-flow__connector">
+        <sp-icon name="arrow-right" [size]="18"></sp-icon>
+      </div>
+
+      <div class="eco-flow__col eco-flow__col--single">
+        <div class="eco-node eco-node--hub eco-node--ai">
+          <span class="eco-node__icon"><sp-icon [name]="hubs[1].icon" [size]="20"></sp-icon></span>
+          <span class="eco-node__label">{{ hubs[1].label }}</span>
+          <span class="eco-node__caption">{{ hubs[1].caption }}</span>
+        </div>
+      </div>
+
+      <div class="eco-flow__connector">
+        <sp-icon name="arrow-right" [size]="18"></sp-icon>
+      </div>
+
+      <div class="eco-flow__col">
+        @for (r of roles; track r.label) {
+          <div class="eco-node" [class.eco-node--generalist]="r.label === 'Generalists'" [class.eco-node--specialist]="r.label === 'Specialists'">
+            <span class="eco-node__icon"><sp-icon [name]="r.icon" [size]="18"></sp-icon></span>
+            <span class="eco-node__label">{{ r.label }}</span>
+            <span class="eco-node__caption">{{ r.caption }}</span>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>

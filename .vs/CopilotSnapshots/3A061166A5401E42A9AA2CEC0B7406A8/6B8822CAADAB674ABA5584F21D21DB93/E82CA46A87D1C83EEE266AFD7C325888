@@ -1,0 +1,271 @@
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Sparks.Api.Models;
+
+namespace Sparks.Api.Data;
+
+public static class DbSeeder
+{
+    public static async Task SeedAsync(IServiceProvider services)
+    {
+        var db = services.GetRequiredService<AppDbContext>();
+        var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+        var roleManager = services.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
+
+        await db.Database.MigrateAsync();
+
+        foreach (var role in new[] { "Generalist", "Specialist", "Admin", "TeamLead", "Polyvalent" })
+        {
+            if (!await roleManager.RoleExistsAsync(role))
+                await roleManager.CreateAsync(new IdentityRole<Guid>(role));
+        }
+
+        if (await db.Users.AnyAsync()) return; // already seeded
+
+        var users = new (string First, string Last, string Email, UserRole Role, UserStatus Status, UserAvailability Availability, string Color, DateTime Created)[]
+        {
+            ("Marcus", "Weber", "marcus.weber@alten.com", UserRole.Generalist, UserStatus.Active, UserAvailability.Available, "#008BD2", new DateTime(2023, 3, 11)),
+            ("Sofia", "Reyes", "sofia.reyes@alten.com", UserRole.Generalist, UserStatus.Active, UserAvailability.Away, "#008BD2", new DateTime(2023, 5, 2)),
+            ("Isabelle", "Morin", "i.morin@alten.com", UserRole.Specialist, UserStatus.Active, UserAvailability.Available, "#043962", new DateTime(2022, 11, 20)),
+            ("Tomasz", "Wiśniewski", "t.wisniewski@alten.com", UserRole.Specialist, UserStatus.Active, UserAvailability.Available, "#043962", new DateTime(2023, 1, 9)),
+            ("Marc", "Dubois", "marc.dubois@alten.com", UserRole.Generalist, UserStatus.Inactive, UserAvailability.Away, "#008BD2", new DateTime(2022, 7, 14)),
+            ("Amara", "Diallo", "a.diallo@alten.com", UserRole.Admin, UserStatus.Active, UserAvailability.Available, "#7C3AED", new DateTime(2022, 2, 1)),
+            ("Youssef", "El Amrani", "y.elamrani@alten.com", UserRole.TeamLead, UserStatus.Active, UserAvailability.Available, "#B45309", new DateTime(2022, 9, 5)),
+            ("Léa", "Fontaine", "l.fontaine@alten.com", UserRole.Polyvalent, UserStatus.Active, UserAvailability.Available, "#0F766E", new DateTime(2023, 6, 18)),
+        };
+
+        var idByFirstName = new Dictionary<string, Guid>();
+
+        foreach (var u in users)
+        {
+            var user = new ApplicationUser
+            {
+                UserName = u.Email,
+                Email = u.Email,
+                EmailConfirmed = true,
+                FirstName = u.First,
+                LastName = u.Last,
+                Role = u.Role,
+                Status = u.Status,
+                Availability = u.Availability,
+                AvatarColor = u.Color,
+                CreatedAt = u.Created,
+            };
+            var result = await userManager.CreateAsync(user, "demo1234");
+            if (!result.Succeeded)
+                throw new Exception($"Failed to seed user {u.Email}: {string.Join(", ", result.Errors.Select(e => e.Description))}");
+            await userManager.AddToRoleAsync(user, u.Role.ToString());
+            idByFirstName[u.First] = user.Id;
+        }
+
+        Guid Marcus() => idByFirstName["Marcus"];
+        Guid Sofia() => idByFirstName["Sofia"];
+        Guid Isabelle() => idByFirstName["Isabelle"];
+        Guid Tomasz() => idByFirstName["Tomasz"];
+
+        var now = DateTime.UtcNow;
+
+        Ticket T(string id, DateTime created, TicketPriority priority, string domain, TicketStatus status, int slaMinutes,
+            SuggestedRoute route, SourceSystem source, string title, string description, string requester, string site,
+            Guid? assignee = null, string? partNumber = null, string? ecrNumber = null) => new()
+        {
+            Id = id,
+            CreatedAtUtc = created,
+            Priority = priority,
+            Domain = domain,
+            Status = status,
+            SlaDeadlineUtc = now.AddMinutes(slaMinutes),
+            AiSuggestedRoute = route,
+            SourceSystem = source,
+            Title = title,
+            Description = description,
+            RequesterName = requester,
+            Site = site,
+            AssigneeId = assignee,
+            PartNumber = partNumber,
+            EcrNumber = ecrNumber,
+        };
+
+        TicketHistoryEntry H(string ticketId, string label, string actor, DateTime ts, bool isAi, string icon, string? detail = null) => new()
+        {
+            TicketId = ticketId, Label = label, Actor = actor, TimestampUtc = ts, IsAiGenerated = isAi, Icon = icon, Detail = detail,
+        };
+
+        var t2847 = T("TKT-2847", new DateTime(2024, 1, 15), TicketPriority.Critical, "ECR Workflow", TicketStatus.New, 120,
+            SuggestedRoute.Generalist, SourceSystem.AIDE,
+            "ECR approval stuck in pending state past SLA",
+            "ECR-9021 has been sitting in \"Pending Approval\" for 26 hours despite both required approvers signing off in Teamcenter. The workflow engine does not appear to be evaluating the completed signoffs, blocking the downstream CAD publish step.",
+            "Claire Fontaine", "Sochaux, FR", ecrNumber: "ECR-9021");
+        t2847.Attachments.Add(new TicketAttachment { TicketId = t2847.Id, Name = "workflow_state_export.json", SizeKb = 42 });
+        t2847.History.Add(H(t2847.Id, "Ticket created by Requester", "System", new DateTime(2024, 1, 15, 8, 2, 0), false, "plus"));
+        t2847.History.Add(H(t2847.Id, "Classified as ECR Workflow / Priority: Critical — 91% confidence", "SmartTicket AI", new DateTime(2024, 1, 15, 8, 3, 0), true, "sparkle"));
+
+        var t2846 = T("TKT-2846", new DateTime(2024, 1, 15), TicketPriority.High, "BOM", TicketStatus.New, 360,
+            SuggestedRoute.Generalist, SourceSystem.TOOLSUP,
+            "BOM export to SAP missing quantity multipliers",
+            "Engineering BOM export from Teamcenter to SAP ERP drops the quantity-per-assembly multiplier field for all sub-components nested more than 2 levels deep. Affects purchasing quantities for 3 active work orders.",
+            "Hugo Lambert", "Mulhouse, FR", partNumber: "11-BTZ-220-A");
+        t2846.History.Add(H(t2846.Id, "Ticket created by Requester", "System", new DateTime(2024, 1, 15, 7, 40, 0), false, "plus"));
+        t2846.History.Add(H(t2846.Id, "Classified as BOM / Priority: High — 88% confidence", "SmartTicket AI", new DateTime(2024, 1, 15, 7, 41, 0), true, "sparkle"));
+
+        var t2845 = T("TKT-2845", new DateTime(2024, 1, 14), TicketPriority.Medium, "CAD Data Sync", TicketStatus.InProgress, 1080,
+            SuggestedRoute.Generalist, SourceSystem.AIDE,
+            "CATIA V5 assembly out of sync after Teamcenter checkout",
+            "After checking out an assembly from Teamcenter, the local CATIA V5 session still references the previous revision for two child parts. Refresh and reload both fail to pull the latest geometry.",
+            "Julien Perrot", "Sochaux, FR", assignee: Marcus());
+        t2845.Attachments.Add(new TicketAttachment { TicketId = t2845.Id, Name = "sync_error.log", SizeKb = 18 });
+        t2845.History.Add(H(t2845.Id, "Ticket created by Requester", "System", new DateTime(2024, 1, 14, 14, 10, 0), false, "plus"));
+        t2845.History.Add(H(t2845.Id, "Classified as CAD Data Sync / Priority: Medium — 84% confidence", "SmartTicket AI", new DateTime(2024, 1, 14, 14, 11, 0), true, "sparkle"));
+        t2845.History.Add(H(t2845.Id, "Accepted ticket from pool", "Marcus Weber", new DateTime(2024, 1, 14, 15, 2, 0), false, "check"));
+        t2845.History.Add(H(t2845.Id, "Status changed to In Progress", "Marcus Weber", new DateTime(2024, 1, 14, 15, 5, 0), false, "activity"));
+
+        var t2844 = T("TKT-2844", new DateTime(2024, 1, 14), TicketPriority.Low, "PLM-ERP Integration", TicketStatus.Accepted, 2160,
+            SuggestedRoute.Generalist, SourceSystem.TOOLSUP,
+            "Nightly PLM-ERP batch sync delayed by 40 minutes",
+            "The scheduled 02:00 CET batch sync between Teamcenter and SAP ERP has consistently completed 35-45 minutes late for the past 4 nights, pushing morning BOM availability past shift start.",
+            "Nadia Haddad", "Poissy, FR", assignee: Sofia());
+        t2844.History.Add(H(t2844.Id, "Ticket created by Requester", "System", new DateTime(2024, 1, 14, 9, 0, 0), false, "plus"));
+        t2844.History.Add(H(t2844.Id, "Classified as PLM-ERP Integration / Priority: Low — 79% confidence", "SmartTicket AI", new DateTime(2024, 1, 14, 9, 1, 0), true, "sparkle"));
+        t2844.History.Add(H(t2844.Id, "Accepted ticket from pool", "Sofia Reyes", new DateTime(2024, 1, 14, 9, 30, 0), false, "check"));
+
+        var t2843 = T("TKT-2843", new DateTime(2024, 1, 13), TicketPriority.High, "Change Management", TicketStatus.Escalated, 480,
+            SuggestedRoute.Specialist, SourceSystem.AIDE,
+            "Change request approval matrix misconfigured for powertrain domain",
+            "Change requests routed to the powertrain functional domain are skipping the required chief engineer approval step, allowing changes to reach release state with only one signoff instead of two.",
+            "Peter Kowalski", "Rüsselsheim, DE", assignee: Isabelle());
+        t2843.Attachments.Add(new TicketAttachment { TicketId = t2843.Id, Name = "approval_matrix_config.xlsx", SizeKb = 66 });
+        t2843.History.Add(H(t2843.Id, "Ticket created by Requester", "System", new DateTime(2024, 1, 13, 11, 20, 0), false, "plus"));
+        t2843.History.Add(H(t2843.Id, "Classified as Change Management / Priority: High — 92% confidence", "SmartTicket AI", new DateTime(2024, 1, 13, 11, 21, 0), true, "sparkle"));
+        t2843.History.Add(H(t2843.Id, "Escalated to Specialist", "Marc Dubois", new DateTime(2024, 1, 13, 13, 0, 0), false, "escalate"));
+        t2843.History.Add(H(t2843.Id, "Accepted ticket from pool", "Dr. Isabelle Morin", new DateTime(2024, 1, 13, 13, 40, 0), false, "check"));
+
+        var t2842 = T("TKT-2842", new DateTime(2024, 1, 13), TicketPriority.Critical, "Document Control", TicketStatus.Resolved, 60,
+            SuggestedRoute.Specialist, SourceSystem.TOOLSUP,
+            "Released drawing package missing mandatory revision watermark",
+            "Drawings released through the Document Control workflow are being generated without the \"Superseded\" watermark on prior revisions, creating risk of shop floor using an obsolete print.",
+            "Elena Rossi", "Turin, IT", assignee: Tomasz());
+        t2842.Attachments.Add(new TicketAttachment { TicketId = t2842.Id, Name = "drawing_sample.pdf", SizeKb = 890 });
+        t2842.History.Add(H(t2842.Id, "Ticket created by Requester", "System", new DateTime(2024, 1, 13, 8, 0, 0), false, "plus"));
+        t2842.History.Add(H(t2842.Id, "Classified as Document Control / Priority: Critical — 95% confidence", "SmartTicket AI", new DateTime(2024, 1, 13, 8, 1, 0), true, "sparkle"));
+        t2842.History.Add(H(t2842.Id, "Accepted ticket from pool", "Tomasz Wiśniewski", new DateTime(2024, 1, 13, 8, 20, 0), false, "check"));
+        t2842.History.Add(H(t2842.Id, "Status changed to In Progress", "Tomasz Wiśniewski", new DateTime(2024, 1, 13, 8, 25, 0), false, "activity"));
+        t2842.History.Add(H(t2842.Id, "Marked as Resolved", "Tomasz Wiśniewski", new DateTime(2024, 1, 13, 10, 5, 0), false, "check"));
+        t2842.Comments.Add(new TicketComment { TicketId = t2842.Id, Author = "Tomasz Wiśniewski", AuthorInitials = "TW", Message = "Watermark template rule re-linked in Document Control admin panel. Verified on 3 test releases.", TimestampUtc = new DateTime(2024, 1, 13, 10, 4, 0) });
+
+        var t2841 = T("TKT-2841", new DateTime(2024, 1, 12), TicketPriority.Medium, "BOM", TicketStatus.Closed, 0,
+            SuggestedRoute.Generalist, SourceSystem.AIDE,
+            "Duplicate part numbers created for identical fasteners",
+            "Two separate part numbers exist for the same M8x25 hex bolt (06-ATZ-118-A and 06-ATZ-118-B), causing inventory reconciliation issues in SAP.",
+            "Marcus Weber", "Sochaux, FR", assignee: Marcus(), partNumber: "06-ATZ-118-A");
+        t2841.History.Add(H(t2841.Id, "Ticket created by Requester", "System", new DateTime(2024, 1, 12, 10, 0, 0), false, "plus"));
+        t2841.History.Add(H(t2841.Id, "Classified as BOM / Priority: Medium — 90% confidence", "SmartTicket AI", new DateTime(2024, 1, 12, 10, 1, 0), true, "sparkle"));
+        t2841.History.Add(H(t2841.Id, "Accepted ticket from pool", "Marcus Weber", new DateTime(2024, 1, 12, 10, 15, 0), false, "check"));
+        t2841.History.Add(H(t2841.Id, "Marked as Resolved", "Marcus Weber", new DateTime(2024, 1, 12, 12, 30, 0), false, "check"));
+        t2841.History.Add(H(t2841.Id, "Ticket closed", "Marcus Weber", new DateTime(2024, 1, 12, 16, 0, 0), false, "check"));
+
+        var t2840 = T("TKT-2840", new DateTime(2024, 1, 15), TicketPriority.High, "BOM", TicketStatus.InProgress, 135,
+            SuggestedRoute.Generalist, SourceSystem.TOOLSUP,
+            "BOM structure mismatch causing downstream assembly errors in Catia V5",
+            "After approving ECR-8821 for part number 06-ATZ-334-B revision C, the BOM structure in Teamcenter reflects the update, but the linked CATIA V5 assembly (.CATProduct) still references revision B geometry. This is causing assembly constraint failures for the subassembly used in 3 vehicle programs (208, DS4, Jeep Avenger). Downstream ERP BOM sync via SAP has also propagated the incorrect revision, leading to purchase orders being raised for obsolete parts.",
+            "Jean-Pierre Moreau", "Sochaux, FR", assignee: Marcus(), partNumber: "06-ATZ-334-B", ecrNumber: "ECR-8821");
+        t2840.Attachments.Add(new TicketAttachment { TicketId = t2840.Id, Name = "screenshot_bom_error.png", SizeKb = 210 });
+        t2840.Attachments.Add(new TicketAttachment { TicketId = t2840.Id, Name = "catia_log_export.txt", SizeKb = 34 });
+        t2840.History.Add(H(t2840.Id, "Ticket created by Requester", "System", new DateTime(2024, 1, 15, 9, 14, 0), false, "plus"));
+        t2840.History.Add(H(t2840.Id, "Classified as BOM / Priority: High — 94% confidence", "SmartTicket AI", new DateTime(2024, 1, 15, 9, 16, 0), true, "sparkle"));
+        t2840.History.Add(H(t2840.Id, "Accepted ticket from pool", "Marcus Weber", new DateTime(2024, 1, 15, 9, 18, 0), false, "check"));
+        t2840.History.Add(H(t2840.Id, "Status changed to In Progress", "Marcus Weber", new DateTime(2024, 1, 15, 10, 30, 0), false, "activity"));
+        t2840.History.Add(H(t2840.Id, "Suggested solution from TKT-2791 — 87% similarity match", "SmartTicket AI", new DateTime(2024, 1, 15, 11, 45, 0), true, "sparkle"));
+
+        var t2839 = T("TKT-2839", new DateTime(2024, 1, 11), TicketPriority.Low, "CAD Data Sync", TicketStatus.Closed, 0,
+            SuggestedRoute.Generalist, SourceSystem.AIDE,
+            "Thumbnail preview not regenerating after part revision",
+            "Teamcenter thumbnail previews stay on the old revision snapshot for up to 24h after a new revision is published, causing confusion during visual part search.",
+            "Anaïs Girard", "Mulhouse, FR", assignee: Sofia());
+        t2839.History.Add(H(t2839.Id, "Ticket created by Requester", "System", new DateTime(2024, 1, 11, 9, 0, 0), false, "plus"));
+        t2839.History.Add(H(t2839.Id, "Classified as CAD Data Sync / Priority: Low — 81% confidence", "SmartTicket AI", new DateTime(2024, 1, 11, 9, 1, 0), true, "sparkle"));
+        t2839.History.Add(H(t2839.Id, "Accepted ticket from pool", "Sofia Reyes", new DateTime(2024, 1, 11, 9, 30, 0), false, "check"));
+        t2839.History.Add(H(t2839.Id, "Marked as Resolved", "Sofia Reyes", new DateTime(2024, 1, 11, 11, 0, 0), false, "check"));
+        t2839.History.Add(H(t2839.Id, "Ticket closed", "Sofia Reyes", new DateTime(2024, 1, 11, 15, 0, 0), false, "check"));
+
+        var t2838 = T("TKT-2838", new DateTime(2024, 1, 10), TicketPriority.High, "PLM-ERP Integration", TicketStatus.Escalated, 300,
+            SuggestedRoute.Specialist, SourceSystem.TOOLSUP,
+            "Cost roll-up from SAP not reflecting latest BOM revision",
+            "Standard cost roll-up jobs in SAP are pulling BOM quantities from a stale Teamcenter snapshot, understating assembly cost by up to 12% for recently revised parts.",
+            "Laurent Bernard", "Poissy, FR", assignee: Isabelle());
+        t2838.Attachments.Add(new TicketAttachment { TicketId = t2838.Id, Name = "cost_variance_report.xlsx", SizeKb = 120 });
+        t2838.History.Add(H(t2838.Id, "Ticket created by Requester", "System", new DateTime(2024, 1, 10, 8, 30, 0), false, "plus"));
+        t2838.History.Add(H(t2838.Id, "Classified as PLM-ERP Integration / Priority: High — 89% confidence", "SmartTicket AI", new DateTime(2024, 1, 10, 8, 31, 0), true, "sparkle"));
+        t2838.History.Add(H(t2838.Id, "Escalated to Specialist", "Sofia Reyes", new DateTime(2024, 1, 10, 9, 15, 0), false, "escalate"));
+        t2838.History.Add(H(t2838.Id, "Accepted ticket from pool", "Dr. Isabelle Morin", new DateTime(2024, 1, 10, 9, 40, 0), false, "check"));
+
+        var t2791 = T("TKT-2791", new DateTime(2024, 1, 4), TicketPriority.High, "BOM", TicketStatus.Closed, 0,
+            SuggestedRoute.Generalist, SourceSystem.TOOLSUP,
+            "CAD-BOM sync failure after ECR approval on chassis subassembly",
+            "Similar BOM/CAD revision mismatch traced to a missing CAD publish trigger following ECR approval. Resolved by manually re-triggering the CAD publish job from the Teamcenter workflow admin panel.",
+            "Chloé Petit", "Sochaux, FR", assignee: Marcus(), ecrNumber: "ECR-8654");
+
+        var t2634 = T("TKT-2634", new DateTime(2023, 12, 18), TicketPriority.Medium, "ECR Workflow", TicketStatus.Closed, 0,
+            SuggestedRoute.Generalist, SourceSystem.AIDE,
+            "ECR publish rule missing CAD-BOM sync trigger condition",
+            "Root cause identified in the ECR publish rule configuration: missing CAD-BOM sync trigger added to the approval checklist to prevent recurrence.",
+            "Marcus Weber", "Sochaux, FR", assignee: Marcus());
+
+        var t2510 = T("TKT-2510", new DateTime(2023, 11, 22), TicketPriority.Low, "CAD Data Sync", TicketStatus.Closed, 0,
+            SuggestedRoute.Generalist, SourceSystem.TOOLSUP,
+            "Obsolete geometry referenced after partial BOM update",
+            "Partial BOM update left one child component pointing at obsolete geometry; fixed via manual re-sync.",
+            "Diego Alves", "Turin, IT", assignee: Sofia());
+
+        db.Tickets.AddRange(t2847, t2846, t2845, t2844, t2843, t2842, t2841, t2840, t2839, t2838, t2791, t2634, t2510);
+        await db.SaveChangesAsync();
+
+        // AI metadata for TKT-2840 — the ticket the frontend ticket-detail screen demos by default.
+        var aiMeta = new TicketAiMetadata
+        {
+            TicketId = t2840.Id,
+            Summary = "ECR-8821 approval completed but CAD publish workflow was not triggered, leaving CATIA V5 assembly referencing obsolete revision B. SAP BOM sync has propagated the incorrect revision downstream. Affects 3 vehicle programs.",
+            ClassifiedDomain = "BOM",
+            ClassificationConfidencePct = 94,
+        };
+        aiMeta.SimilarTickets.Add(new AiSimilarTicket { SourceTicketId = "TKT-2791", Domain = "BOM", SimilarityPct = 87 });
+        aiMeta.SimilarTickets.Add(new AiSimilarTicket { SourceTicketId = "TKT-2634", Domain = "ECR Workflow", SimilarityPct = 71 });
+        aiMeta.SimilarTickets.Add(new AiSimilarTicket { SourceTicketId = "TKT-2510", Domain = "CAD Data Sync", SimilarityPct = 63 });
+        aiMeta.SuggestedSolutions.Add(new AiSuggestedSolution { Rank = 1, Text = "Manually re-trigger CAD publish job from Teamcenter workflow admin panel — confirmed resolves sync failure in 15 min.", SourceTicketId = "TKT-2791", NeedsVerification = true });
+        aiMeta.SuggestedSolutions.Add(new AiSuggestedSolution { Rank = 2, Text = "Verify ECR publish rule conditions in Teamcenter admin; add missing CAD-BOM sync trigger to approval checklist.", SourceTicketId = "TKT-2634", NeedsVerification = true });
+        aiMeta.ChatMessages.Add(new AiChatMessage { Sender = "ai", Text = "Hello! I've analyzed TKT-2840. This appears to be a BOM structure mismatch caused by a recent ECR approval that wasn't fully synchronized across downstream assemblies. Would you like me to list similar resolved tickets?", TimestampUtc = new DateTime(2024, 1, 15, 11, 45, 0) });
+        db.TicketAiMetadata.Add(aiMeta);
+
+        db.AiInsightsSnapshots.Add(new AiInsightsSnapshot
+        {
+            Id = 1,
+            RoutingAccuracyPct = 94.2,
+            RoutingAccuracyDeltaPct = 1.8,
+            TicketsClassified = 1248,
+            EstimatedModelCostUsd = 48.2,
+            ModelVersion = "SmartTicket-v2.3.1",
+            ModelLastUpdatedUtc = new DateTime(2024, 1, 10),
+            AvgLatencyMs = 142,
+            P95LatencyMs = 380,
+            MonthlyTokens = "2.4M tokens",
+            MonthlyCostUsd = 48.2,
+        });
+
+        var recurring = new[] { 12, 15, 20, 26, 32, 30, 27 };
+        var accuracy = new[] { 89, 90, 91, 91.5, 93, 93.6, 94.2 };
+        var weeks = new[] { "W44", "W45", "W46", "W47", "W48", "W49", "W50" };
+        for (var i = 0; i < weeks.Length; i++)
+        {
+            db.AiTrendPoints.Add(new AiTrendPoint { Kind = "recurring", Label = weeks[i], Value = recurring[i], Order = i });
+            db.AiTrendPoints.Add(new AiTrendPoint { Kind = "accuracy", Label = weeks[i], Value = accuracy[i], Order = i });
+        }
+
+        db.AiLowConfidenceItems.AddRange(
+            new AiLowConfidenceItem { TicketId = "TKT-2841", SuggestedDomain = "BOM", AiRoute = SuggestedRoute.Specialist, ConfidencePct = 52 },
+            new AiLowConfidenceItem { TicketId = "TKT-2836", SuggestedDomain = "ECR Workflow", AiRoute = SuggestedRoute.Generalist, ConfidencePct = 58 },
+            new AiLowConfidenceItem { TicketId = "TKT-2829", SuggestedDomain = "Change Management", AiRoute = SuggestedRoute.Specialist, ConfidencePct = 61 },
+            new AiLowConfidenceItem { TicketId = "TKT-2822", SuggestedDomain = "Document Control", AiRoute = SuggestedRoute.Generalist, ConfidencePct = 63 }
+        );
+
+        await db.SaveChangesAsync();
+    }
+}

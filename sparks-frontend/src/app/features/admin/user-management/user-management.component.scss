@@ -1,0 +1,133 @@
+.um__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 22px;
+}
+
+.um__header h1 {
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.um__header p {
+  color: var(--text-secondary);
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.um__delete-error {
+  background: var(--priority-critical-bg);
+  color: var(--priority-critical);
+  border: 1px solid var(--priority-critical-bg);
+  border-radius: var(--radius);
+  padding: 10px 14px;
+  font-size: 13.5px;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+.um__table-wrap {
+  overflow-x: auto;
+}
+
+.um__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+
+.um__table th {
+  text-align: left;
+  padding: 14px 18px;
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+
+.um__table td {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border);
+}
+
+.um__table tr:last-child td {
+  border-bottom: none;
+}
+
+.um__name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+}
+
+.um__avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+
+.um__muted {
+  color: var(--text-secondary);
+}
+
+.um__dot-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+  color: var(--status-resolved);
+}
+
+.um__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.um__dot-label--off {
+  color: var(--text-muted);
+}
+
+.um__actions {
+  display: flex;
+  gap: 6px;
+}
+
+.um__actions button {
+  border: 1px solid var(--border);
+  background: #fff;
+  border-radius: 6px;
+  padding: 6px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  display: flex;
+}
+
+.um__actions button:hover {
+  background: var(--surface);
+}
+
+.um__form {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.um__form .sp-label {
+  margin-top: 12px;
+}
+
+.um__form-submit {
+  margin-top: 22px;
+}

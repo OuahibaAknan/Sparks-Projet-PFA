@@ -1,0 +1,1636 @@
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2741: Property 'mustChangePassword' is missing in type '{ sub: string; email: string; firstName: string; lastName: string; role: UserRole; initials: string; }' but required in type 'JwtClaims'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/core/services/auth.service.ts:34:12:
+[37m      34 │       const [32mclaims[37m: JwtClaims = {
+         ╵             [32m~~~~~~[0m
+
+  'mustChangePassword' is declared here.
+
+    src/app/core/models/auth.model.ts:21:2:
+[37m      21 │   [32mmustChangePassword[37m: boolean;
+         ╵   [32m~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2741: Property 'mustChangePassword' is missing in type '{ sub: string; email: string; firstName: string; lastName: string; role: UserRole; initials: string; }' but required in type 'JwtClaims'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/core/services/auth.service.ts:34:12:
+[37m      34 │       const [32mclaims[37m: JwtClaims = {
+         ╵             [32m~~~~~~[0m
+
+  'mustChangePassword' is declared here.
+
+    src/app/core/models/auth.model.ts:21:2:
+[37m      21 │   [32mmustChangePassword[37m: boolean;
+         ╵   [32m~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2739: Type '{ sub: string; email: string; firstName: string; lastName: string; role: UserRole; initials: string; mustChangePassword: false; }' is missing the following properties from type 'JwtClaims': idStellantis, profilePhotoUrl[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/core/services/auth.service.ts:34:12:
+[37m      34 │       const [32mclaims[37m: JwtClaims = {
+         ╵             [32m~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2739: Type '{ sub: string; email: string; firstName: string; lastName: string; role: UserRole; initials: string; mustChangePassword: false; }' is missing the following properties from type 'JwtClaims': idStellantis, profilePhotoUrl[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/core/services/auth.service.ts:34:12:
+[37m      34 │       const [32mclaims[37m: JwtClaims = {
+         ╵             [32m~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'photoUrl' does not exist on type 'ShellComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/shell/shell.component.ts:49:63:
+[37m      49 │ ..." [style.background-image]="[32mphotoUrl[37m(user) ? 'url(' + photoUrl(...
+         ╵                                [32m~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'photoUrl' does not exist on type 'ShellComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/shell/shell.component.ts:49:89:
+[37m      49 │ ...nd-image]="photoUrl(user) ? 'url(' + [32mphotoUrl[37m(user) + ')' : null">
+         ╵                                         [32m~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'photoUrl' does not exist on type 'ShellComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/shell/shell.component.ts:50:26:
+[37m      50 │             <span *ngIf="![32mphotoUrl[37m(user)">{{ user.initials }}</span>
+         ╵                           [32m~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'photoUrl' does not exist on type 'ShellComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/shell/shell.component.ts:49:63:
+[37m      49 │ ..." [style.background-image]="[32mphotoUrl[37m(user) ? 'url(' + photoUrl(...
+         ╵                                [32m~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'photoUrl' does not exist on type 'ShellComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/shell/shell.component.ts:49:89:
+[37m      49 │ ...nd-image]="photoUrl(user) ? 'url(' + [32mphotoUrl[37m(user) + ')' : null">
+         ╵                                         [32m~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'photoUrl' does not exist on type 'ShellComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/shell/shell.component.ts:50:26:
+[37m      50 │             <span *ngIf="![32mphotoUrl[37m(user)">{{ user.initials }}</span>
+         ╵                           [32m~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'photoUrl' does not exist on type 'ShellComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/shell/shell.component.ts:85:40:
+[37m      85 │ ...  [style.background-image]="[32mphotoUrl[37m(user) ? 'url(' + photoUrl(...
+         ╵                                [32m~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'photoUrl' does not exist on type 'ShellComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/shell/shell.component.ts:85:66:
+[37m      85 │ ...und-image]="photoUrl(user) ? 'url(' + [32mphotoUrl[37m(user) + ')' : null"
+         ╵                                          [32m~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'photoUrl' does not exist on type 'ShellComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/shell/shell.component.ts:87:28:
+[37m      87 │               <span *ngIf="![32mphotoUrl[37m(user)">{{ user.initials }}</s...
+         ╵                             [32m~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2741: Property 'Cancelled' is missing in type '{ New: { fg: string; bg: string; }; Accepted: { fg: string; bg: string; }; InProgress: { fg: string; bg: string; }; Escalated: { fg: string; bg: string; }; Resolved: { fg: string; bg: string; }; Closed: { fg: string; bg: string; }; }' but required in type 'Record<TicketStatus, BadgeColor>'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/utils/badge-colors.ts:9:6:
+[37m      9 │ const [32mSTATUS_COLORS[37m: Record<TicketStatus, BadgeColor> = {
+        ╵       [32m~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[33m[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: BlindTicketCardComponent is not used within the template of TicketManagementComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/tickets/ticket-management/ticket-management.component.ts:39:26:
+[37m      39 │ ...rts: [CommonModule, [32mBlindTicketCardComponent[37m, AcceptModalCompon...
+         ╵                        [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: AcceptModalComponent is not used within the template of TicketManagementComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/tickets/ticket-management/ticket-management.component.ts:39:52:
+[37m      39 │ ...s: [CommonModule, BlindTicketCardComponent, [32mAcceptModalComponent[37m],
+         ╵                                                [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'selected' does not exist on type 'TicketManagementComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/tickets/ticket-management/ticket-management.component.html:18:32:
+[37m      18 │       [class.tm__pill--active]="[32mselected[37m() === pill.key"
+         ╵                                 [32m~~~~~~~~[0m
+
+  Error occurs in the template of component TicketManagementComponent.
+
+    src/app/features/tickets/ticket-management/ticket-management.component.ts:40:15:
+[37m      40 │   templateUrl: [32m'./ticket-management.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'selected' does not exist on type 'TicketManagementComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/tickets/ticket-management/ticket-management.component.html:19:21:
+[37m      19 │       [style.color]="[32mselected[37m() === pill.key ? '#fff' : pill.fg"
+         ╵                      [32m~~~~~~~~[0m
+
+  Error occurs in the template of component TicketManagementComponent.
+
+    src/app/features/tickets/ticket-management/ticket-management.component.ts:40:15:
+[37m      40 │   templateUrl: [32m'./ticket-management.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'selected' does not exist on type 'TicketManagementComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/tickets/ticket-management/ticket-management.component.html:20:26:
+[37m      20 │       [style.background]="[32mselected[37m() === pill.key ? pill.fg : pill...
+         ╵                           [32m~~~~~~~~[0m
+
+  Error occurs in the template of component TicketManagementComponent.
+
+    src/app/features/tickets/ticket-management/ticket-management.component.ts:40:15:
+[37m      40 │   templateUrl: [32m'./ticket-management.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'select' does not exist on type 'TicketManagementComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/tickets/ticket-management/ticket-management.component.html:22:15:
+[37m      22 │       (click)="[32mselect[37m(pill.key)"
+         ╵                [32m~~~~~~[0m
+
+  Error occurs in the template of component TicketManagementComponent.
+
+    src/app/features/tickets/ticket-management/ticket-management.component.ts:40:15:
+[37m      40 │   templateUrl: [32m'./ticket-management.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'tab' does not exist on type 'GeneralistDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/generalist/dashboard/dashboard.component.html:20:57:
+[37m      20 │ ...b" [class.dash__tab--active]="[32mtab[37m() === 'pool'" (click)="tab.se...
+         ╵                                  [32m~~~[0m
+
+  Error occurs in the template of component GeneralistDashboardComponent.
+
+    src/app/features/generalist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'tab' does not exist on type 'GeneralistDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/generalist/dashboard/dashboard.component.html:20:84:
+[37m      20 │ ...s.dash__tab--active]="tab() === 'pool'" (click)="[32mtab[37m.set('pool')">
+         ╵                                                     [32m~~~[0m
+
+  Error occurs in the template of component GeneralistDashboardComponent.
+
+    src/app/features/generalist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'tab' does not exist on type 'GeneralistDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/generalist/dashboard/dashboard.component.html:23:57:
+[37m      23 │ ...b" [class.dash__tab--active]="[32mtab[37m() === 'active'" (click)="tab....
+         ╵                                  [32m~~~[0m
+
+  Error occurs in the template of component GeneralistDashboardComponent.
+
+    src/app/features/generalist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'tab' does not exist on type 'GeneralistDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/generalist/dashboard/dashboard.component.html:23:86:
+[37m      23 │ ...sh__tab--active]="tab() === 'active'" (click)="[32mtab[37m.set('active')">
+         ╵                                                   [32m~~~[0m
+
+  Error occurs in the template of component GeneralistDashboardComponent.
+
+    src/app/features/generalist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'priorities' does not exist on type 'GeneralistDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/generalist/dashboard/dashboard.component.html:31:23:
+[37m      31 │       *ngFor="let p of [32mpriorities[37m"
+         ╵                        [32m~~~~~~~~~~[0m
+
+  Error occurs in the template of component GeneralistDashboardComponent.
+
+    src/app/features/generalist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'priorityFilter' does not exist on type 'GeneralistDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/generalist/dashboard/dashboard.component.html:33:41:
+[37m      33 │       [class.dash__filter-chip--active]="[32mpriorityFilter[37m() === p"
+         ╵                                          [32m~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component GeneralistDashboardComponent.
+
+    src/app/features/generalist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'setPriorityFilter' does not exist on type 'GeneralistDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/generalist/dashboard/dashboard.component.html:34:15:
+[37m      34 │       (click)="[32msetPriorityFilter[37m(p)"
+         ╵                [32m~~~~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component GeneralistDashboardComponent.
+
+    src/app/features/generalist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'tab' does not exist on type 'GeneralistDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/generalist/dashboard/dashboard.component.html:40:33:
+[37m      40 │   <div class="dash__grid" *ngIf="[32mtab[37m() === 'pool'">
+         ╵                                  [32m~~~[0m
+
+  Error occurs in the template of component GeneralistDashboardComponent.
+
+    src/app/features/generalist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8001: 'sp-blind-ticket-card' is not a known element:
+1. If 'sp-blind-ticket-card' is an Angular component, then verify that it is included in the '@Component.imports' of this component.
+2. If 'sp-blind-ticket-card' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/generalist/dashboard/dashboard.component.html:41:4:
+[37m      41 │     [32m<sp-blind-ticket-card[37m
+         ╵     [32m~~~~~~~~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component GeneralistDashboardComponent.
+
+    src/app/features/generalist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'filteredPool' does not exist on type 'GeneralistDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/generalist/dashboard/dashboard.component.html:42:23:
+[37m      42 │       *ngFor="let t of [32mfilteredPool[37m()"
+         ╵                        [32m~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component GeneralistDashboardComponent.
+
+    src/app/features/generalist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8002: Can't bind to 'ticket' since it isn't a known property of 'sp-blind-ticket-card'.
+1. If 'sp-blind-ticket-card' is an Angular component and it has 'ticket' input, then verify that it is included in the '@Component.imports' of this component.
+2. If 'sp-blind-ticket-card' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/generalist/dashboard/dashboard.component.html:43:6:
+[37m      43 │       [32m[ticket]="t"[37m
+         ╵       [32m~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component GeneralistDashboardComponent.
+
+    src/app/features/generalist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'openAccept' does not exist on type 'GeneralistDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/generalist/dashboard/dashboard.component.html:45:16:
+[37m      45 │       (accept)="[32mopenAccept[37m($event)"
+         ╵                 [32m~~~~~~~~~~[0m
+
+  Error occurs in the template of component GeneralistDashboardComponent.
+
+    src/app/features/generalist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'decline' does not exist on type 'GeneralistDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/generalist/dashboard/dashboard.component.html:46:17:
+[37m      46 │       (decline)="[32mdecline[37m($event)"
+         ╵                  [32m~~~~~~~[0m
+
+  Error occurs in the template of component GeneralistDashboardComponent.
+
+    src/app/features/generalist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'loading' does not exist on type 'GeneralistDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/generalist/dashboard/dashboard.component.html:48:35:
+[37m      48 │ ...class="dash__empty" *ngIf="![32mloading[37m() && filteredPool().length ...
+         ╵                                [32m~~~~~~~[0m
+
+  Error occurs in the template of component GeneralistDashboardComponent.
+
+    src/app/features/generalist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'filteredPool' does not exist on type 'GeneralistDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/generalist/dashboard/dashboard.component.html:48:48:
+[37m      48 │ ...pty" *ngIf="!loading() && [32mfilteredPool[37m().length === 0">No ticke...
+         ╵                              [32m~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component GeneralistDashboardComponent.
+
+    src/app/features/generalist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'tab' does not exist on type 'GeneralistDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/generalist/dashboard/dashboard.component.html:51:33:
+[37m      51 │   <div class="dash__grid" *ngIf="[32mtab[37m() === 'active'">
+         ╵                                  [32m~~~[0m
+
+  Error occurs in the template of component GeneralistDashboardComponent.
+
+    src/app/features/generalist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8001: 'sp-blind-ticket-card' is not a known element:
+1. If 'sp-blind-ticket-card' is an Angular component, then verify that it is included in the '@Component.imports' of this component.
+2. If 'sp-blind-ticket-card' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/generalist/dashboard/dashboard.component.html:52:4:
+[37m      52 │     [32m<sp-blind-ticket-card *ngFor="let t of filteredActive()" [tick[37m...
+         ╵     [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component GeneralistDashboardComponent.
+
+    src/app/features/generalist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'filteredActive' does not exist on type 'GeneralistDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/generalist/dashboard/dashboard.component.html:52:43:
+[37m      52 │ ...et-card *ngFor="let t of [32mfilteredActive[37m()" [ticket]="t" mode="a...
+         ╵                             [32m~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component GeneralistDashboardComponent.
+
+    src/app/features/generalist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8002: Can't bind to 'ticket' since it isn't a known property of 'sp-blind-ticket-card'.
+1. If 'sp-blind-ticket-card' is an Angular component and it has 'ticket' input, then verify that it is included in the '@Component.imports' of this component.
+2. If 'sp-blind-ticket-card' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/generalist/dashboard/dashboard.component.html:52:61:
+[37m      52 │ ...et t of filteredActive()" [32m[ticket]="t"[37m mode="active"></sp-blind...
+         ╵                              [32m~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component GeneralistDashboardComponent.
+
+    src/app/features/generalist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'filteredActive' does not exist on type 'GeneralistDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/generalist/dashboard/dashboard.component.html:53:34:
+[37m      53 │ ...ass="dash__empty" *ngIf="[32mfilteredActive[37m().length === 0">No acti...
+         ╵                             [32m~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component GeneralistDashboardComponent.
+
+    src/app/features/generalist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8001: 'sp-accept-modal' is not a known element:
+1. If 'sp-accept-modal' is an Angular component, then verify that it is included in the '@Component.imports' of this component.
+2. If 'sp-accept-modal' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/generalist/dashboard/dashboard.component.html:57:0:
+[37m      57 │ [32m<sp-accept-modal[37m
+         ╵ [32m~~~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component GeneralistDashboardComponent.
+
+    src/app/features/generalist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8002: Can't bind to 'ticket' since it isn't a known property of 'sp-accept-modal'.
+1. If 'sp-accept-modal' is an Angular component and it has 'ticket' input, then verify that it is included in the '@Component.imports' of this component.
+2. If 'sp-accept-modal' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/generalist/dashboard/dashboard.component.html:58:2:
+[37m      58 │   [32m[ticket]="ticketToConfirm()"[37m
+         ╵   [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component GeneralistDashboardComponent.
+
+    src/app/features/generalist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'ticketToConfirm' does not exist on type 'GeneralistDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/generalist/dashboard/dashboard.component.html:58:12:
+[37m      58 │   [ticket]="[32mticketToConfirm[37m()"
+         ╵             [32m~~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component GeneralistDashboardComponent.
+
+    src/app/features/generalist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8002: Can't bind to 'loading' since it isn't a known property of 'sp-accept-modal'.
+1. If 'sp-accept-modal' is an Angular component and it has 'loading' input, then verify that it is included in the '@Component.imports' of this component.
+2. If 'sp-accept-modal' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/generalist/dashboard/dashboard.component.html:59:2:
+[37m      59 │   [32m[loading]="acceptLoading()"[37m
+         ╵   [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component GeneralistDashboardComponent.
+
+    src/app/features/generalist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'acceptLoading' does not exist on type 'GeneralistDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/generalist/dashboard/dashboard.component.html:59:13:
+[37m      59 │   [loading]="[32macceptLoading[37m()"
+         ╵              [32m~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component GeneralistDashboardComponent.
+
+    src/app/features/generalist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'confirmAccept' does not exist on type 'GeneralistDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/generalist/dashboard/dashboard.component.html:60:13:
+[37m      60 │   (confirm)="[32mconfirmAccept[37m($event)"
+         ╵              [32m~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component GeneralistDashboardComponent.
+
+    src/app/features/generalist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'ticketToConfirm' does not exist on type 'GeneralistDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/generalist/dashboard/dashboard.component.html:61:12:
+[37m      61 │   (cancel)="[32mticketToConfirm[37m.set(null)"
+         ╵             [32m~~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component GeneralistDashboardComponent.
+
+    src/app/features/generalist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'tab' does not exist on type 'SpecialistDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/specialist/dashboard/dashboard.component.html:20:57:
+[37m      20 │ ...b" [class.dash__tab--active]="[32mtab[37m() === 'pool'" (click)="tab.se...
+         ╵                                  [32m~~~[0m
+
+  Error occurs in the template of component SpecialistDashboardComponent.
+
+    src/app/features/specialist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'tab' does not exist on type 'SpecialistDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/specialist/dashboard/dashboard.component.html:20:84:
+[37m      20 │ ...s.dash__tab--active]="tab() === 'pool'" (click)="[32mtab[37m.set('pool')">
+         ╵                                                     [32m~~~[0m
+
+  Error occurs in the template of component SpecialistDashboardComponent.
+
+    src/app/features/specialist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'tab' does not exist on type 'SpecialistDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/specialist/dashboard/dashboard.component.html:23:57:
+[37m      23 │ ...b" [class.dash__tab--active]="[32mtab[37m() === 'active'" (click)="tab....
+         ╵                                  [32m~~~[0m
+
+  Error occurs in the template of component SpecialistDashboardComponent.
+
+    src/app/features/specialist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'tab' does not exist on type 'SpecialistDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/specialist/dashboard/dashboard.component.html:23:86:
+[37m      23 │ ...sh__tab--active]="tab() === 'active'" (click)="[32mtab[37m.set('active')">
+         ╵                                                   [32m~~~[0m
+
+  Error occurs in the template of component SpecialistDashboardComponent.
+
+    src/app/features/specialist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'priorities' does not exist on type 'SpecialistDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/specialist/dashboard/dashboard.component.html:31:23:
+[37m      31 │       *ngFor="let p of [32mpriorities[37m"
+         ╵                        [32m~~~~~~~~~~[0m
+
+  Error occurs in the template of component SpecialistDashboardComponent.
+
+    src/app/features/specialist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'priorityFilter' does not exist on type 'SpecialistDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/specialist/dashboard/dashboard.component.html:33:41:
+[37m      33 │       [class.dash__filter-chip--active]="[32mpriorityFilter[37m() === p"
+         ╵                                          [32m~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component SpecialistDashboardComponent.
+
+    src/app/features/specialist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'setPriorityFilter' does not exist on type 'SpecialistDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/specialist/dashboard/dashboard.component.html:34:15:
+[37m      34 │       (click)="[32msetPriorityFilter[37m(p)"
+         ╵                [32m~~~~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component SpecialistDashboardComponent.
+
+    src/app/features/specialist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'tab' does not exist on type 'SpecialistDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/specialist/dashboard/dashboard.component.html:40:33:
+[37m      40 │   <div class="dash__grid" *ngIf="[32mtab[37m() === 'pool'">
+         ╵                                  [32m~~~[0m
+
+  Error occurs in the template of component SpecialistDashboardComponent.
+
+    src/app/features/specialist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8001: 'sp-blind-ticket-card' is not a known element:
+1. If 'sp-blind-ticket-card' is an Angular component, then verify that it is included in the '@Component.imports' of this component.
+2. If 'sp-blind-ticket-card' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/specialist/dashboard/dashboard.component.html:41:4:
+[37m      41 │     [32m<sp-blind-ticket-card[37m
+         ╵     [32m~~~~~~~~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component SpecialistDashboardComponent.
+
+    src/app/features/specialist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'filteredPool' does not exist on type 'SpecialistDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/specialist/dashboard/dashboard.component.html:42:23:
+[37m      42 │       *ngFor="let t of [32mfilteredPool[37m()"
+         ╵                        [32m~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component SpecialistDashboardComponent.
+
+    src/app/features/specialist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8002: Can't bind to 'ticket' since it isn't a known property of 'sp-blind-ticket-card'.
+1. If 'sp-blind-ticket-card' is an Angular component and it has 'ticket' input, then verify that it is included in the '@Component.imports' of this component.
+2. If 'sp-blind-ticket-card' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/specialist/dashboard/dashboard.component.html:43:6:
+[37m      43 │       [32m[ticket]="t"[37m
+         ╵       [32m~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component SpecialistDashboardComponent.
+
+    src/app/features/specialist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'openAccept' does not exist on type 'SpecialistDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/specialist/dashboard/dashboard.component.html:45:16:
+[37m      45 │       (accept)="[32mopenAccept[37m($event)"
+         ╵                 [32m~~~~~~~~~~[0m
+
+  Error occurs in the template of component SpecialistDashboardComponent.
+
+    src/app/features/specialist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'decline' does not exist on type 'SpecialistDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/specialist/dashboard/dashboard.component.html:46:17:
+[37m      46 │       (decline)="[32mdecline[37m($event)"
+         ╵                  [32m~~~~~~~[0m
+
+  Error occurs in the template of component SpecialistDashboardComponent.
+
+    src/app/features/specialist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'loading' does not exist on type 'SpecialistDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/specialist/dashboard/dashboard.component.html:48:35:
+[37m      48 │ ...class="dash__empty" *ngIf="![32mloading[37m() && filteredPool().length ...
+         ╵                                [32m~~~~~~~[0m
+
+  Error occurs in the template of component SpecialistDashboardComponent.
+
+    src/app/features/specialist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'filteredPool' does not exist on type 'SpecialistDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/specialist/dashboard/dashboard.component.html:48:48:
+[37m      48 │ ...pty" *ngIf="!loading() && [32mfilteredPool[37m().length === 0">No escal...
+         ╵                              [32m~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component SpecialistDashboardComponent.
+
+    src/app/features/specialist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'tab' does not exist on type 'SpecialistDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/specialist/dashboard/dashboard.component.html:51:33:
+[37m      51 │   <div class="dash__grid" *ngIf="[32mtab[37m() === 'active'">
+         ╵                                  [32m~~~[0m
+
+  Error occurs in the template of component SpecialistDashboardComponent.
+
+    src/app/features/specialist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8001: 'sp-blind-ticket-card' is not a known element:
+1. If 'sp-blind-ticket-card' is an Angular component, then verify that it is included in the '@Component.imports' of this component.
+2. If 'sp-blind-ticket-card' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/specialist/dashboard/dashboard.component.html:52:4:
+[37m      52 │     [32m<sp-blind-ticket-card *ngFor="let t of filteredActive()" [tick[37m...
+         ╵     [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component SpecialistDashboardComponent.
+
+    src/app/features/specialist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'filteredActive' does not exist on type 'SpecialistDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/specialist/dashboard/dashboard.component.html:52:43:
+[37m      52 │ ...et-card *ngFor="let t of [32mfilteredActive[37m()" [ticket]="t" mode="a...
+         ╵                             [32m~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component SpecialistDashboardComponent.
+
+    src/app/features/specialist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8002: Can't bind to 'ticket' since it isn't a known property of 'sp-blind-ticket-card'.
+1. If 'sp-blind-ticket-card' is an Angular component and it has 'ticket' input, then verify that it is included in the '@Component.imports' of this component.
+2. If 'sp-blind-ticket-card' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/specialist/dashboard/dashboard.component.html:52:61:
+[37m      52 │ ...et t of filteredActive()" [32m[ticket]="t"[37m mode="active"></sp-blind...
+         ╵                              [32m~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component SpecialistDashboardComponent.
+
+    src/app/features/specialist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'filteredActive' does not exist on type 'SpecialistDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/specialist/dashboard/dashboard.component.html:53:34:
+[37m      53 │ ...ass="dash__empty" *ngIf="[32mfilteredActive[37m().length === 0">No acti...
+         ╵                             [32m~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component SpecialistDashboardComponent.
+
+    src/app/features/specialist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8001: 'sp-accept-modal' is not a known element:
+1. If 'sp-accept-modal' is an Angular component, then verify that it is included in the '@Component.imports' of this component.
+2. If 'sp-accept-modal' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/specialist/dashboard/dashboard.component.html:57:0:
+[37m      57 │ [32m<sp-accept-modal[37m
+         ╵ [32m~~~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component SpecialistDashboardComponent.
+
+    src/app/features/specialist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8002: Can't bind to 'ticket' since it isn't a known property of 'sp-accept-modal'.
+1. If 'sp-accept-modal' is an Angular component and it has 'ticket' input, then verify that it is included in the '@Component.imports' of this component.
+2. If 'sp-accept-modal' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/specialist/dashboard/dashboard.component.html:58:2:
+[37m      58 │   [32m[ticket]="ticketToConfirm()"[37m
+         ╵   [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component SpecialistDashboardComponent.
+
+    src/app/features/specialist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'ticketToConfirm' does not exist on type 'SpecialistDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/specialist/dashboard/dashboard.component.html:58:12:
+[37m      58 │   [ticket]="[32mticketToConfirm[37m()"
+         ╵             [32m~~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component SpecialistDashboardComponent.
+
+    src/app/features/specialist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8002: Can't bind to 'loading' since it isn't a known property of 'sp-accept-modal'.
+1. If 'sp-accept-modal' is an Angular component and it has 'loading' input, then verify that it is included in the '@Component.imports' of this component.
+2. If 'sp-accept-modal' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/specialist/dashboard/dashboard.component.html:59:2:
+[37m      59 │   [32m[loading]="acceptLoading()"[37m
+         ╵   [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component SpecialistDashboardComponent.
+
+    src/app/features/specialist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'acceptLoading' does not exist on type 'SpecialistDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/specialist/dashboard/dashboard.component.html:59:13:
+[37m      59 │   [loading]="[32macceptLoading[37m()"
+         ╵              [32m~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component SpecialistDashboardComponent.
+
+    src/app/features/specialist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'confirmAccept' does not exist on type 'SpecialistDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/specialist/dashboard/dashboard.component.html:60:13:
+[37m      60 │   (confirm)="[32mconfirmAccept[37m($event)"
+         ╵              [32m~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component SpecialistDashboardComponent.
+
+    src/app/features/specialist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'ticketToConfirm' does not exist on type 'SpecialistDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/specialist/dashboard/dashboard.component.html:61:12:
+[37m      61 │   (cancel)="[32mticketToConfirm[37m.set(null)"
+         ╵             [32m~~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component SpecialistDashboardComponent.
+
+    src/app/features/specialist/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'tab' does not exist on type 'PolyvalentDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/polyvalent/dashboard/dashboard.component.html:21:57:
+[37m      21 │ ...b" [class.dash__tab--active]="[32mtab[37m() === 'generalist'" (click)="...
+         ╵                                  [32m~~~[0m
+
+  Error occurs in the template of component PolyvalentDashboardComponent.
+
+    src/app/features/polyvalent/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'tab' does not exist on type 'PolyvalentDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/polyvalent/dashboard/dashboard.component.html:21:90:
+[37m      21 │ ...-active]="tab() === 'generalist'" (click)="[32mtab[37m.set('generalist')">
+         ╵                                               [32m~~~[0m
+
+  Error occurs in the template of component PolyvalentDashboardComponent.
+
+    src/app/features/polyvalent/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'tab' does not exist on type 'PolyvalentDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/polyvalent/dashboard/dashboard.component.html:24:57:
+[37m      24 │ ...b" [class.dash__tab--active]="[32mtab[37m() === 'specialist'" (click)="...
+         ╵                                  [32m~~~[0m
+
+  Error occurs in the template of component PolyvalentDashboardComponent.
+
+    src/app/features/polyvalent/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'tab' does not exist on type 'PolyvalentDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/polyvalent/dashboard/dashboard.component.html:24:90:
+[37m      24 │ ...-active]="tab() === 'specialist'" (click)="[32mtab[37m.set('specialist')">
+         ╵                                               [32m~~~[0m
+
+  Error occurs in the template of component PolyvalentDashboardComponent.
+
+    src/app/features/polyvalent/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'tab' does not exist on type 'PolyvalentDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/polyvalent/dashboard/dashboard.component.html:27:57:
+[37m      27 │ ...b" [class.dash__tab--active]="[32mtab[37m() === 'active'" (click)="tab....
+         ╵                                  [32m~~~[0m
+
+  Error occurs in the template of component PolyvalentDashboardComponent.
+
+    src/app/features/polyvalent/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'tab' does not exist on type 'PolyvalentDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/polyvalent/dashboard/dashboard.component.html:27:86:
+[37m      27 │ ...sh__tab--active]="tab() === 'active'" (click)="[32mtab[37m.set('active')">
+         ╵                                                   [32m~~~[0m
+
+  Error occurs in the template of component PolyvalentDashboardComponent.
+
+    src/app/features/polyvalent/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'priorities' does not exist on type 'PolyvalentDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/polyvalent/dashboard/dashboard.component.html:35:23:
+[37m      35 │       *ngFor="let p of [32mpriorities[37m"
+         ╵                        [32m~~~~~~~~~~[0m
+
+  Error occurs in the template of component PolyvalentDashboardComponent.
+
+    src/app/features/polyvalent/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'priorityFilter' does not exist on type 'PolyvalentDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/polyvalent/dashboard/dashboard.component.html:37:41:
+[37m      37 │       [class.dash__filter-chip--active]="[32mpriorityFilter[37m() === p"
+         ╵                                          [32m~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component PolyvalentDashboardComponent.
+
+    src/app/features/polyvalent/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'setPriorityFilter' does not exist on type 'PolyvalentDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/polyvalent/dashboard/dashboard.component.html:38:15:
+[37m      38 │       (click)="[32msetPriorityFilter[37m(p)"
+         ╵                [32m~~~~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component PolyvalentDashboardComponent.
+
+    src/app/features/polyvalent/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'tab' does not exist on type 'PolyvalentDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/polyvalent/dashboard/dashboard.component.html:44:33:
+[37m      44 │   <div class="dash__grid" *ngIf="[32mtab[37m() === 'generalist' || tab() =...
+         ╵                                  [32m~~~[0m
+
+  Error occurs in the template of component PolyvalentDashboardComponent.
+
+    src/app/features/polyvalent/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'tab' does not exist on type 'PolyvalentDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/polyvalent/dashboard/dashboard.component.html:44:59:
+[37m      44 │ ...h__grid" *ngIf="tab() === 'generalist' || [32mtab[37m() === 'specialist'">
+         ╵                                              [32m~~~[0m
+
+  Error occurs in the template of component PolyvalentDashboardComponent.
+
+    src/app/features/polyvalent/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8001: 'sp-blind-ticket-card' is not a known element:
+1. If 'sp-blind-ticket-card' is an Angular component, then verify that it is included in the '@Component.imports' of this component.
+2. If 'sp-blind-ticket-card' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/polyvalent/dashboard/dashboard.component.html:45:4:
+[37m      45 │     [32m<sp-blind-ticket-card[37m
+         ╵     [32m~~~~~~~~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component PolyvalentDashboardComponent.
+
+    src/app/features/polyvalent/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'filteredPool' does not exist on type 'PolyvalentDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/polyvalent/dashboard/dashboard.component.html:46:23:
+[37m      46 │       *ngFor="let t of [32mfilteredPool[37m()"
+         ╵                        [32m~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component PolyvalentDashboardComponent.
+
+    src/app/features/polyvalent/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8002: Can't bind to 'ticket' since it isn't a known property of 'sp-blind-ticket-card'.
+1. If 'sp-blind-ticket-card' is an Angular component and it has 'ticket' input, then verify that it is included in the '@Component.imports' of this component.
+2. If 'sp-blind-ticket-card' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/polyvalent/dashboard/dashboard.component.html:47:6:
+[37m      47 │       [32m[ticket]="t"[37m
+         ╵       [32m~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component PolyvalentDashboardComponent.
+
+    src/app/features/polyvalent/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'openAccept' does not exist on type 'PolyvalentDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/polyvalent/dashboard/dashboard.component.html:49:16:
+[37m      49 │       (accept)="[32mopenAccept[37m($event)"
+         ╵                 [32m~~~~~~~~~~[0m
+
+  Error occurs in the template of component PolyvalentDashboardComponent.
+
+    src/app/features/polyvalent/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'decline' does not exist on type 'PolyvalentDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/polyvalent/dashboard/dashboard.component.html:50:17:
+[37m      50 │       (decline)="[32mdecline[37m($event)"
+         ╵                  [32m~~~~~~~[0m
+
+  Error occurs in the template of component PolyvalentDashboardComponent.
+
+    src/app/features/polyvalent/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'loading' does not exist on type 'PolyvalentDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/polyvalent/dashboard/dashboard.component.html:52:35:
+[37m      52 │ ...class="dash__empty" *ngIf="![32mloading[37m() && filteredPool().length ...
+         ╵                                [32m~~~~~~~[0m
+
+  Error occurs in the template of component PolyvalentDashboardComponent.
+
+    src/app/features/polyvalent/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'filteredPool' does not exist on type 'PolyvalentDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/polyvalent/dashboard/dashboard.component.html:52:48:
+[37m      52 │ ...pty" *ngIf="!loading() && [32mfilteredPool[37m().length === 0">No ticke...
+         ╵                              [32m~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component PolyvalentDashboardComponent.
+
+    src/app/features/polyvalent/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'tab' does not exist on type 'PolyvalentDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/polyvalent/dashboard/dashboard.component.html:55:33:
+[37m      55 │   <div class="dash__grid" *ngIf="[32mtab[37m() === 'active'">
+         ╵                                  [32m~~~[0m
+
+  Error occurs in the template of component PolyvalentDashboardComponent.
+
+    src/app/features/polyvalent/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8001: 'sp-blind-ticket-card' is not a known element:
+1. If 'sp-blind-ticket-card' is an Angular component, then verify that it is included in the '@Component.imports' of this component.
+2. If 'sp-blind-ticket-card' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/polyvalent/dashboard/dashboard.component.html:56:4:
+[37m      56 │     [32m<sp-blind-ticket-card *ngFor="let t of filteredActive()" [tick[37m...
+         ╵     [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component PolyvalentDashboardComponent.
+
+    src/app/features/polyvalent/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'filteredActive' does not exist on type 'PolyvalentDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/polyvalent/dashboard/dashboard.component.html:56:43:
+[37m      56 │ ...et-card *ngFor="let t of [32mfilteredActive[37m()" [ticket]="t" mode="a...
+         ╵                             [32m~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component PolyvalentDashboardComponent.
+
+    src/app/features/polyvalent/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8002: Can't bind to 'ticket' since it isn't a known property of 'sp-blind-ticket-card'.
+1. If 'sp-blind-ticket-card' is an Angular component and it has 'ticket' input, then verify that it is included in the '@Component.imports' of this component.
+2. If 'sp-blind-ticket-card' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/polyvalent/dashboard/dashboard.component.html:56:61:
+[37m      56 │ ...et t of filteredActive()" [32m[ticket]="t"[37m mode="active"></sp-blind...
+         ╵                              [32m~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component PolyvalentDashboardComponent.
+
+    src/app/features/polyvalent/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'filteredActive' does not exist on type 'PolyvalentDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/polyvalent/dashboard/dashboard.component.html:57:34:
+[37m      57 │ ...ass="dash__empty" *ngIf="[32mfilteredActive[37m().length === 0">No acti...
+         ╵                             [32m~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component PolyvalentDashboardComponent.
+
+    src/app/features/polyvalent/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8001: 'sp-accept-modal' is not a known element:
+1. If 'sp-accept-modal' is an Angular component, then verify that it is included in the '@Component.imports' of this component.
+2. If 'sp-accept-modal' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/polyvalent/dashboard/dashboard.component.html:61:0:
+[37m      61 │ [32m<sp-accept-modal[37m
+         ╵ [32m~~~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component PolyvalentDashboardComponent.
+
+    src/app/features/polyvalent/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8002: Can't bind to 'ticket' since it isn't a known property of 'sp-accept-modal'.
+1. If 'sp-accept-modal' is an Angular component and it has 'ticket' input, then verify that it is included in the '@Component.imports' of this component.
+2. If 'sp-accept-modal' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/polyvalent/dashboard/dashboard.component.html:62:2:
+[37m      62 │   [32m[ticket]="ticketToConfirm()"[37m
+         ╵   [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component PolyvalentDashboardComponent.
+
+    src/app/features/polyvalent/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'ticketToConfirm' does not exist on type 'PolyvalentDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/polyvalent/dashboard/dashboard.component.html:62:12:
+[37m      62 │   [ticket]="[32mticketToConfirm[37m()"
+         ╵             [32m~~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component PolyvalentDashboardComponent.
+
+    src/app/features/polyvalent/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8002: Can't bind to 'loading' since it isn't a known property of 'sp-accept-modal'.
+1. If 'sp-accept-modal' is an Angular component and it has 'loading' input, then verify that it is included in the '@Component.imports' of this component.
+2. If 'sp-accept-modal' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/polyvalent/dashboard/dashboard.component.html:63:2:
+[37m      63 │   [32m[loading]="acceptLoading()"[37m
+         ╵   [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component PolyvalentDashboardComponent.
+
+    src/app/features/polyvalent/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'acceptLoading' does not exist on type 'PolyvalentDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/polyvalent/dashboard/dashboard.component.html:63:13:
+[37m      63 │   [loading]="[32macceptLoading[37m()"
+         ╵              [32m~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component PolyvalentDashboardComponent.
+
+    src/app/features/polyvalent/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'confirmAccept' does not exist on type 'PolyvalentDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/polyvalent/dashboard/dashboard.component.html:64:13:
+[37m      64 │   (confirm)="[32mconfirmAccept[37m($event)"
+         ╵              [32m~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component PolyvalentDashboardComponent.
+
+    src/app/features/polyvalent/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'ticketToConfirm' does not exist on type 'PolyvalentDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/polyvalent/dashboard/dashboard.component.html:65:12:
+[37m      65 │   (cancel)="[32mticketToConfirm[37m.set(null)"
+         ╵             [32m~~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component PolyvalentDashboardComponent.
+
+    src/app/features/polyvalent/dashboard/dashboard.component.ts:12:15:
+[37m      12 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'mineOnly' does not exist on type 'TicketManagementComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/tickets/ticket-management/ticket-management.component.html:9:55:
+[37m      9 │ ...ch" [class.tm__switch--on]="[32mmineOnly[37m()" (click)="toggleMineOnly()">
+        ╵                                [32m~~~~~~~~[0m
+
+  Error occurs in the template of component TicketManagementComponent.
+
+    src/app/features/tickets/ticket-management/ticket-management.component.ts:41:15:
+[37m      41 │   templateUrl: [32m'./ticket-management.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'toggleMineOnly' does not exist on type 'TicketManagementComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/tickets/ticket-management/ticket-management.component.html:9:76:
+[37m      9 │ ...ch" [class.tm__switch--on]="mineOnly()" (click)="[32mtoggleMineOnly[37m()">
+        ╵                                                     [32m~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component TicketManagementComponent.
+
+    src/app/features/tickets/ticket-management/ticket-management.component.ts:41:15:
+[37m      41 │   templateUrl: [32m'./ticket-management.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[33m[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: AllTicketsTableComponent is not used within the template of GeneralistDashboardComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/generalist/dashboard/dashboard.component.ts:12:44:
+[37m      12 │ ...ports: [CommonModule, KpiStatComponent, [32mAllTicketsTableComponent[37m],
+         ╵                                            [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[33m[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: AllTicketsTableComponent is not used within the template of SpecialistDashboardComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/specialist/dashboard/dashboard.component.ts:12:44:
+[37m      12 │ ...ports: [CommonModule, KpiStatComponent, [32mAllTicketsTableComponent[37m],
+         ╵                                            [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[33m[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: AllTicketsTableComponent is not used within the template of PolyvalentDashboardComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/polyvalent/dashboard/dashboard.component.ts:12:44:
+[37m      12 │ ...ports: [CommonModule, KpiStatComponent, [32mAllTicketsTableComponent[37m],
+         ╵                                            [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2739: Type '{ sub: string; email: string; firstName: string; lastName: string; role: UserRole; initials: string; mustChangePassword: false; idStellantis: null; profilePhotoUrl: null; }' is missing the following properties from type 'JwtClaims': status, emailStellantis, altenId, languages[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/core/services/auth.service.ts:34:12:
+[37m      34 │       const [32mclaims[37m: JwtClaims = {
+         ╵             [32m~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2739: Type '{ sub: string; email: string; firstName: string; lastName: string; role: UserRole; initials: string; mustChangePassword: false; idStellantis: null; profilePhotoUrl: null; }' is missing the following properties from type 'JwtClaims': status, emailStellantis, altenId, languages[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/core/services/auth.service.ts:34:12:
+[37m      34 │       const [32mclaims[37m: JwtClaims = {
+         ╵             [32m~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2345: Argument of type '{ firstName: string; lastName: string; idStellantis: string | null; }' is not assignable to parameter of type 'UpdateProfileRequest'.
+  Type '{ firstName: string; lastName: string; idStellantis: string | null; }' is missing the following properties from type 'UpdateProfileRequest': emailStellantis, altenId, languages, isActive[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/profile/profile.component.ts:56:21:
+[37m      56 │       .updateProfile([32m{[37m
+         ╵                      [32m^[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2345: Argument of type '{ firstName: string; lastName: string; idStellantis: string | null; }' is not assignable to parameter of type 'UpdateProfileRequest'.
+  Type '{ firstName: string; lastName: string; idStellantis: string | null; }' is missing the following properties from type 'UpdateProfileRequest': emailStellantis, altenId, languages, isActive[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/profile/profile.component.ts:56:21:
+[37m      56 │       .updateProfile([32m{[37m
+         ╵                      [32m^[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2345: Argument of type '{ firstName: string; lastName: string; idStellantis: string | null; }' is not assignable to parameter of type 'UpdateProfileRequest'.
+  Type '{ firstName: string; lastName: string; idStellantis: string | null; }' is missing the following properties from type 'UpdateProfileRequest': emailStellantis, altenId, languages, isActive[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/profile/profile.component.ts:62:21:
+[37m      62 │       .updateProfile([32m{[37m
+         ╵                      [32m^[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2345: Argument of type '{ firstName: string; lastName: string; idStellantis: string | null; }' is not assignable to parameter of type 'UpdateProfileRequest'.
+  Type '{ firstName: string; lastName: string; idStellantis: string | null; }' is missing the following properties from type 'UpdateProfileRequest': emailStellantis, altenId, languages, isActive[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/account/profile/profile.component.ts:66:21:
+[37m      66 │       .updateProfile([32m{[37m
+         ╵                      [32m^[0m
+
+[39m[22m
+[1m[33m[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: BadgeComponent is not used within the template of AcceptModalComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/accept-modal/accept-modal.component.ts:14:42:
+[37m      14 │ ...nModule, ModalComponent, [32mBadgeComponent[37m, AiBadgeComponent, Icon...
+         ╵                             [32m~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: AiBadgeComponent is not used within the template of AcceptModalComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/accept-modal/accept-modal.component.ts:14:58:
+[37m      14 │ ... ModalComponent, BadgeComponent, [32mAiBadgeComponent[37m, IconComponent],
+         ╵                                     [32m~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2663: Cannot find name 'priorityColor'. Did you mean the instance member 'this.priorityColor'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/accept-modal/accept-modal.component.ts:93:18:
+[37m      93 │   priorityColor = [32mpriorityColor[37m;
+         ╵                   [32m~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2552: Cannot find name 'formatSla'. Did you mean 'FormData'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/accept-modal/accept-modal.component.ts:94:13:
+[37m      94 │   slaLabel = [32mformatSla[37m;
+         ╵              [32m~~~~~~~~~[0m
+
+  'FormData' is declared here.
+
+    node_modules/typescript/lib/lib.dom.d.ts:12263:12:
+[37m      12263 │ declare var [32mFormData[37m: {
+            ╵             [32m~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2663: Cannot find name 'priorityColor'. Did you mean the instance member 'this.priorityColor'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/accept-modal/accept-modal.component.ts:74:18:
+[37m      74 │   priorityColor = [32mpriorityColor[37m;
+         ╵                   [32m~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2552: Cannot find name 'formatSla'. Did you mean 'FormData'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/accept-modal/accept-modal.component.ts:75:13:
+[37m      75 │   slaLabel = [32mformatSla[37m;
+         ╵              [32m~~~~~~~~~[0m
+
+  'FormData' is declared here.
+
+    node_modules/typescript/lib/lib.dom.d.ts:12263:12:
+[37m      12263 │ declare var [32mFormData[37m: {
+            ╵             [32m~~~~~~~~[0m
+
+[39m[22m
+[1m[33m[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: IconComponent is not used within the template of FooterComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/landing/components/footer/footer.component.ts:9:26:
+[37m      9 │   imports: [CommonModule, [32mIconComponent[37m],
+        ╵                           [32m~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2740: Type '{ id: string; createdAt: string; priority: "Critical"; domain: "ECR Workflow"; status: "New"; slaMinutesRemaining: number; aiSuggestedRoute: "Generalist"; sourceSystem: "AIDE"; title: string; ... 8 more ...; comments: never[]; }' is missing the following properties from type 'TicketFull': applicantId, applicantFirstName, applicantLastName, referenceSTLA, and 9 more.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/core/mocks/mock-tickets.ts:4:2:
+[37m      4 │   [32m{[37m
+        ╵   [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2740: Type '{ id: string; createdAt: string; priority: "High"; domain: "BOM"; status: "New"; slaMinutesRemaining: number; aiSuggestedRoute: "Generalist"; sourceSystem: "TOOLSUP"; title: string; description: string; ... 7 more ...; comments: never[]; }' is missing the following properties from type 'TicketFull': applicantId, applicantFirstName, applicantLastName, referenceSTLA, and 9 more.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/core/mocks/mock-tickets.ts:28:2:
+[37m      28 │   [32m{[37m
+         ╵   [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2740: Type '{ id: string; createdAt: string; priority: "Medium"; domain: "CAD Data Sync"; status: "InProgress"; slaMinutesRemaining: number; aiSuggestedRoute: "Generalist"; sourceSystem: "AIDE"; title: string; ... 7 more ...; comments: never[]; }' is missing the following properties from type 'TicketFull': applicantId, applicantFirstName, applicantLastName, referenceSTLA, and 9 more.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/core/mocks/mock-tickets.ts:52:2:
+[37m      52 │   [32m{[37m
+         ╵   [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2740: Type '{ id: string; createdAt: string; priority: "Low"; domain: "PLM-ERP Integration"; status: "Accepted"; slaMinutesRemaining: number; aiSuggestedRoute: "Generalist"; sourceSystem: "TOOLSUP"; ... 8 more ...; comments: never[]; }' is missing the following properties from type 'TicketFull': applicantId, applicantFirstName, applicantLastName, referenceSTLA, and 9 more.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/core/mocks/mock-tickets.ts:77:2:
+[37m      77 │   [32m{[37m
+         ╵   [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2740: Type '{ id: string; createdAt: string; priority: "High"; domain: "Change Management"; status: "Escalated"; slaMinutesRemaining: number; aiSuggestedRoute: "Specialist"; sourceSystem: "AIDE"; title: string; ... 7 more ...; comments: never[]; }' is missing the following properties from type 'TicketFull': applicantId, applicantFirstName, applicantLastName, referenceSTLA, and 9 more.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/core/mocks/mock-tickets.ts:101:2:
+[37m      101 │   [32m{[37m
+          ╵   [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2740: Type '{ id: string; createdAt: string; priority: "Critical"; domain: "Document Control"; status: "Resolved"; slaMinutesRemaining: number; aiSuggestedRoute: "Specialist"; sourceSystem: "TOOLSUP"; ... 8 more ...; comments: { ...; }[]; }' is missing the following properties from type 'TicketFull': applicantId, applicantFirstName, applicantLastName, referenceSTLA, and 9 more.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/core/mocks/mock-tickets.ts:126:2:
+[37m      126 │   [32m{[37m
+          ╵   [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2740: Type '{ id: string; createdAt: string; priority: "Medium"; domain: "BOM"; status: "Closed"; slaMinutesRemaining: number; aiSuggestedRoute: "Generalist"; sourceSystem: "AIDE"; title: string; description: string; ... 7 more ...; comments: never[]; }' is missing the following properties from type 'TicketFull': applicantId, applicantFirstName, applicantLastName, referenceSTLA, and 9 more.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/core/mocks/mock-tickets.ts:154:2:
+[37m      154 │   [32m{[37m
+          ╵   [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2740: Type '{ id: string; createdAt: string; priority: "High"; domain: "BOM"; status: "InProgress"; slaMinutesRemaining: number; aiSuggestedRoute: "Generalist"; sourceSystem: "TOOLSUP"; title: string; description: string; ... 8 more ...; comments: never[]; }' is missing the following properties from type 'TicketFull': applicantId, applicantFirstName, applicantLastName, referenceSTLA, and 9 more.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/core/mocks/mock-tickets.ts:181:2:
+[37m      181 │   [32m{[37m
+          ╵   [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2740: Type '{ id: string; createdAt: string; priority: "Low"; domain: "CAD Data Sync"; status: "Closed"; slaMinutesRemaining: number; aiSuggestedRoute: "Generalist"; sourceSystem: "AIDE"; title: string; ... 7 more ...; comments: never[]; }' is missing the following properties from type 'TicketFull': applicantId, applicantFirstName, applicantLastName, referenceSTLA, and 9 more.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/core/mocks/mock-tickets.ts:212:2:
+[37m      212 │   [32m{[37m
+          ╵   [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2740: Type '{ id: string; createdAt: string; priority: "High"; domain: "PLM-ERP Integration"; status: "Escalated"; slaMinutesRemaining: number; aiSuggestedRoute: "Specialist"; sourceSystem: "TOOLSUP"; ... 8 more ...; comments: never[]; }' is missing the following properties from type 'TicketFull': applicantId, applicantFirstName, applicantLastName, referenceSTLA, and 9 more.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/core/mocks/mock-tickets.ts:238:2:
+[37m      238 │   [32m{[37m
+          ╵   [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2740: Type '{ id: string; createdAt: string; priority: "High"; domain: "BOM"; status: "Closed"; slaMinutesRemaining: number; aiSuggestedRoute: "Generalist"; sourceSystem: "TOOLSUP"; title: string; description: string; ... 7 more ...; comments: never[]; }' is missing the following properties from type 'TicketFull': applicantId, applicantFirstName, applicantLastName, referenceSTLA, and 9 more.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/core/mocks/mock-tickets.ts:263:2:
+[37m      263 │   [32m{[37m
+          ╵   [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2740: Type '{ id: string; createdAt: string; priority: "Medium"; domain: "ECR Workflow"; status: "Closed"; slaMinutesRemaining: number; aiSuggestedRoute: "Generalist"; sourceSystem: "AIDE"; title: string; ... 7 more ...; comments: never[]; }' is missing the following properties from type 'TicketFull': applicantId, applicantFirstName, applicantLastName, referenceSTLA, and 9 more.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/core/mocks/mock-tickets.ts:284:2:
+[37m      284 │   [32m{[37m
+          ╵   [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2740: Type '{ id: string; createdAt: string; priority: "Low"; domain: "CAD Data Sync"; status: "Closed"; slaMinutesRemaining: number; aiSuggestedRoute: "Generalist"; sourceSystem: "TOOLSUP"; title: string; ... 7 more ...; comments: never[]; }' is missing the following properties from type 'TicketFull': applicantId, applicantFirstName, applicantLastName, referenceSTLA, and 9 more.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/core/mocks/mock-tickets.ts:304:2:
+[37m      304 │   [32m{[37m
+          ╵   [32m^[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2488: Type 'WritableSignal<ImpactStat[]>' must have a '[Symbol.iterator]()' method that returns an iterator.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/landing/components/impact/impact.component.html:13:17:
+[37m      13 │       @for (s of [32mstats[37m; track s.label; let i = $index) {
+         ╵                  [32m~~~~~[0m
+
+  Error occurs in the template of component ImpactComponent.
+
+    src/app/features/landing/components/impact/impact.component.ts:13:15:
+[37m      13 │   templateUrl: [32m'./impact.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[33m[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: ConfirmModalComponent is not used within the template of UserManagementComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/admin/user-management/user-management.component.ts:15:86:
+[37m      15 │ ...eComponent, IconComponent, ModalComponent, [32mConfirmModalComponent[37m],
+         ╵                                               [32m~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[33m[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: ConfirmModalComponent is not used within the template of UserManagementComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/admin/user-management/user-management.component.ts:15:86:
+[37m      15 │ ...eComponent, IconComponent, ModalComponent, [32mConfirmModalComponent[37m],
+         ╵                                               [32m~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'userMenuOpen' does not exist on type 'ShellComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/shell/shell.component.ts:82:25:
+[37m      82 │                 (click)="[32muserMenuOpen[37m.set(!userMenuOpen())"
+         ╵                          [32m~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'userMenuOpen' does not exist on type 'ShellComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/shell/shell.component.ts:82:43:
+[37m      82 │                 (click)="userMenuOpen.set(![32muserMenuOpen[37m())"
+         ╵                                            [32m~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'userMenuOpen' does not exist on type 'ShellComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/shell/shell.component.ts:88:60:
+[37m      88 │ ...ser-menu-backdrop" *ngIf="[32muserMenuOpen[37m()" (click)="userMenuOpen...
+         ╵                              [32m~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'userMenuOpen' does not exist on type 'ShellComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/shell/shell.component.ts:88:85:
+[37m      88 │ ...p" *ngIf="userMenuOpen()" (click)="[32muserMenuOpen[37m.set(false)"></div>
+         ╵                                       [32m~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'userMenuOpen' does not exist on type 'ShellComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/shell/shell.component.ts:90:51:
+[37m      90 │               <div class="shell__user-menu" *ngIf="[32muserMenuOpen[37m()">
+         ╵                                                    [32m~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'userMenuOpen' does not exist on type 'ShellComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/shell/shell.component.ts:91:84:
+[37m      91 │ ...item" routerLink="/app/profile" (click)="[32muserMenuOpen[37m.set(false)">
+         ╵                                             [32m~~~~~~~~~~~~[0m
+
+[39m[22m

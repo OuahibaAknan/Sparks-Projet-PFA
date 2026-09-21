@@ -1,0 +1,38 @@
+<header class="nav">
+  <div class="nav__inner">
+    <a class="nav__brand" href="#top" (click)="closeMenu()">
+      <span class="nav__logo"><img src="/logo-sparks-full.png" alt="SPARKS" class="nav__logo-img" /></span>
+    </a>
+
+    <nav class="nav__links">
+      @for (link of navLinks; track link.label) {
+        <a [href]="'#' + link.fragment" (click)="closeMenu()">{{ link.label }}</a>
+      }
+    </nav>
+
+    <div class="nav__actions">
+      <a class="sp-btn sp-btn--primary sp-btn--sm nav__login" routerLink="/login">
+        <sp-icon name="user" [size]="14"></sp-icon>
+        Log in
+      </a>
+    </div>
+
+    <button type="button" class="nav__burger" (click)="toggleMenu()" [attr.aria-expanded]="menuOpen()" aria-label="Toggle navigation menu">
+      <sp-icon [name]="menuOpen() ? 'x' : 'menu'" [size]="22"></sp-icon>
+    </button>
+  </div>
+
+  @if (menuOpen()) {
+    <div class="nav__mobile">
+      @for (link of navLinks; track link.label) {
+        <a [href]="'#' + link.fragment" (click)="closeMenu()">{{ link.label }}</a>
+      }
+      <div class="nav__mobile-actions">
+        <a class="sp-btn sp-btn--primary nav__login" routerLink="/login" (click)="closeMenu()">
+          <sp-icon name="user" [size]="14"></sp-icon>
+          Log in
+        </a>
+      </div>
+    </div>
+  }
+</header>

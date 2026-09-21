@@ -1,0 +1,41 @@
+<div class="orbit">
+  <span class="orbit__ring orbit__ring--1"></span>
+  <span class="orbit__ring orbit__ring--2"></span>
+
+  <svg class="orbit__svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+    <path d="M16,22 Q34,36 50,50" class="orbit__path orbit__path--in"></path>
+    <path d="M16,78 Q34,64 50,50" class="orbit__path orbit__path--in"></path>
+    <path d="M50,50 Q66,36 84,22" class="orbit__path orbit__path--out"></path>
+    <path d="M50,50 Q66,64 84,78" class="orbit__path orbit__path--out orbit__path--specialist"></path>
+
+    <circle r="1.1" class="orbit__dot orbit__dot--in">
+      <animateMotion path="M16,22 Q34,36 50,50" dur="2.6s" begin="0s" repeatCount="indefinite"></animateMotion>
+    </circle>
+    <circle r="1.1" class="orbit__dot orbit__dot--in">
+      <animateMotion path="M16,78 Q34,64 50,50" dur="2.6s" begin="0.5s" repeatCount="indefinite"></animateMotion>
+    </circle>
+    <circle r="1.1" class="orbit__dot orbit__dot--out">
+      <animateMotion path="M50,50 Q66,36 84,22" dur="2.6s" begin="1s" repeatCount="indefinite"></animateMotion>
+    </circle>
+    <circle r="1.1" class="orbit__dot orbit__dot--specialist">
+      <animateMotion path="M50,50 Q66,64 84,78" dur="2.6s" begin="1.5s" repeatCount="indefinite"></animateMotion>
+    </circle>
+  </svg>
+
+  <div class="orbit__node orbit__node--aide">
+    <sp-icon name="layers" [size]="15"></sp-icon>
+    <span>AIDE</span>
+  </div>
+  <div class="orbit__node orbit__node--toolsup">
+    <sp-icon name="monitor" [size]="15"></sp-icon>
+    <span>TOOLSUP</span>
+  </div>
+  <div class="orbit__node orbit__node--gen">
+    <sp-icon name="users" [size]="15"></sp-icon>
+    <span>Generalists</span>
+  </div>
+  <div class="orbit__node orbit__node--spec">
+    <sp-icon name="user" [size]="15"></sp-icon>
+    <span>Specialists</span>
+  </div>
+</div>

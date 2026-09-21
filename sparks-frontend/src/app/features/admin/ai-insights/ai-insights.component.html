@@ -1,0 +1,119 @@
+<div class="aii" *ngIf="stats() as s">
+  <div class="aii__header">
+    <div>
+      <h1><sp-icon name="sparkles" [size]="20"></sp-icon> SmartTicket AI Insights</h1>
+      <p>Model performance, routing accuracy, and trend analysis</p>
+    </div>
+    <span class="aii__pill"><sp-icon name="sparkles" [size]="14"></sp-icon> AI Analytics Dashboard</span>
+  </div>
+
+  <div class="aii__kpis">
+    <div class="sp-card aii__kpi aii__kpi--violet">
+      <div class="aii__kpi-value">{{ s.routingAccuracyPct }}%</div>
+      <div class="aii__kpi-label">AI Routing Accuracy</div>
+      <div class="aii__kpi-delta">+{{ s.routingAccuracyDeltaPct }}% vs last month</div>
+    </div>
+    <div class="sp-card aii__kpi aii__kpi--blue">
+      <div class="aii__kpi-value">{{ s.ticketsClassified }}</div>
+      <div class="aii__kpi-label">Tickets Classified</div>
+      <div class="aii__kpi-delta aii__kpi-delta--muted">this month</div>
+    </div>
+    <div class="sp-card aii__kpi aii__kpi--orange">
+      <div class="aii__kpi-value">{{ s.lowConfidenceCount }}</div>
+      <div class="aii__kpi-label">Low Confidence Queue</div>
+      <div class="aii__kpi-delta aii__kpi-delta--muted">need review</div>
+    </div>
+    <div class="sp-card aii__kpi aii__kpi--green">
+      <div class="aii__kpi-value">${{ s.estimatedModelCostUsd }}</div>
+      <div class="aii__kpi-label">Est. Model Cost</div>
+      <div class="aii__kpi-delta aii__kpi-delta--muted">this month</div>
+    </div>
+  </div>
+
+  <div class="aii__charts">
+    <div class="sp-card aii__chart-card">
+      <h3><sp-icon name="sparkles" [size]="14"></sp-icon> Recurring Issue Trends by Domain</h3>
+      <p class="aii__chart-sub">Spike detected: ECR Workflow approval delays (+48% vs W48)</p>
+      <sp-line-chart [data]="s.recurringIssueTrend" color="var(--ai-accent)"></sp-line-chart>
+    </div>
+    <div class="sp-card aii__chart-card">
+      <h3><sp-icon name="trending-up" [size]="14"></sp-icon> AI Routing Accuracy Over Time</h3>
+      <p class="aii__chart-sub">AI-suggested team vs. actual resolving team match rate</p>
+      <sp-line-chart [data]="s.routingAccuracyOverTime" color="var(--ai-accent)"></sp-line-chart>
+    </div>
+  </div>
+
+  <div class="sp-card aii__queue">
+    <div class="aii__queue-header">
+      <sp-icon name="alert-triangle" [size]="16"></sp-icon>
+      <h3>Low-Confidence Classification Review Queue</h3>
+      <span class="aii__queue-pending">{{ s.lowConfidenceQueue.length }} pending</span>
+    </div>
+    <table class="aii__queue-table" *ngIf="s.lowConfidenceQueue.length; else queueEmpty">
+      <thead>
+        <tr>
+          <th>Ticket ID</th>
+          <th>Domain</th>
+          <th>Suggested domain</th>
+          <th>AI Route</th>
+          <th>Confidence</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of s.lowConfidenceQueue">
+          <td class="aii__queue-id">{{ item.ticketId }}</td>
+          <td>{{ item.currentDomain || '—' }}</td>
+          <td><span class="aii__domain-tag"><sp-icon name="tag" [size]="12"></sp-icon>{{ item.suggestedDomain }}</span></td>
+          <td>
+            <span class="aii__route-tag"><sp-icon name="sparkles" [size]="12"></sp-icon> {{ item.aiRoute }}</span>
+          </td>
+          <td>
+            <div class="aii__confidence">
+              <div class="aii__confidence-track">
+                <div class="aii__confidence-fill" [style.width.%]="item.confidencePct"></div>
+              </div>
+              <span>{{ item.confidencePct }}%</span>
+            </div>
+          </td>
+          <td>
+            <div class="aii__queue-actions">
+              <button class="aii__approve-btn" [disabled]="reviewingTicketId() === item.ticketId" (click)="approve(item)">
+                <sp-icon name="check" [size]="13"></sp-icon> Approve
+              </button>
+              <button class="aii__correct-btn" [disabled]="reviewingTicketId() === item.ticketId" (click)="openCorrect(item)">
+                <sp-icon name="edit" [size]="13"></sp-icon> Correct
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <ng-template #queueEmpty>
+      <p class="aii__queue-empty">No low-confidence classifications waiting for review.</p>
+    </ng-template>
+    <p class="aii__queue-error" *ngIf="reviewError()">{{ reviewError() }}</p>
+  </div>
+
+</div>
+
+<sp-modal [open]="!!correcting()" title="Correct AI classification" (closed)="correcting.set(null)">
+  <ng-container *ngIf="correcting() as item">
+    <p class="aii__correct-ticket">{{ item.ticketId }}</p>
+
+    <label class="sp-label">PLM Domain</label>
+    <select class="sp-input" [(ngModel)]="correctionDomain">
+      <option *ngFor="let d of domains" [value]="d">{{ d }}</option>
+    </select>
+
+    <label class="sp-label">Routing</label>
+    <select class="sp-input" [(ngModel)]="correctionRoute">
+      <option value="Generalist">Generalist</option>
+      <option value="Specialist">Specialist</option>
+    </select>
+
+    <button class="sp-btn sp-btn--primary aii__correct-save" [disabled]="reviewingTicketId() === item.ticketId" (click)="saveCorrection()">
+      {{ reviewingTicketId() === item.ticketId ? 'Saving…' : 'Save correction' }}
+    </button>
+  </ng-container>
+</sp-modal>

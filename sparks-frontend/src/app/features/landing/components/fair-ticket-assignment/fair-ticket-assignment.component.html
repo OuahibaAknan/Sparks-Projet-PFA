@@ -1,0 +1,62 @@
+<section class="fta section section--bg-white" id="fair-assignment">
+  <div class="container">
+    <div class="section__header" spReveal>
+      <span class="section__kicker">
+        <sp-icon name="shield" [size]="13"></sp-icon>
+        Fair Ticket Assignment
+      </span>
+      <h2 class="section__title">No cherry-picking. Every ticket gets a fair shot.</h2>
+      <p class="section__subtitle">
+        Engineers commit to a ticket before they can see its content, so easy tickets stop
+        getting picked first and distribution stays balanced across the team.
+      </p>
+    </div>
+
+    <div class="fta__grid">
+      <div class="fta__steps">
+        @for (s of steps; track s.step; let i = $index; let last = $last) {
+          <div class="fta__step" [class.fta__step--last]="last" [spReveal]="i * 90">
+            <span class="fta__step-icon"><sp-icon [name]="s.icon" [size]="17"></sp-icon></span>
+            <div class="fta__step-body">
+              <span class="fta__step-number">Step {{ s.step }}</span>
+              <h3>{{ s.title }}</h3>
+              <p>{{ s.text }}</p>
+            </div>
+          </div>
+        }
+      </div>
+
+      <div class="fta__demo" spReveal>
+        <span class="fta__demo-label">
+          <sp-icon name="eye" [size]="13"></sp-icon>
+          Live preview, try it
+        </span>
+
+        @if (!revealed()) {
+          <sp-blind-ticket-card [ticket]="demoTicket" mode="pool" (accept)="reveal($event)" (decline)="decline($event)"></sp-blind-ticket-card>
+          @if (declined()) {
+            <p class="fta__hint">
+              Declined. The ticket returns to the pool for another engineer. Nothing about its content was ever shown.
+            </p>
+          }
+        } @else {
+          <div class="fta__revealed sp-card">
+            <div class="fta__revealed-top">
+              <span class="fta__revealed-id">{{ demoTicket.id }}</span>
+              <sp-ai-badge text="AI-qualified"></sp-ai-badge>
+            </div>
+            <h4>ECR approval stuck in pending state past SLA</h4>
+            <p>
+              ECR-9021 has been sitting in "Pending Approval" for 26 hours despite both required
+              approvers signing off. The workflow engine isn't evaluating the completed signoffs.
+            </p>
+            <button type="button" class="sp-btn sp-btn--outline sp-btn--sm" (click)="resetDemo()">
+              <sp-icon name="refresh-cw" [size]="14"></sp-icon>
+              Replay demo
+            </button>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,58 @@
+<div class="att sp-card">
+  <div class="att__header">
+    <div class="att__title-row">
+      <div>
+        <h3>All Tickets</h3>
+        <p>Read-only overview of every ticket in the system</p>
+      </div>
+      <label class="att__search">
+        <span class="att__search-label">Search</span>
+        <input type="search" [(ngModel)]="search" (ngModelChange)="onSearch()" placeholder="Search by ID, domain, status, priority..." />
+      </label>
+    </div>
+  </div>
+
+  <table class="att__table">
+    <thead>
+      <tr>
+        <th><button class="att__sort-btn" (click)="sortBy('id')">ID <span class="att__sort-indicator" *ngIf="sortKey === 'id'">{{ sortDirection === 'asc' ? '↑' : '↓' }}</span></button></th>
+        <th><button class="att__sort-btn" (click)="sortBy('priority')">Priority <span class="att__sort-indicator" *ngIf="sortKey === 'priority'">{{ sortDirection === 'asc' ? '↑' : '↓' }}</span></button></th>
+        <th><button class="att__sort-btn" (click)="sortBy('domain')">Domain <span class="att__sort-indicator" *ngIf="sortKey === 'domain'">{{ sortDirection === 'asc' ? '↑' : '↓' }}</span></button></th>
+        <th><button class="att__sort-btn" (click)="sortBy('aiSuggestedRoute')">Niveau <span class="att__sort-indicator" *ngIf="sortKey === 'aiSuggestedRoute'">{{ sortDirection === 'asc' ? '↑' : '↓' }}</span></button></th>
+        <th><button class="att__sort-btn" (click)="sortBy('status')">Status <span class="att__sort-indicator" *ngIf="sortKey === 'status'">{{ sortDirection === 'asc' ? '↑' : '↓' }}</span></button></th>
+        <th><button class="att__sort-btn" (click)="sortBy('slaMinutesRemaining')">SLA <span class="att__sort-indicator" *ngIf="sortKey === 'slaMinutesRemaining'">{{ sortDirection === 'asc' ? '↑' : '↓' }}</span></button></th>
+        <th><button class="att__sort-btn" (click)="sortBy('createdAt')">Created <span class="att__sort-indicator" *ngIf="sortKey === 'createdAt'">{{ sortDirection === 'asc' ? '↑' : '↓' }}</span></button></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let t of items()">
+        <td class="att__id">{{ t.id }}</td>
+        <td><sp-badge [text]="t.priority" [fg]="priorityColor(t.priority).fg" [bg]="priorityColor(t.priority).bg" [dot]="true"></sp-badge></td>
+        <td><sp-badge [text]="t.domain" fg="var(--alten-navy)" bg="#eaf3fa"></sp-badge></td>
+        <td><sp-badge [text]="t.aiSuggestedRoute" [fg]="roleColor(t.aiSuggestedRoute).fg" [bg]="roleColor(t.aiSuggestedRoute).bg"></sp-badge></td>
+        <td><sp-badge [text]="statusLabel(t.status)" [fg]="statusColor(t.status).fg" [bg]="statusColor(t.status).bg"></sp-badge></td>
+        <td [class.att__urgent]="t.slaMinutesRemaining < 180">{{ slaLabel(t.slaMinutesRemaining) }}</td>
+        <td class="att__muted">{{ t.createdAt }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="att__empty" *ngIf="!loading() && items().length === 0">No tickets to show.</p>
+
+  <div class="att__footer">
+    <div class="att__left">
+      <span class="att__count">{{ total() }} ticket{{ total() > 1 ? 's' : '' }} total</span>
+      <label class="att__page-size">
+        <span>Afficher</span>
+        <select [value]="pageSize" (change)="onPageSizeChange($any($event.target).value)">
+          <option *ngFor="let option of pageSizeOptions" [value]="option">{{ option }}</option>
+        </select>
+      </label>
+    </div>
+    <div class="att__pager">
+      <button class="sp-btn sp-btn--outline sp-btn--sm" [disabled]="page() <= 1" (click)="prevPage()">Previous</button>
+      <span class="att__page-label">Page {{ page() }} of {{ totalPages }}</span>
+      <button class="sp-btn sp-btn--outline sp-btn--sm" [disabled]="page() >= totalPages" (click)="nextPage()">Next</button>
+    </div>
+  </div>
+</div>

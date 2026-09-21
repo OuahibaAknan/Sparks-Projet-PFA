@@ -1,0 +1,595 @@
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Sparks.Api.Models;
+
+namespace Sparks.Api.Data;
+
+/// <summary>Seeds demo data. Users/Teams/reference data are fixed (the login screen advertises
+/// specific demo accounts). Tickets and their AI metadata are generated — a stand-in for the
+/// eventual AIDE/TOOLSUP import feeds, so the shape and volume are realistic rather than a
+/// handful of hand-authored rows.</summary>
+public static class DbSeeder
+{
+    private static readonly string[] FirstNames =
+        ["Claire", "Hugo", "Julien", "Nadia", "Peter", "Elena", "Anaïs", "Laurent", "Chloé", "Diego",
+         "Jean-Pierre", "Sophie", "Thomas", "Camille", "Lucas", "Emma", "Nathan", "Antoine", "Manon",
+         "Alexandre", "Julie", "Maxime", "Charlotte", "Karim", "Yasmine", "Victor", "Ines", "Paul"];
+
+    private static readonly string[] LastNames =
+        ["Fontaine", "Lambert", "Perrot", "Haddad", "Kowalski", "Rossi", "Girard", "Bernard", "Petit", "Alves",
+         "Moreau", "Martin", "Bertrand", "Roux", "Simon", "Lefevre", "Michel", "Garcia", "David", "Bonnet",
+         "Francois", "Legrand", "Benali", "Chevalier"];
+
+    private static readonly string[] VehiclePrograms =
+        ["208", "308", "3008", "5008", "DS4", "DS7", "Jeep Avenger", "Jeep Compass", "Opel Astra", "Opel Corsa"];
+
+    private static readonly string[] AttachmentNames =
+        ["screenshot_error.png", "export_log.txt", "config_report.xlsx", "workflow_state_export.json",
+         "catia_log_export.txt", "cost_variance_report.xlsx", "approval_matrix_config.xlsx", "drawing_sample.pdf", "sync_error.log"];
+
+    private static readonly string[] ResolutionComments =
+        ["Root cause identified and fixed; verified on a handful of test cases.",
+         "Workaround applied via the Teamcenter admin panel; monitoring for recurrence.",
+         "Config rule re-linked and validated with the requester.",
+         "Escalated fix deployed; confirmed resolved by the end user."];
+
+    private static readonly string[] SolutionTemplates =
+        ["Manually re-trigger the publish job from the Teamcenter workflow admin panel — resolves the sync failure in most cases.",
+         "Verify the publish rule conditions in Teamcenter admin and add the missing sync trigger to the approval checklist.",
+         "Re-link the affected config rule and validate against 2-3 test releases before closing.",
+         "Escalate to the SAP integration team to re-run the nightly batch job manually."];
+
+    private static readonly string[] LowConfidenceReasons =
+        ["Ambiguous root cause between two overlapping categories.",
+         "Short description limited classification signal.",
+         "Overlapping keywords with a different domain.",
+         "Ticket references multiple systems, reducing classification confidence."];
+
+    public static async Task SeedAsync(IServiceProvider services)
+    {
+        var db = services.GetRequiredService<AppDbContext>();
+        var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+        var roleManager = services.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
+
+        await db.Database.MigrateAsync();
+
+        foreach (var role in new[] { "Generalist", "Specialist", "Admin", "TeamLead", "Polyvalent" })
+        {
+            if (!await roleManager.RoleExistsAsync(role))
+                await roleManager.CreateAsync(new IdentityRole<Guid>(role));
+        }
+
+        if (await db.Users.AnyAsync()) return; // already seeded
+
+        var rnd = new Random();
+
+        // --- Reference data -------------------------------------------------
+
+        var generalistTeam = new Team { Name = "Generalist Support", Department = "Support" };
+        var specialistTeam = new Team { Name = "Specialist Support", Department = "Engineering" };
+        db.Teams.AddRange(generalistTeam, specialistTeam);
+
+        var sourceSystems = new[] { new SourceSystem { Name = "AIDE" }, new SourceSystem { Name = "TOOLSUP" } };
+        db.SourceSystems.AddRange(sourceSystems);
+        var sourceSystemByName = sourceSystems.ToDictionary(s => s.Name);
+
+        var domainDefs = new (string Name, string Description)[]
+        {
+            ("BOM", "Bill of materials structure and export issues."),
+            ("ECR Workflow", "Engineering change request approval workflow."),
+            ("CAD Data Sync", "CAD/PLM revision synchronization."),
+            ("PLM-ERP Integration", "Teamcenter/SAP integration and batch sync."),
+            ("Change Management", "Change request routing and approval matrices."),
+            ("Document Control", "Released document and drawing control."),
+            ("Autre", "Uncategorized / other."),
+        };
+        var domains = domainDefs.Select(d => new Domain { Name = d.Name, Description = d.Description }).ToArray();
+        db.Domains.AddRange(domains);
+        var domainByName = domains.ToDictionary(d => d.Name);
+
+        var siteNames = new[] { "Sochaux, FR", "Mulhouse, FR", "Poissy, FR", "Rüsselsheim, DE", "Turin, IT" };
+        var sites = siteNames.Select(n => new Site { Name = n }).ToArray();
+        db.Sites.AddRange(sites);
+        var siteByName = sites.ToDictionary(s => s.Name);
+
+        await db.SaveChangesAsync();
+
+        // --- Users ------------------------------------------------------------
+
+        var users = new (string First, string Last, string Email, UserRole Role, UserStatus Status, UserAvailability Availability, string Color, DateTime Created, Team? Team)[]
+        {
+            ("Marcus", "Weber", "marcus.weber@alten.com", UserRole.Generalist, UserStatus.Active, UserAvailability.Available, "#008BD2", new DateTime(2023, 3, 11), generalistTeam),
+            ("Sofia", "Reyes", "sofia.reyes@alten.com", UserRole.Generalist, UserStatus.Active, UserAvailability.Away, "#008BD2", new DateTime(2023, 5, 2), generalistTeam),
+            ("Isabelle", "Morin", "i.morin@alten.com", UserRole.Specialist, UserStatus.Active, UserAvailability.Available, "#043962", new DateTime(2022, 11, 20), specialistTeam),
+            ("Tomasz", "Wiśniewski", "t.wisniewski@alten.com", UserRole.Specialist, UserStatus.Active, UserAvailability.Available, "#043962", new DateTime(2023, 1, 9), specialistTeam),
+            ("Marc", "Dubois", "marc.dubois@alten.com", UserRole.Generalist, UserStatus.Inactive, UserAvailability.Away, "#008BD2", new DateTime(2022, 7, 14), generalistTeam),
+            ("Amara", "Diallo", "a.diallo@alten.com", UserRole.Admin, UserStatus.Active, UserAvailability.Available, "#7C3AED", new DateTime(2022, 2, 1), null),
+            ("Youssef", "El Amrani", "y.elamrani@alten.com", UserRole.TeamLead, UserStatus.Active, UserAvailability.Available, "#B45309", new DateTime(2022, 9, 5), null),
+            ("Léa", "Fontaine", "l.fontaine@alten.com", UserRole.Polyvalent, UserStatus.Active, UserAvailability.Available, "#0F766E", new DateTime(2023, 6, 18), generalistTeam),
+        };
+
+        var userByFirstName = new Dictionary<string, ApplicationUser>();
+
+        foreach (var u in users)
+        {
+            var user = new ApplicationUser
+            {
+                UserName = u.Email,
+                Email = u.Email,
+                EmailConfirmed = true,
+                FirstName = u.First,
+                LastName = u.Last,
+                Role = u.Role,
+                Status = u.Status,
+                Availability = u.Availability,
+                AvatarColor = u.Color,
+                CreatedAt = u.Created,
+                TeamId = u.Team?.Id,
+            };
+            var result = await userManager.CreateAsync(user, "demo1234");
+            if (!result.Succeeded)
+                throw new Exception($"Failed to seed user {u.Email}: {string.Join(", ", result.Errors.Select(e => e.Description))}");
+            await userManager.AddToRoleAsync(user, u.Role.ToString());
+            userByFirstName[u.First] = user;
+        }
+
+        var generalistPool = new[] { userByFirstName["Marcus"], userByFirstName["Sofia"], userByFirstName["Léa"] };
+        var specialistPool = new[] { userByFirstName["Isabelle"], userByFirstName["Tomasz"] };
+
+        // --- Tickets (generated — stand-in for the AIDE/TOOLSUP import feeds) ---
+
+        var tickets = GenerateTickets(rnd, 100, sourceSystemByName, domainByName, siteByName, generalistPool, specialistPool);
+        db.Tickets.AddRange(tickets);
+        await db.SaveChangesAsync();
+
+        // --- AI data, derived from the generated tickets -----------------------
+
+        GenerateAiData(rnd, db, tickets, domainByName);
+
+        // --- A handful of demo notifications, so the bell isn't empty on first login ---
+
+        GenerateNotifications(rnd, db, tickets, generalistPool, specialistPool);
+
+        await db.SaveChangesAsync();
+    }
+
+    private static void GenerateNotifications(Random rnd, AppDbContext db, List<Ticket> tickets, ApplicationUser[] generalistPool, ApplicationUser[] specialistPool)
+    {
+        var escalated = tickets.Where(t => t.Status == TicketStatus.Escalated).Take(3).ToList();
+        foreach (var ticket in escalated)
+        {
+            foreach (var specialist in specialistPool)
+            {
+                db.Notifications.Add(new Notification
+                {
+                    UserId = specialist.Id,
+                    TicketId = ticket.Id,
+                    Type = "escalation",
+                    Message = $"Ticket {ticket.ReferenceKZ} was escalated to the Specialist pool.",
+                    Read = rnd.NextDouble() < 0.4,
+                    CreatedAtUtc = ticket.CreatedAtUtc.AddHours(1),
+                });
+            }
+        }
+
+        var assigned = tickets.Where(t => t.AssigneeId.HasValue && t.Status is TicketStatus.InProgress or TicketStatus.Accepted).Take(5).ToList();
+        foreach (var ticket in assigned)
+        {
+            db.Notifications.Add(new Notification
+            {
+                UserId = ticket.AssigneeId!.Value,
+                TicketId = ticket.Id,
+                Type = "comment",
+                Message = $"Youssef El Amrani commented on {ticket.ReferenceKZ}.",
+                Read = rnd.NextDouble() < 0.5,
+                CreatedAtUtc = ticket.CreatedAtUtc.AddHours(2),
+            });
+        }
+
+        var slaAtRisk = tickets.Where(t => t.AssigneeId.HasValue && t.Status is TicketStatus.InProgress or TicketStatus.Accepted).Skip(5).Take(3).ToList();
+        foreach (var ticket in slaAtRisk)
+        {
+            db.Notifications.Add(new Notification
+            {
+                UserId = ticket.AssigneeId!.Value,
+                TicketId = ticket.Id,
+                Type = "sla-warning",
+                Message = $"{ticket.ReferenceKZ} is approaching its SLA deadline.",
+                Read = false,
+                CreatedAtUtc = DateTime.UtcNow.AddMinutes(-rnd.Next(5, 240)),
+            });
+        }
+    }
+
+    private static List<Ticket> GenerateTickets(
+        Random rnd, int count,
+        Dictionary<string, SourceSystem> sourceSystems, Dictionary<string, Domain> domains, Dictionary<string, Site> sites,
+        ApplicationUser[] generalistPool, ApplicationUser[] specialistPool)
+    {
+        var statusWeights = new (TicketStatus Value, int Weight)[]
+        {
+            (TicketStatus.New, 15), (TicketStatus.Accepted, 10), (TicketStatus.InProgress, 15),
+            (TicketStatus.Escalated, 8), (TicketStatus.Resolved, 15), (TicketStatus.Closed, 30), (TicketStatus.Cancelled, 7),
+        };
+        var priorityWeights = new (TicketPriority Value, int Weight)[]
+        {
+            (TicketPriority.Low, 20), (TicketPriority.Medium, 35), (TicketPriority.High, 30), (TicketPriority.Critical, 15),
+        };
+        var domainWeights = domains.Keys.Select(d => (Value: d, Weight: d == "Autre" ? 5 : 16)).ToArray();
+
+        var now = DateTime.UtcNow;
+        var result = new List<Ticket>(count);
+
+        for (var i = 0; i < count; i++)
+        {
+            var domainName = WeightedPick(rnd, domainWeights);
+            var sourceSystemName = rnd.Next(2) == 0 ? "AIDE" : "TOOLSUP";
+            var priority = WeightedPick(rnd, priorityWeights);
+            var status = WeightedPick(rnd, statusWeights);
+            var program = VehiclePrograms[rnd.Next(VehiclePrograms.Length)];
+            var partCode = RandomPartNumber(rnd);
+            var ecrCode = RandomEcrNumber(rnd);
+            var (title, description) = RandomIssue(rnd, domainName, partCode, ecrCode, program);
+
+            SuggestedRoute level;
+            ApplicationUser? assignee;
+            switch (status)
+            {
+                case TicketStatus.New:
+                    level = SuggestedRoute.Generalist;
+                    assignee = null;
+                    break;
+                case TicketStatus.Escalated:
+                    level = SuggestedRoute.Specialist;
+                    assignee = null;
+                    break;
+                default:
+                    level = rnd.NextDouble() < 0.75 ? SuggestedRoute.Generalist : SuggestedRoute.Specialist;
+                    var pool = level == SuggestedRoute.Generalist ? generalistPool : specialistPool;
+                    assignee = status == TicketStatus.Cancelled && rnd.NextDouble() < 0.5 ? null : pool[rnd.Next(pool.Length)];
+                    break;
+            }
+
+            var createdAtUtc = now.AddDays(-rnd.Next(0, 90)).AddHours(-rnd.Next(0, 24)).AddMinutes(-rnd.Next(0, 60));
+            var isClosedOut = status is TicketStatus.Resolved or TicketStatus.Closed or TicketStatus.Cancelled;
+            var slaMinutes = isClosedOut ? 0 : priority switch
+            {
+                TicketPriority.Critical => 120,
+                TicketPriority.High => 360,
+                TicketPriority.Medium => 1080,
+                _ => 2160,
+            };
+
+            var ticket = new Ticket
+            {
+                ReferenceKZ = $"TKT-{3000 - i}",
+                SourceSystemId = sourceSystems[sourceSystemName].Id,
+                Application = ApplicationFor(domainName),
+                CreatedAtUtc = createdAtUtc,
+                Priority = priority,
+                DomainId = domains[domainName].Id,
+                Status = status,
+                Level = level,
+                SlaDeadlineUtc = now.AddMinutes(slaMinutes),
+                AiSuggestedRoute = level,
+                Title = title,
+                Description = description,
+                ApplicantFirstName = FirstNames[rnd.Next(FirstNames.Length)],
+                ApplicantLastName = LastNames[rnd.Next(LastNames.Length)],
+                ApplicantId = rnd.NextDouble() < 0.7 ? $"STL{rnd.Next(100000, 999999)}" : null,
+                SiteId = sites[PickRandomSiteKey(rnd, sites)].Id,
+                AssigneeId = assignee?.Id,
+                EnglishAccepted = rnd.NextDouble() < 0.6,
+                JiraLink = rnd.NextDouble() < 0.3 ? $"https://jira.alten.com/browse/SPARKS-{rnd.Next(1000, 9999)}" : null,
+                ClosingDate = status == TicketStatus.Closed ? createdAtUtc.AddHours(rnd.Next(2, 72)) : null,
+            };
+
+            if (domainName is "BOM" or "CAD Data Sync" && rnd.NextDouble() < 0.8) ticket.PartNumber = partCode;
+            if (domainName is "ECR Workflow" or "Change Management" && rnd.NextDouble() < 0.8) ticket.EcrNumber = ecrCode;
+
+            BuildHistory(rnd, ticket, assignee, createdAtUtc, priority, domainName);
+            BuildAttachments(rnd, ticket, createdAtUtc);
+            if (status is TicketStatus.Resolved or TicketStatus.Closed && assignee is not null && rnd.NextDouble() < 0.5)
+            {
+                ticket.Comments.Add(new TicketComment
+                {
+                    TicketId = ticket.Id,
+                    UserId = assignee.Id,
+                    Content = ResolutionComments[rnd.Next(ResolutionComments.Length)],
+                    CreatedAtUtc = createdAtUtc.AddHours(rnd.Next(2, 48)),
+                });
+            }
+
+            result.Add(ticket);
+        }
+
+        return result;
+    }
+
+    private static string PickRandomSiteKey(Random rnd, Dictionary<string, Site> sites)
+    {
+        var keys = sites.Keys.ToArray();
+        return keys[rnd.Next(keys.Length)];
+    }
+
+    private static void BuildHistory(Random rnd, Ticket ticket, ApplicationUser? assignee, DateTime createdAtUtc, TicketPriority priority, string domainName)
+    {
+        var confidence = rnd.Next(78, 97);
+        ticket.History.Add(new TicketHistoryEntry
+        {
+            TicketId = ticket.Id, Action = "Ticket created by Requester", Actor = "System",
+            TimestampUtc = createdAtUtc, IsAiGenerated = false, Icon = "plus",
+        });
+        ticket.History.Add(new TicketHistoryEntry
+        {
+            TicketId = ticket.Id, Action = $"Classified as {domainName} / Priority: {priority} — {confidence}% confidence", Actor = "SmartTicket AI",
+            TimestampUtc = createdAtUtc.AddMinutes(1), IsAiGenerated = true, Icon = "sparkle",
+        });
+
+        var t = createdAtUtc.AddMinutes(rnd.Next(10, 60));
+
+        if (ticket.Status == TicketStatus.Escalated)
+        {
+            ticket.History.Add(new TicketHistoryEntry
+            {
+                TicketId = ticket.Id, Action = "Escalated to Specialist", Actor = "System",
+                TimestampUtc = t, IsAiGenerated = false, Icon = "escalate",
+            });
+            return;
+        }
+
+        if (ticket.Status == TicketStatus.Cancelled)
+        {
+            ticket.History.Add(new TicketHistoryEntry
+            {
+                TicketId = ticket.Id, Action = "Ticket cancelled", Actor = assignee is null ? "System" : $"{assignee.FirstName} {assignee.LastName}",
+                UserId = assignee?.Id, TimestampUtc = t, IsAiGenerated = false, Icon = "activity",
+            });
+            return;
+        }
+
+        if (ticket.Status == TicketStatus.New || assignee is null) return;
+
+        var actorName = $"{assignee.FirstName} {assignee.LastName}";
+        ticket.History.Add(new TicketHistoryEntry
+        {
+            TicketId = ticket.Id, Action = "Accepted ticket from pool", Actor = actorName, UserId = assignee.Id,
+            TimestampUtc = t, IsAiGenerated = false, Icon = "check",
+        });
+        if (ticket.Status == TicketStatus.Accepted) return;
+
+        t = t.AddMinutes(rnd.Next(15, 90));
+        ticket.History.Add(new TicketHistoryEntry
+        {
+            TicketId = ticket.Id, Action = "Status changed to In Progress", Actor = actorName, UserId = assignee.Id,
+            TimestampUtc = t, IsAiGenerated = false, Icon = "activity",
+        });
+        if (ticket.Status == TicketStatus.InProgress) return;
+
+        t = t.AddHours(rnd.Next(1, 24));
+        ticket.History.Add(new TicketHistoryEntry
+        {
+            TicketId = ticket.Id, Action = "Marked as Resolved", Actor = actorName, UserId = assignee.Id,
+            TimestampUtc = t, IsAiGenerated = false, Icon = "check",
+        });
+        ticket.ResolvedAtUtc = t;
+        if (ticket.Status == TicketStatus.Resolved) return;
+
+        t = t.AddHours(rnd.Next(1, 48));
+        ticket.History.Add(new TicketHistoryEntry
+        {
+            TicketId = ticket.Id, Action = "Ticket closed", Actor = actorName, UserId = assignee.Id,
+            TimestampUtc = t, IsAiGenerated = false, Icon = "check",
+        });
+    }
+
+    private static void BuildAttachments(Random rnd, Ticket ticket, DateTime createdAtUtc)
+    {
+        var count = rnd.NextDouble() switch { < 0.5 => 0, < 0.85 => 1, _ => 2 };
+        for (var i = 0; i < count; i++)
+        {
+            ticket.Attachments.Add(new TicketAttachment
+            {
+                TicketId = ticket.Id,
+                FileName = AttachmentNames[rnd.Next(AttachmentNames.Length)],
+                SizeKb = rnd.Next(10, 900),
+                UploadedAtUtc = createdAtUtc.AddMinutes(rnd.Next(1, 30)),
+            });
+        }
+    }
+
+    private static void GenerateAiData(Random rnd, AppDbContext db, List<Ticket> tickets, Dictionary<string, Domain> domains)
+    {
+        var domainNameById = domains.Values.ToDictionary(d => d.Id, d => d.Name);
+        var ticketsByDomain = tickets
+            .Where(t => t.DomainId.HasValue)
+            .GroupBy(t => t.DomainId!.Value)
+            .ToDictionary(g => g.Key, g => g.ToList());
+
+        foreach (var ticket in tickets)
+        {
+            var domainName = ticket.DomainId.HasValue ? domainNameById.GetValueOrDefault(ticket.DomainId.Value, "") : "";
+            var confidence = rnd.Next(55, 99);
+
+            db.TicketAiMetadata.Add(new TicketAiMetadata
+            {
+                TicketId = ticket.Id,
+                Summary = $"Automated classification: {domainName} issue, priority {ticket.Priority}, confidence {confidence}%.",
+                ClassifiedDomain = domainName,
+                Confidence = confidence,
+            });
+
+            if (ticket.DomainId.HasValue && rnd.NextDouble() < 0.4 && ticketsByDomain.TryGetValue(ticket.DomainId.Value, out var siblings))
+            {
+                var candidates = siblings.Where(s => s.Id != ticket.Id).ToList();
+                foreach (var similar in candidates.OrderBy(_ => rnd.Next()).Take(rnd.Next(1, 4)))
+                {
+                    db.AiSimilarTickets.Add(new AiSimilarTicket { TicketId = ticket.Id, SimilarTicketId = similar.Id, Score = rnd.Next(50, 96) });
+                }
+            }
+
+            if (ticket.Status is TicketStatus.InProgress or TicketStatus.Resolved or TicketStatus.Closed)
+            {
+                var solutionCount = rnd.Next(1, 3);
+                for (var r = 1; r <= solutionCount; r++)
+                {
+                    Guid? sourceRefId = ticket.DomainId.HasValue && ticketsByDomain.TryGetValue(ticket.DomainId.Value, out var pool) && pool.Count > 1
+                        ? pool.Where(p => p.Id != ticket.Id).OrderBy(_ => rnd.Next()).FirstOrDefault()?.Id
+                        : null;
+
+                    db.AiSuggestedSolutions.Add(new AiSuggestedSolution
+                    {
+                        TicketId = ticket.Id,
+                        Rank = r,
+                        SolutionText = SolutionTemplates[rnd.Next(SolutionTemplates.Length)],
+                        SourceTicketRefId = sourceRefId,
+                        NeedsVerification = rnd.NextDouble() < 0.6,
+                        Vote = ticket.Status == TicketStatus.Closed ? (rnd.NextDouble() < 0.7 ? "up" : "down") : null,
+                    });
+                }
+            }
+
+            if (rnd.NextDouble() < 0.25)
+            {
+                var t0 = ticket.CreatedAtUtc.AddMinutes(rnd.Next(5, 120));
+                db.AiChatMessages.Add(new AiChatMessage
+                {
+                    TicketId = ticket.Id, Role = "ai",
+                    Message = $"Hello! I've analyzed this ticket — it looks related to a {domainName} issue similar to past resolved cases. Would you like me to list similar tickets?",
+                    TimestampUtc = t0,
+                });
+                if (rnd.NextDouble() < 0.5)
+                {
+                    db.AiChatMessages.Add(new AiChatMessage { TicketId = ticket.Id, Role = "user", Message = "Can you summarize the likely root cause?", TimestampUtc = t0.AddMinutes(2) });
+                    db.AiChatMessages.Add(new AiChatMessage
+                    {
+                        TicketId = ticket.Id, Role = "ai",
+                        Message = $"This matches a pattern seen in prior {domainName} tickets where a workflow trigger was missing after approval. I'd recommend checking the publish rule configuration first.",
+                        TimestampUtc = t0.AddMinutes(3),
+                    });
+                }
+            }
+        }
+
+        var domainKeys = domains.Keys.ToArray();
+        foreach (var ticket in tickets.OrderBy(_ => rnd.Next()).Take(Math.Min(8, tickets.Count)))
+        {
+            var actualDomain = ticket.DomainId.HasValue ? domainNameById.GetValueOrDefault(ticket.DomainId.Value, "") : "";
+            var suggestedDomain = domainKeys[rnd.Next(domainKeys.Length)];
+            db.AiLowConfidenceItems.Add(new AiLowConfidenceItem
+            {
+                TicketId = ticket.Id,
+                SuggestedDomain = suggestedDomain,
+                AiRoute = rnd.NextDouble() < 0.5 ? SuggestedRoute.Generalist : SuggestedRoute.Specialist,
+                ConfidencePct = rnd.Next(30, 66),
+                Reason = LowConfidenceReasons[rnd.Next(LowConfidenceReasons.Length)],
+            });
+        }
+
+        var routingAccuracy = Math.Round(88 + rnd.NextDouble() * 9, 1);
+        db.AiInsightsSnapshots.Add(new AiInsightsSnapshot
+        {
+            Id = 1,
+            RoutingAccuracyPct = routingAccuracy,
+            RoutingAccuracyDeltaPct = Math.Round(rnd.NextDouble() * 4 - 1, 1),
+            TicketsClassified = tickets.Count,
+            EstimatedModelCostUsd = Math.Round(30 + rnd.NextDouble() * 40, 1),
+            ModelVersion = "SmartTicket-v2.3.1",
+            ModelLastUpdatedUtc = DateTime.UtcNow.AddDays(-rnd.Next(5, 30)),
+            AvgLatencyMs = rnd.Next(110, 200),
+            P95LatencyMs = rnd.Next(300, 450),
+            MonthlyTokens = $"{Math.Round(1.5 + rnd.NextDouble() * 2, 1).ToString(System.Globalization.CultureInfo.InvariantCulture)}M tokens",
+            MonthlyCostUsd = Math.Round(30 + rnd.NextDouble() * 40, 1),
+        });
+
+        var weeks = new[] { "W44", "W45", "W46", "W47", "W48", "W49", "W50" };
+        var recurringBase = rnd.Next(10, 20);
+        var accuracyBase = 88 + rnd.NextDouble() * 4;
+        for (var i = 0; i < weeks.Length; i++)
+        {
+            recurringBase += rnd.Next(-3, 6);
+            accuracyBase += rnd.NextDouble() * 1.2;
+            db.AiTrendPoints.Add(new AiTrendPoint { SnapshotId = 1, Kind = "recurring", Label = weeks[i], Value = Math.Max(0, recurringBase), Order = i });
+            db.AiTrendPoints.Add(new AiTrendPoint { SnapshotId = 1, Kind = "accuracy", Label = weeks[i], Value = Math.Round(Math.Min(99, accuracyBase), 1), Order = i });
+        }
+    }
+
+    private static string ApplicationFor(string domain) => domain switch
+    {
+        "BOM" or "PLM-ERP Integration" => "SAP",
+        "CAD Data Sync" => "CATIA",
+        "ECR Workflow" or "Change Management" or "Document Control" => "Teamcenter",
+        _ => "Autre",
+    };
+
+    private static T WeightedPick<T>(Random rnd, (T Value, int Weight)[] items)
+    {
+        var total = items.Sum(i => i.Weight);
+        var roll = rnd.Next(total);
+        var cumulative = 0;
+        foreach (var (value, weight) in items)
+        {
+            cumulative += weight;
+            if (roll < cumulative) return value;
+        }
+        return items[^1].Value;
+    }
+
+    private static string RandomPartNumber(Random rnd) =>
+        $"{rnd.Next(10, 99)}-{RandomLetters(rnd, 3)}-{rnd.Next(100, 999)}-{(char)('A' + rnd.Next(0, 4))}";
+
+    private static string RandomEcrNumber(Random rnd) => $"ECR-{rnd.Next(8000, 9999)}";
+
+    private static string RandomLetters(Random rnd, int n)
+    {
+        var chars = new char[n];
+        for (var i = 0; i < n; i++) chars[i] = (char)('A' + rnd.Next(26));
+        return new string(chars);
+    }
+
+    private static (string Title, string Description) RandomIssue(Random rnd, string domain, string code, string ecr, string program)
+    {
+        var options = domain switch
+        {
+            "BOM" => new (string, string)[]
+            {
+                ($"BOM export to SAP missing quantity multipliers for {program}", $"Engineering BOM export from Teamcenter to SAP ERP drops the quantity-per-assembly multiplier field for part {code} on program {program}, affecting purchasing quantities."),
+                ("Duplicate part numbers created for identical fasteners", $"Two separate part numbers exist for the same component ({code}), causing inventory reconciliation issues in SAP."),
+                ("BOM structure mismatch causing downstream assembly errors", $"After approving {ecr} for part {code}, the BOM structure in Teamcenter reflects the update but the linked CAD assembly still references the old revision, causing assembly constraint failures on program {program}."),
+                ("Cost roll-up from SAP not reflecting latest BOM revision", $"Standard cost roll-up jobs in SAP are pulling BOM quantities from a stale Teamcenter snapshot for part {code}, understating assembly cost."),
+            },
+            "ECR Workflow" => new (string, string)[]
+            {
+                ("ECR approval stuck in pending state past SLA", $"{ecr} has been sitting in \"Pending Approval\" for over 24 hours despite required approvers signing off in Teamcenter, blocking the downstream CAD publish step."),
+                ("ECR publish rule missing CAD-BOM sync trigger condition", $"Root cause identified in the {ecr} publish rule configuration: missing CAD-BOM sync trigger, allowing stale geometry to persist after approval."),
+                ($"ECR approval matrix skipping required signoff for {program}", $"Change requests routed through {ecr} for program {program} are bypassing one of the two required engineering signoffs."),
+            },
+            "CAD Data Sync" => new (string, string)[]
+            {
+                ("CATIA V5 assembly out of sync after Teamcenter checkout", $"After checking out an assembly from Teamcenter, the local CATIA V5 session still references the previous revision for part {code}. Refresh and reload both fail to pull the latest geometry."),
+                ("Thumbnail preview not regenerating after part revision", $"Teamcenter thumbnail previews stay on the old revision snapshot for up to 24h after publishing part {code}, causing confusion during visual part search."),
+                ($"Obsolete geometry referenced after partial BOM update on {program}", $"Partial BOM update on program {program} left part {code} pointing at obsolete geometry; requires manual re-sync."),
+            },
+            "PLM-ERP Integration" => new (string, string)[]
+            {
+                ($"Nightly PLM-ERP batch sync delayed for {program}", $"The scheduled batch sync between Teamcenter and SAP ERP has consistently completed late for the past several nights, pushing morning BOM availability past shift start for program {program}."),
+                ("Cost roll-up from SAP not reflecting latest BOM revision", $"Standard cost roll-up jobs in SAP are pulling stale Teamcenter data for part {code}."),
+            },
+            "Change Management" => new (string, string)[]
+            {
+                ($"Change request approval matrix misconfigured for {program}", $"Change requests routed to program {program} are skipping a required chief engineer approval step for {ecr}."),
+                ("Change request stuck between engineering and manufacturing sign-off", $"{ecr} on part {code} is blocked between two approval groups with no clear escalation path."),
+            },
+            "Document Control" => new (string, string)[]
+            {
+                ("Released drawing package missing mandatory revision watermark", $"Drawings released for part {code} are generated without the \"Superseded\" watermark on prior revisions, creating risk of shop floor using an obsolete print."),
+                ($"Document Control workflow not archiving prior revision for {ecr}", $"Prior revisions of drawings for {ecr} are not automatically archived after release."),
+            },
+            _ => new (string, string)[]
+            {
+                ($"Unclassified support request for program {program}", $"Ticket does not clearly match a known category; requires manual triage. Reference: {code}."),
+            },
+        };
+        return options[rnd.Next(options.Length)];
+    }
+}

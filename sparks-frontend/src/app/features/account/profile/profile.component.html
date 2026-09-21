@@ -1,0 +1,171 @@
+<div class="pf" *ngIf="auth.currentUser() as user">
+  <div class="pf__header">
+    <h1>Profile</h1>
+    <p>Your SPARKS account details</p>
+  </div>
+
+  <div class="sp-card pf__card pf__identity">
+    <div class="pf__top">
+      <div class="pf__avatar-wrap">
+        <button
+          type="button"
+          class="pf__avatar-button"
+          [disabled]="!avatarImageUrl(user.profilePhotoUrl)"
+          (click)="openAvatarPreview()"
+          [attr.aria-label]="'Open profile photo'"
+          [style.background-image]="avatarImageUrl(user.profilePhotoUrl) ? 'url(' + avatarImageUrl(user.profilePhotoUrl) + ')' : null"
+        >
+          <span *ngIf="!avatarImageUrl(user.profilePhotoUrl)">{{ user.initials }}</span>
+        </button>
+        <button class="pf__avatar-edit" (click)="photoInput.click()" [disabled]="photoUploading()" title="Change photo">
+          <sp-icon name="edit" [size]="13"></sp-icon>
+        </button>
+        <input #photoInput type="file" accept="image/png,image/jpeg,image/webp" hidden (change)="onPhotoSelected($event)" />
+      </div>
+      <div>
+        <h2>{{ user.firstName }} {{ user.lastName }}</h2>
+        <p>{{ user.email }}</p>
+      </div>
+      <sp-badge [text]="user.role" [fg]="roleColor(user.role).fg" [bg]="roleColor(user.role).bg" class="pf__role-badge"></sp-badge>
+    </div>
+
+    <p class="pf__photo-status pf__photo-status--loading" *ngIf="photoUploading()">Uploading photo…</p>
+    <p class="pf__photo-status pf__photo-status--error" *ngIf="photoError()">{{ photoError() }}</p>
+  </div>
+
+  <form (ngSubmit)="saveInfo()">
+    <div class="pf__grid">
+      <div class="sp-card pf__card">
+        <h3 class="pf__card-title">User Information</h3>
+
+        <div class="pf__field pf__field--row">
+          <label class="sp-label">Status</label>
+          <button type="button" class="pf__switch" [class.pf__switch--on]="isActive" (click)="isActive = !isActive">
+            <span class="pf__switch-knob"></span>
+          </button>
+          <span class="pf__status-label">{{ isActive ? 'Active' : 'Inactive' }}</span>
+        </div>
+
+        <div class="pf__field">
+          <label class="sp-label" for="firstName">First name</label>
+          <input id="firstName" class="sp-input" name="firstName" [(ngModel)]="firstName" />
+        </div>
+        <div class="pf__field">
+          <label class="sp-label" for="lastName">Last name</label>
+          <input id="lastName" class="sp-input" name="lastName" [(ngModel)]="lastName" />
+        </div>
+        <div class="pf__field">
+          <label class="sp-label" for="idStellantis">Stellantis ID</label>
+          <input id="idStellantis" class="sp-input" name="idStellantis" [formControl]="idStellantisControl" required />
+        </div>
+        <div class="pf__field">
+          <label class="sp-label">User Role</label>
+          <div>
+            <sp-badge [text]="user.role" [fg]="roleColor(user.role).fg" [bg]="roleColor(user.role).bg"></sp-badge>
+          </div>
+        </div>
+        <div class="pf__field">
+          <label class="sp-label" for="emailAlten">Email Alten</label>
+          <input id="emailAlten" class="sp-input" name="emailAlten" [value]="user.email" disabled />
+        </div>
+        <div class="pf__field">
+          <label class="sp-label" for="emailStellantis">Email Stellantis</label>
+          <input id="emailStellantis" class="sp-input" name="emailStellantis" [(ngModel)]="emailStellantis" placeholder="Optional" />
+        </div>
+        <div class="pf__field">
+          <label class="sp-label" for="altenId">Alten ID</label>
+          <input id="altenId" class="sp-input" name="altenId" [(ngModel)]="altenId" placeholder="Optional" />
+        </div>
+      </div>
+
+      <div class="sp-card pf__card pf__lang-card">
+        <h3 class="pf__card-title">Langue Selection</h3>
+        <p class="pf__card-sub">Select every language you're comfortable working in.</p>
+
+        <div #languageDropdown class="pf__lang-dropdown">
+          <button type="button" class="pf__lang-trigger" (click)="toggleLangDropdown()">
+            <span class="pf__lang-tags" *ngIf="selectedLanguages.length; else noLang">
+              <span class="pf__lang-tag" *ngFor="let lang of selectedLanguages">{{ lang }}</span>
+            </span>
+            <ng-template #noLang><span class="pf__lang-placeholder">Select languages…</span></ng-template>
+            <sp-icon name="chevron-down" [size]="16"></sp-icon>
+          </button>
+
+          <div class="pf__lang-panel" *ngIf="langDropdownOpen()">
+            <button
+              type="button"
+              *ngFor="let lang of availableLanguages"
+              class="pf__lang-option"
+              [class.pf__lang-option--active]="selectedLanguages.includes(lang)"
+              (click)="toggleLanguage(lang)"
+            >
+              {{ lang }}
+              <sp-icon *ngIf="selectedLanguages.includes(lang)" name="check" [size]="15"></sp-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="pf__error" *ngIf="saveError()">{{ saveError() }}</p>
+    <p class="pf__success" *ngIf="saveSuccess()">
+      <sp-icon name="check-circle" [size]="14"></sp-icon>
+      Profile updated.
+    </p>
+
+    <button class="sp-btn sp-btn--primary pf__save" type="submit" [disabled]="saving()">
+      {{ saving() ? 'Saving…' : 'Save changes' }}
+    </button>
+  </form>
+
+  <div class="sp-card pf__card pf__row">
+    <div>
+      <p class="pf__row-title"><sp-icon name="lock" [size]="14"></sp-icon> Password</p>
+      <p class="pf__row-sub">Change the password used to sign in to SPARKS.</p>
+    </div>
+    <a class="sp-btn sp-btn--outline" routerLink="/app/change-password">Change password</a>
+  </div>
+
+  <div class="sp-card pf__card pf__row">
+    <div>
+      <p class="pf__row-title">Availability</p>
+      <p class="pf__row-sub">Toggle whether new tickets can be routed to you.</p>
+    </div>
+    <button class="pf__switch" [class.pf__switch--on]="available()" (click)="available.set(!available())">
+      <span class="pf__switch-knob"></span>
+    </button>
+  </div>
+
+  <div class="sp-card pf__card pf__row">
+    <div>
+      <p class="pf__row-title"><sp-icon name="shield" [size]="14"></sp-icon> Blind acceptance</p>
+      <p class="pf__row-sub">You never see ticket title or description before accepting. Enforced platform-wide.</p>
+    </div>
+  </div>
+
+  <div class="pf__crop-backdrop" *ngIf="cropModalOpen()">
+    <section class="pf__crop-modal" role="dialog" aria-modal="true" aria-labelledby="crop-title">
+      <h2 id="crop-title">Adjust profile photo</h2>
+      <p>Zoom to position your photo inside the circular crop.</p>
+
+      <div class="pf__crop-frame">
+        <img class="pf__crop-image" [src]="cropImage()" [style.transform]="'scale(' + cropZoom() + ')'" alt="Photo crop preview" />
+      </div>
+
+      <label class="pf__crop-zoom" for="photoZoom">
+        <span>Zoom</span>
+        <input id="photoZoom" type="range" min="1" max="3" step="0.05" [value]="cropZoom()" (input)="cropZoom.set(+$any($event.target).value)" />
+      </label>
+
+      <div class="pf__crop-actions">
+        <button type="button" class="sp-btn sp-btn--outline" (click)="cancelCrop()">Cancel</button>
+        <button type="button" class="sp-btn sp-btn--primary" (click)="confirmCrop()">Crop and confirm</button>
+      </div>
+    </section>
+  </div>
+
+  <div class="pf__image-backdrop" *ngIf="expandedImageUrl()" (click)="closeAvatarPreview()">
+    <button type="button" class="pf__image-close" aria-label="Close enlarged photo" (click)="closeAvatarPreview()">×</button>
+    <img class="pf__image-full" [src]="expandedImageUrl()" alt="Profile photo enlarged" (click)="$event.stopPropagation()" />
+  </div>
+</div>

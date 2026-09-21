@@ -1,0 +1,25 @@
+<section class="hiw section section--bg-tint" id="how-it-works">
+  <div class="container">
+    <div class="section__header" spReveal>
+      <span class="section__kicker">
+        <sp-icon name="zap" [size]="13"></sp-icon>
+        How SPARKS Works
+      </span>
+      <h2 class="section__title">From ticket to resolution, in four steps</h2>
+      <p class="section__subtitle">Every ticket follows the same clear, automated path. No manual triage, no guesswork.</p>
+    </div>
+
+    <div class="hiw__grid">
+      @for (s of steps; track s.step; let i = $index; let last = $last) {
+        <div class="hiw__step" [class.hiw__step--last]="last" [spReveal]="i * 100">
+          <span class="hiw__number">{{ s.step }}</span>
+          <div class="hiw__icon">
+            <sp-icon [name]="s.icon" [size]="22"></sp-icon>
+          </div>
+          <h3>{{ s.title }}</h3>
+          <p>{{ s.text }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>

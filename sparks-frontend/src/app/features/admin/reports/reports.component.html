@@ -1,0 +1,18 @@
+<div class="rp">
+  <div class="rp__header">
+    <h1>Reports</h1>
+    <p>Generate and export operational reports as CSV</p>
+  </div>
+
+  <div class="rp__grid">
+    <div class="sp-card rp__card" *ngFor="let r of reports">
+      <div class="rp__icon"><sp-icon [name]="r.icon" [size]="20"></sp-icon></div>
+      <h3>{{ r.title }}</h3>
+      <p>{{ r.description }}</p>
+      <button class="sp-btn sp-btn--outline sp-btn--sm" (click)="generate(r)" [disabled]="generating() === r.id">
+        <sp-icon name="download" [size]="14"></sp-icon>
+        {{ generating() === r.id ? 'Generating…' : 'Export CSV' }}
+      </button>
+    </div>
+  </div>
+</div>

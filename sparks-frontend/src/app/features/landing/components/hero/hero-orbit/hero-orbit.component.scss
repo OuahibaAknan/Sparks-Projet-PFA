@@ -1,0 +1,124 @@
+/* Unstyled component hosts shrink-to-fit their content by default, which creates
+   a circular dependency with .orbit's width:100% below (host sized by content,
+   content sized by host). Forcing the host to fill its flex slot breaks the cycle. */
+:host {
+  display: block;
+  width: 100%;
+}
+
+.orbit {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  margin-inline: auto;
+}
+
+/* Padding-based square instead of `aspect-ratio` — avoids a second circular
+   sizing dependency between width and height on the same box. */
+.orbit::before {
+  content: '';
+  display: block;
+  padding-top: 100%;
+}
+
+.orbit__ring {
+  position: absolute;
+  inset: 12%;
+  border-radius: 50%;
+  border: 1px dashed rgba(0, 139, 210, 0.22);
+}
+
+.orbit__ring--2 {
+  inset: 26%;
+  border-color: rgba(124, 58, 237, 0.2);
+  animation: orbit-spin 22s linear infinite;
+}
+
+@keyframes orbit-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.orbit__svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.orbit__path {
+  fill: none;
+  stroke: rgba(0, 139, 210, 0.35);
+  stroke-width: 0.5;
+}
+
+.orbit__path--specialist {
+  stroke: rgba(249, 115, 22, 0.35);
+}
+
+.orbit__dot {
+  fill: #5fd0ff;
+  filter: drop-shadow(0 0 3px rgba(95, 208, 255, 0.8));
+}
+
+.orbit__dot--specialist {
+  fill: var(--specialist-accent);
+  filter: drop-shadow(0 0 3px rgba(249, 115, 22, 0.7));
+}
+
+.orbit__node {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--alten-navy);
+  white-space: nowrap;
+  z-index: 2;
+}
+
+.orbit__node--aide {
+  left: 16%;
+  top: 22%;
+}
+
+.orbit__node--toolsup {
+  left: 16%;
+  top: 78%;
+}
+
+.orbit__node--gen {
+  left: 84%;
+  top: 22%;
+  color: var(--generalist-accent);
+  border-color: rgba(0, 139, 210, 0.3);
+}
+
+.orbit__node--spec {
+  left: 84%;
+  top: 78%;
+  color: var(--specialist-accent);
+  border-color: rgba(249, 115, 22, 0.3);
+}
+
+@media (max-width: 420px) {
+  .orbit {
+    max-width: 280px;
+  }
+  .orbit__node {
+    font-size: 10px;
+    padding: 5px 9px;
+    gap: 4px;
+  }
+}

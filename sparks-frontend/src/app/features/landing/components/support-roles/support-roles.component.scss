@@ -1,0 +1,109 @@
+.roles__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+  margin-top: 56px;
+}
+
+.roles__card {
+  min-width: 0;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 36px 32px;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.roles__card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.roles__icon {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius);
+  background: var(--generalist-accent-soft);
+  color: var(--generalist-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.roles__card--specialist .roles__icon {
+  background: var(--specialist-accent-soft);
+  color: var(--specialist-accent);
+}
+
+.roles__card h3 {
+  font-size: 21px;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.roles__card > p {
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: 22px;
+}
+
+.roles__examples {
+  list-style: none;
+  margin: 0;
+  padding: 18px 0 0;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.roles__examples li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.roles__card .roles__examples li sp-icon {
+  color: var(--generalist-accent);
+  flex: none;
+}
+
+.roles__card--specialist .roles__examples li sp-icon {
+  color: var(--specialist-accent);
+}
+
+.roles__link {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.roles__link-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--landing-surface);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ai-accent);
+}
+
+@media (max-width: 760px) {
+  .roles__grid {
+    grid-template-columns: 1fr;
+  }
+}

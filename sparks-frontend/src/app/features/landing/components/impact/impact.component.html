@@ -1,0 +1,26 @@
+<section class="impact section section--bg-white" id="impact">
+  <div class="container">
+    <div class="section__header" spReveal>
+      <span class="section__kicker">
+        <sp-icon name="trending-up" [size]="13"></sp-icon>
+        Impact &amp; Benefits
+      </span>
+      <h2 class="section__title">Measurable gains, from day one</h2>
+      <p class="section__subtitle">Live metrics, computed from real SPARKS ticket activity over the last 6 weeks.</p>
+    </div>
+
+    <div class="impact__grid">
+      @for (s of stats(); track s.label; let i = $index) {
+        <div class="impact__card" [spReveal]="i * 90">
+          <div class="impact__head">
+            <span class="impact__label">{{ s.label }}</span>
+            <span class="impact__delta" [class.impact__delta--down]="s.tone === 'negative'">{{ s.deltaLabel }}</span>
+          </div>
+          <sp-line-chart [data]="s.data" [color]="s.color" [compact]="true"></sp-line-chart>
+        </div>
+      }
+    </div>
+
+    <p class="impact__note">Figures update automatically as tickets are created, routed, and resolved across SPARKS.</p>
+  </div>
+</section>
